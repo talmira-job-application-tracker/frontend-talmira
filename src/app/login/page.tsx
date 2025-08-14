@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import * as yup from 'yup'
+import Cookies from "js-cookie"
 
 
 const schema = yup.object().shape({
@@ -36,8 +37,17 @@ const LoginPage = () => {
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
 
-            document.cookie = `token=${token}; path=/; max-age=${60 * 60 * 24}; SameSite=Lax`;
-            document.cookie = `user=${encodeURIComponent(JSON.stringify(user))}; path=/; max-age=${60 * 60 * 24}; SameSite=Lax`;
+            Cookies.set("token", token, {
+                expires: 1, // days
+                path: "/",
+                sameSite: "Lax",
+            });
+
+            Cookies.set("user", JSON.stringify(user), {
+                expires: 1,
+                path: "/",
+                sameSite: "Lax",
+            });
 
             toast.success("login success")
 

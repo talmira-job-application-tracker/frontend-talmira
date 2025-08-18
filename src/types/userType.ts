@@ -1,5 +1,5 @@
 export interface UserType {
-    id: string,
+    id?: string,
     role: "admin" | "user",
     name: string,
     email: string,
@@ -9,8 +9,5 @@ export interface UserType {
     phone: string,
     skills: string[],
     interests: string[],
-    isDeleted: boolean,
     receiveNotification: boolean,
-    createdAt: string,
-    updatedAt: string,
 }

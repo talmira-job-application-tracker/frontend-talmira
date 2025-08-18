@@ -3,7 +3,6 @@ export interface UserType {
     role: "admin" | "user",
     name: string,
     email: string,
-    password: string,
     age?: number,
     image?: string | null,
     phone: string,

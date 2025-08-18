@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import * as yup from 'yup'
 import Cookies from "js-cookie"
+import { useRouter } from 'next/navigation';
 
 
 const schema = yup.object().shape({
@@ -20,6 +21,7 @@ type LoginForm = {
 
 const LoginPage = () => {
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
     const { register, handleSubmit, formState: { errors }} = useForm<LoginForm>({
         resolver: yupResolver(schema)
@@ -48,6 +50,7 @@ const LoginPage = () => {
             });
 
             toast.success("login success")
+            router.push('/company');
 
         }catch (err: any){
             console.error(err);

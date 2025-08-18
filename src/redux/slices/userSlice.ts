@@ -1,15 +1,15 @@
-import { UserType } from "@/types/userType";
+// import { UserType } from "@/types/userType";
 
-interface UserState {
-    user: UserType | null;
-    loading: boolean;
-    error: string | null;
-    isRefresh: boolean;
-}
+// interface UserState {
+//     user: UserType | null;
+//     loading: boolean;
+//     error: string | null;
+//     isRefresh: boolean;
+// }
 
-const initialState: UserState = {
-    user: null,
-    loading: false,
-    error: null,
-    isRefresh: false,
-}
+// const initialState: UserState = {
+//     user: null,
+//     loading: false,
+//     error: null,
+//     isRefresh: false,
+// }

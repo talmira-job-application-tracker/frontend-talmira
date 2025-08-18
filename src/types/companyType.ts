@@ -1,5 +1,5 @@
 export interface CompanyType {
-    id: string,
+    _id: string,
     name: string,
     industry: string,
     description: string,

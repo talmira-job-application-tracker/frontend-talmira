@@ -32,7 +32,7 @@ const ListCompanies = () => {
     <div>
       {companies.map((company) => {
         const logoPath = company.logo?.replace(/\\/g, "/");
-        const logoUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${logoPath}`;
+        const logoUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}${logoPath.startsWith("/") ? "" : "/"}${logoPath}`;
 
         return (
           <div key={company._id}>

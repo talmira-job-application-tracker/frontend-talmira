@@ -1,4 +1,4 @@
-export interface IRegisterInput {
+export interface RegisterType {
   name: string;
   email: string;
   password: string;

@@ -1,5 +1,5 @@
 export interface UserType {
-    id?: string,
+    id: string,
     role: "admin" | "user",
     name: string,
     email: string,

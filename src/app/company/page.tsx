@@ -13,7 +13,7 @@ const ListCompanies = () => {
   const router = useRouter();
 
   useEffect(() => {
-    api.get("/company/listallcompanies")
+    api.get('/company/listallcompanies')
       .then((res) => {
         setCompanies(res.data.data);
       })

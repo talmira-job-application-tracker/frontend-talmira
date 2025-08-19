@@ -24,6 +24,11 @@ export const listCompany = createAsyncThunk('company/list', async() => {
     return res.data;
 });
 
+export const addCompany = createAsyncThunk('company/add', async(companyData: FormData) => {
+    const res = await api.post('/company/add', companyData);
+    return res.data;
+})
+
 //slice
 const companySlice = createSlice({
     name: 'company',
@@ -43,7 +48,21 @@ const companySlice = createSlice({
         .addCase(listCompany.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message || 'Failed to list companies'
-        });
+        })
+
+        //add company
+        .addCase(addCompany.pending, state => {
+            state.loading = true;
+        })
+        .addCase(addCompany.fulfilled, (state, action) => {
+            state.loading = false;
+            state.companies.push(action.payload);
+            state.isRefresh = true;
+        })
+        .addCase(addCompany.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || 'Failed to add company';
+        })
     },
 });
 

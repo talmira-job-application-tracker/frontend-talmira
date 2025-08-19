@@ -1,32 +1,21 @@
 "use client";
 
-import api from "@/api";
-import { CompanyType } from "@/types/companyType";
+import { listCompany } from "@/redux/slices/companySlice";
+import { AppDispatch, RootState } from "@/redux/store";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const ListCompanies = () => {
-  const [companies, setCompanies] = useState<CompanyType[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    api.get('/company/listallcompanies')
-      .then((res) => {
-        setCompanies(res.data.data);
-      })
-      .catch((err) => {
-        setError("Failed to load companies");
-        console.error(err);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const dispatch = useDispatch<AppDispatch>();
+  const { companies } = useSelector((state: RootState) => state.company);
 
-  if (loading) return <h5>Loading...</h5>;
-  if (error) return <h5>{error}</h5>;
-  if (companies.length === 0) return <h5>No companies found.</h5>;
+  useEffect(() => {
+    dispatch(listCompany());
+  }, [dispatch]);
 
   return (
     <div>

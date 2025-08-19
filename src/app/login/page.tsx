@@ -50,7 +50,7 @@ const LoginPage = () => {
             });
 
             toast.success("login success")
-            router.push('/company');
+            router.push('/');
 
         }catch (err: any){
             console.error(err);

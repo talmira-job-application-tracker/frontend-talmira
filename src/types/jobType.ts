@@ -1,7 +1,7 @@
 import { CompanyType } from "./companyType";
 
 export interface JobType {
-    id: string,
+    _id?: string ,
     title: string,
     description: string,
     company: CompanyType,

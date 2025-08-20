@@ -1,11 +1,13 @@
 import ListCompanies from "@/components/ListCompany";
 import ListJob from "@/components/ListJob";
+import AddCompany from "./company/add/page";
 
 export default function Home() {
   return (
     <div>
-      <ListCompanies/>
-      <ListJob/>
+      <AddCompany/>
+      {/* <ListCompanies/> */}
+      {/* <ListJob/> */}
     </div>
   );
 }

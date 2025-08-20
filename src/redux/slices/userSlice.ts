@@ -23,6 +23,11 @@ export const viewProfile = createAsyncThunk('profile/view', async() => {
     return res.data;
 })
 
+export const editProfile = createAsyncThunk('profile/edit', async(formData: FormData) => {
+    const res = await api.patch('/user/edit', formData);
+    return res.data;
+})
+
 //slice
 const userSlice = createSlice({
     name: 'user',
@@ -42,6 +47,19 @@ const userSlice = createSlice({
         .addCase(viewProfile.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message || 'Failed to view profile'
+        })
+
+        //editProfile
+        .addCase(editProfile.pending, state => {
+            state.loading = true;
+        })
+        .addCase(editProfile.fulfilled, (state, action) => {
+            state.loading = false;
+            state.user = action.payload.data;
+        })
+        .addCase(editProfile.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || 'Failed to edit profile'
         })
     },
 });

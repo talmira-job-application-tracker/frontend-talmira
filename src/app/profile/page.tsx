@@ -38,7 +38,7 @@ const ViewProfile = () => {
             <Image
             src={
                 user.image
-                ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/${user.image.replace(/\\/g, "/")}`
+                ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${user.image.replace(/\\/g, "/")}`
                 : "/images/banner4.jpeg"
             }
             alt={user.name || "picture"}
@@ -57,6 +57,27 @@ const ViewProfile = () => {
         <div className="flex items-start gap-2">
             <span className="font-semibold w-20">Email:</span>
             <span className="break-words text-sm">{user.email}</span>
+        </div>
+        </div>
+
+        <div className="text-[#4e342e] space-y-3">
+        <div className="flex items-start gap-2">
+            <span className="font-semibold w-20">Age:</span>
+            <span className="break-words text-sm">{user.age}</span>
+        </div>
+        </div>
+
+        <div className="text-[#4e342e] space-y-3">
+        <div className="flex items-start gap-2">
+            <span className="font-semibold w-20">Phone:</span>
+            <span className="break-words text-sm">{user.phone}</span>
+        </div>
+        </div>
+
+        <div className="text-[#4e342e] space-y-3">
+        <div className="flex items-start gap-2">
+            <span className="font-semibold w-20">skills:</span>
+            <span className="break-words text-sm">{user.skills}</span>
         </div>
         </div>
 

@@ -13,3 +13,17 @@ export interface JobType {
     keyword?: string[] | null,
     workMode: string,
 }
+
+export interface JobCreateType {
+  title: string;
+  description: string;
+  company: string;   
+  location: string;
+  jobType: "Full-time" | "Part-time" | "Contract" | "Internship";
+  salary: string;
+  language: string[];
+  qualification: string;
+  keyword: string[] | null;
+  workMode: "Hybrid" | "On-Site" | "Remote";
+}
+

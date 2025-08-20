@@ -1,6 +1,7 @@
 import api from "@/api";
-import { JobType } from "@/types/jobType";
+import { JobCreateType, JobType } from "@/types/jobType";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 interface jobState {
   jobs: JobType[];
@@ -26,6 +27,14 @@ export const listJobs = createAsyncThunk(
   }
 );
 
+//addjob
+export const addJob = createAsyncThunk('job/add',
+  async (formData:JobCreateType) => {
+    const res = await api.post('/job/add', formData)
+    return res.data.data as JobType
+  }
+)
+
 //slice
 const jobSlice = createSlice({
     name:'job',
@@ -47,6 +56,23 @@ const jobSlice = createSlice({
             state.loading = false;
             state.error = action.error.message || "Failed to fetch jobs";
         })
+
+        //addjob
+        .addCase(addJob.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+        })
+        .addCase(addJob.fulfilled, (state, action) => {
+          state.loading = false;
+          state.jobs.push(action.payload);
+          toast.success('JOb added successfully')
+        })
+
+        .addCase(addJob.rejected, (state, action) => {
+          state.loading = false;
+          state.error = action.error.message || 'Failed to add job';
+          toast.error('Filed to add Job')
+        });
     },
 })
 

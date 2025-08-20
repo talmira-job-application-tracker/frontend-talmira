@@ -35,20 +35,19 @@ const LoginPage = () => {
             const user = res.data.data;
 
             // localStorage.setItem('token', token);
-            localStorage.setItem('user', JSON.stringify(user));
+            // localStorage.setItem('user', JSON.stringify(user));
 
-            // Cookies.set("token", token, {
-            //     expires: 1, 
-            //     path: "/",
-            //     sameSite: "Lax",
-            // });
+            Cookies.set("token", token, {
+                expires: 1, 
+                path: "/",
+                sameSite: "Lax",
+            });
 
-            // Cookies.set("user", JSON.stringify(user), {
-            //     expires: 1,
-            //     path: "/",
-            //     sameSite: "Lax",
-            // });
-
+            Cookies.set("user", JSON.stringify({ role: user.role, name: user.name }), {
+                expires: 1,
+                path: "/",
+                sameSite: "Lax",
+            });
             toast.success("login success")
             router.push('/');
 

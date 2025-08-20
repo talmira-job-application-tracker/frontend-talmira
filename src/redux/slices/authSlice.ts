@@ -1,6 +1,7 @@
 import api from "@/api";
 import { UserType } from "@/types/userType";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 interface AuthState {
   user: UserType | null;
@@ -45,7 +46,7 @@ const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.data; // just store user
-        state.isAuthenticated = true;     
+        state.isAuthenticated = true;   
       })
       .addCase(registerUser.rejected, (state: any, action) => {
         state.loading = false;

@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { registerUser } from "@/redux/slices/authSlice";
 import type { AppDispatch } from "@/redux/store";
+import toast from "react-hot-toast";
 
 
 type RegisterFormValues = {
@@ -26,12 +27,13 @@ const schema = yup.object({
   password: yup.string().required("Password is required").min(6),
   phone: yup.string().matches(/^[0-9]{10}$/, "Phone must be 10 digits").required(),
   image: yup
-    .mixed<FileList>()
-    .test("required", "Image is required", (value) => value && value.length > 0)
-    .test("fileType", "Only jpg, jpeg, or png files are allowed", (value) => {
-      if (!value || value.length === 0) return false;
-      return ["image/jpeg", "image/png", "image/jpg"].includes(value[0]?.type);
-    }),
+  .mixed<FileList>()
+  .optional() 
+  .test("fileType", "Only jpg, jpeg, or png files are allowed", (value) => {
+    if (!value || value.length === 0) return true; 
+    return ["image/jpeg", "image/png", "image/jpg"].includes(value[0]?.type);
+  }),
+
   skills: yup.string().required("Skills are required"),
   interests: yup.string().required("Interests are required"),
 });
@@ -57,27 +59,38 @@ const Register = () => {
     formData.append("email", formValues.email);
     formData.append("password", formValues.password);
     formData.append("phone", formValues.phone);
-    formData.append("image", formValues.image[0]);
     formData.append("skills", formValues.skills || "");
     formData.append("interests", formValues.interests || "");
+    if (formValues.image && formValues.image.length > 0) {
+      formData.append("image", formValues.image[0]);
+    }
+
 
     dispatch(registerUser(formData))
       .unwrap()
       .then((res: { token: string; data: any }) => {
         const { token, data: userData } = res;
 
-        
-        localStorage.setItem("user", JSON.stringify(userData));
+        // localStorage.setItem("user", JSON.stringify(userData));
         // localStorage.setItem("token", token);
-        // Cookies.set("token", token, { expires: 1, path: "/", sameSite: "Lax" });
-        // Cookies.set("user", JSON.stringify(userData), { expires: 1, path: "/", sameSite: "Lax" });
+        Cookies.set("token", token, {
+                expires: 1, 
+                path: "/",
+                sameSite: "Lax",
+        });
 
+        Cookies.set("user", JSON.stringify({ role: userData.role, name: userData.name }), {
+                expires: 1,
+                path: "/",
+                sameSite: "Lax",
+        });
+        toast.success("Register successfully");
         reset();
         router.push("/list");
       })
       .catch((err: any) => {
         console.error("Registration failed:", err);
-        alert(err?.message || "Registration failed");
+        toast.error('Registration failed')
       });
   };
 

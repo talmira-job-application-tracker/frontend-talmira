@@ -1,7 +1,6 @@
 import api from "@/api";
 import { CompanyType } from "@/types/companyType";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import toast from "react-hot-toast";
 
 interface CompanyState {
     companies: CompanyType[];

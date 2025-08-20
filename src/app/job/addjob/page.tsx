@@ -13,7 +13,6 @@ import { useParams } from "next/navigation";
 export const schema = yup.object({
   title: yup.string().required("Job title is required"),
   description: yup.string().required("Description is required"),
-  // ❌ no need for company validation here
   location: yup.string().required("Location is required"),
   jobType: yup
     .string()
@@ -72,8 +71,6 @@ const AddJob = () => {
             <p className="text-red-500">{errors.description.message}</p>
           )}
         </div>
-
-        {/* ❌ Removed company field — we take it from params */}
 
         <div>
           <label>Location</label>

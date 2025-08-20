@@ -29,6 +29,7 @@ export const addCompany = createAsyncThunk('company/add', async(companyData: For
     return res.data;
 })
 
+
 //slice
 const companySlice = createSlice({
     name: 'company',

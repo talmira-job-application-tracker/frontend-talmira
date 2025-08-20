@@ -67,12 +67,10 @@ const Register = () => {
         const { token, data: userData } = res;
 
         
-        localStorage.setItem("token", token);
         localStorage.setItem("user", JSON.stringify(userData));
-
-        
-        Cookies.set("token", token, { expires: 1, path: "/", sameSite: "Lax" });
-        Cookies.set("user", JSON.stringify(userData), { expires: 1, path: "/", sameSite: "Lax" });
+        // localStorage.setItem("token", token);
+        // Cookies.set("token", token, { expires: 1, path: "/", sameSite: "Lax" });
+        // Cookies.set("user", JSON.stringify(userData), { expires: 1, path: "/", sameSite: "Lax" });
 
         reset();
         router.push("/list");

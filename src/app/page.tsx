@@ -5,8 +5,8 @@ import AddCompany from "./company/add/page";
 export default function Home() {
   return (
     <div>
-      <AddCompany/>
-      {/* <ListCompanies/> */}
+      {/* <AddCompany/> */}
+      <ListCompanies/>
       {/* <ListJob/> */}
     </div>
   );

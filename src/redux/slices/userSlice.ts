@@ -21,8 +21,7 @@ const initialState: UserState = {
 export const viewProfile = createAsyncThunk('profile/view', async() => {
     const res = await api.get('/user/view');
       console.log("View profile response:", res.data);
-    return res.data;
-    
+    return res.data;    
 })
 
 export const editProfile = createAsyncThunk('profile/edit', async(formData: FormData) => {

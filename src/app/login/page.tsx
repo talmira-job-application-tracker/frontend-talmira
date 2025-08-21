@@ -43,7 +43,7 @@ const LoginPage = () => {
                 sameSite: "Lax",
             });
 
-            Cookies.set("user", JSON.stringify({ role: user.role, name: user.name }), {
+            Cookies.set("user", JSON.stringify({ _id: user._id, role: user.role, name: user.name }), {
                 expires: 1,
                 path: "/",
                 sameSite: "Lax",

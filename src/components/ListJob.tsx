@@ -2,12 +2,14 @@
 
 import { listJobs } from "@/redux/slices/jobSlice";
 import { AppDispatch, RootState } from "@/redux/store";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const ListJob = () => {
+  const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
-  const { jobs, loading, error } = useSelector((state: RootState) => state.job);
+  const { job, jobs, loading, error } = useSelector((state: RootState) => state.job);
 
   useEffect(() => {
     dispatch(listJobs());
@@ -25,12 +27,19 @@ const ListJob = () => {
           {jobs.map((j) => (
             <li key={j._id}>
               {j.title} - {j.description}-{j.salary}
+              <button onClick={() => router.push(`/job/${j._id}`)}>
+                View Job
+              </button>
             </li>
           ))}
         </ul>
       ) : (
         !loading && <p>No jobs found</p>
       )}
+
+      <div>
+        </div>
+
     </div>
   );
 };

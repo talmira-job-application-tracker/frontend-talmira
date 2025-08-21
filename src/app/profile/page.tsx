@@ -11,7 +11,20 @@ import Image from "next/image";
 const ViewProfile = () => {
     const router = useRouter();
     const dispatch = useDispatch<AppDispatch>();
-    const {user} = useSelector((state: RootState) => state.user);
+    const { user, loading, error } = useSelector((state: RootState) => state.user);
+
+if (loading) {
+  return <div className="text-center py-10 text-gray-500">Loading profile...</div>;
+}
+
+if (error) {
+  return <div className="text-center py-10 text-red-500">{error}</div>;
+}
+
+if (!user) {
+  return <div className="text-center py-10 text-red-500">No profile found</div>;
+}
+
     
     useEffect(() => {
         try {
@@ -87,6 +100,12 @@ const ViewProfile = () => {
             className="px-5 py-2 bg-[#6f4e37] text-white rounded-lg shadow hover:bg-[#5d4037] transition-all duration-200"
         >
             Edit Profile
+        </button>
+         <button
+            onClick={() => router.push(`/profile/delete`)}
+            className="px-5 py-2 bg-[#6f4e37] text-white rounded-lg shadow hover:bg-[#5d4037] transition-all duration-200"
+        >
+            delete Profile
         </button>
         <button
             onClick={() => router.push("/")}

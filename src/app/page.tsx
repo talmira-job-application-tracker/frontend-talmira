@@ -1,13 +1,15 @@
 import ListCompanies from "@/components/ListCompany";
 import ListJob from "@/components/ListJob";
 import AddCompany from "./company/add/page";
+import ListUsers from "@/components/ListUsers";
 
 export default function Home() {
   return (
     <div>
       {/* <AddCompany/> */}
-      <ListCompanies/>
+      {/* <ListCompanies/> */}
       {/* <ListJob/> */}
+      {/* <ListUsers/> */}
     </div>
   );
 }

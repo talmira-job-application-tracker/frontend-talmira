@@ -75,9 +75,6 @@ const AddJob = () => {
   }
 };
 
-
-
-
   return (
     <div className="p-4 max-w-xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Add Job</h2>

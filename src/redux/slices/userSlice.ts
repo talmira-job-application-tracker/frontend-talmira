@@ -20,11 +20,17 @@ const initialState: UserState = {
 
 export const viewProfile = createAsyncThunk('profile/view', async() => {
     const res = await api.get('/user/view');
+      console.log("View profile response:", res.data);
     return res.data;
+    
 })
 
 export const editProfile = createAsyncThunk('profile/edit', async(formData: FormData) => {
     const res = await api.patch('/user/edit', formData);
+    return res.data;
+})
+export const listusers = createAsyncThunk('/listusers', async () => {
+    const res = await api.get('/user/list')
     return res.data;
 })
 
@@ -43,6 +49,7 @@ const userSlice = createSlice({
         .addCase(viewProfile.fulfilled, (state, action) => {
             state.loading = false;
             state.user = action.payload.data;
+            
         })
         .addCase(viewProfile.rejected, (state, action) => {
             state.loading = false;
@@ -60,6 +67,19 @@ const userSlice = createSlice({
         .addCase(editProfile.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message || 'Failed to edit profile'
+        })
+
+        //listallusers
+        .addCase(listusers.pending, state => {
+            state.loading = true;
+        })
+        .addCase(listusers.fulfilled, (state,action) => {
+            state.loading = false;
+            state.users = action.payload.data;
+        })
+        .addCase(listusers.rejected, (state,action) => {
+            state.loading = false;
+            state.error = action.error.message || 'failed to list jobs'
         })
     },
 });

@@ -13,6 +13,7 @@ import {
   DialogTitle,
   Button
 } from "@mui/material";
+import Link from "next/link";
 
 const ViewCompany = () => {
   const { id } = useParams();
@@ -62,6 +63,11 @@ const ViewCompany = () => {
 
       {isAdmin && (
         <>
+          <Link href={`/company/${id}/addjob`}>
+                  <button className="bg-blue-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                    + Add job
+                  </button>
+          </Link>
           <Button
             variant="contained"
             color="error"

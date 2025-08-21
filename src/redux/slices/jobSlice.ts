@@ -65,13 +65,13 @@ const jobSlice = createSlice({
         .addCase(addJob.fulfilled, (state, action) => {
           state.loading = false;
           state.jobs.push(action.payload);
-          toast.success('JOb added successfully')
+          toast.success('Job added successfully')
         })
 
         .addCase(addJob.rejected, (state, action) => {
           state.loading = false;
           state.error = action.error.message || 'Failed to add job';
-          toast.error('Filed to add Job')
+          toast.error('Failed to add Job')
         });
     },
 })

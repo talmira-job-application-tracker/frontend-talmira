@@ -20,12 +20,13 @@ const initialState: UserState = {
 
 export const viewProfile = createAsyncThunk('profile/view', async() => {
     const res = await api.get('/user/view');
-      console.log("View profile response:", res.data);
-    return res.data;    
+ console.log("viewProfile response:", res.data); 
+     return res.data;    
 })
 
 export const editProfile = createAsyncThunk('profile/edit', async(formData: FormData) => {
     const res = await api.patch('/user/edit', formData);
+    console.log("editProfile response:", res.data);  
     return res.data;
 })
 export const listusers = createAsyncThunk('/listusers', async () => {

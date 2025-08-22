@@ -59,8 +59,8 @@ const Register = () => {
     formData.append("email", formValues.email);
     formData.append("password", formValues.password);
     formData.append("phone", formValues.phone);
-    formData.append("skills", formValues.skills || "");
-    formData.append("interests", formValues.interests || "");
+    formData.append("skills", formValues.skills.trim());
+    formData.append("interests", formValues.interests.trim());
     if (formValues.image && formValues.image.length > 0) {
       formData.append("image", formValues.image[0]);
     }

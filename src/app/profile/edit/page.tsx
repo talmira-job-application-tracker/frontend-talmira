@@ -36,8 +36,8 @@ const EditProfile = () => {
         password: yup.string().optional(),
         phone: yup.string().matches(/^[0-9]+$/, "Phone must be digits only").required("Phone is required"),
         age: yup.string(),
-        skills: yup.array().of(yup.string()).min(1, "At least one skill required"),
-        interests: yup.array().of(yup.string()).min(1, "At least one interest required"),
+        skills: yup.array().of(yup.string()),
+        interests: yup.array().of(yup.string()),
         image: yup
             .mixed()
             .test("fileRequired", "Image is required", (value) => {
@@ -71,7 +71,7 @@ const EditProfile = () => {
                     });
 
                     if (userData.image) {
-                        const imageUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${userData.image.replace(/^\/+/, '')}`;
+                    const imageUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${userData.image.replace(/^\/+/, '')}`;
                         setPreview(imageUrl);
                         setHasExistingImage(true); 
                     }
@@ -88,8 +88,9 @@ const EditProfile = () => {
         formData.append("email", data.email);        
         formData.append("age", data.age);
         formData.append("phone", data.phone);
-        formData.append("skills", data.skills.join(","));
-        formData.append("interests", data.interests.join(","));
+        formData.append("skills", JSON.stringify(data.skills));
+        formData.append("interests", JSON.stringify(data.interests));
+
 
         if (data.password) formData.append("password", data.password);
 

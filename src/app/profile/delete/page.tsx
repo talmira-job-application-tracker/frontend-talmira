@@ -3,24 +3,29 @@
 import api from "@/api"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import Cookies from "js-cookie"
 
 const DeleteUser = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
-  const handleDelete = () => {
-    setLoading(true)
-    api.delete("/user/delete")
-      .then(() => {
-        router.push("/goodbye")
-      })
-      .catch((err) => {
-        console.error("Error deleting account:", err)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  }
+ const handleDelete = () => {
+  setLoading(true);
+  api.delete("/user/delete")
+    .then(() => {
+      Cookies.remove("token");
+      Cookies.remove("user");
+
+      router.push("/");
+    })
+    .catch((err) => {
+      console.error("Error deleting account:", err);
+    })
+    .finally(() => {
+      setLoading(false);
+    });
+}
+
 
   return (
     <div className="max-w-md mx-auto mt-20 bg-white p-6 rounded-xl shadow-md text-center space-y-4">

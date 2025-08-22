@@ -10,3 +10,15 @@ export interface UserType {
     interests: string[],
     receiveNotification: boolean,
 }
+
+export type RegisterFormValues = {
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  age: string;
+  image?: FileList;
+  skills: string;     
+  interests: string;  
+};
+

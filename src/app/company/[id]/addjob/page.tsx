@@ -66,8 +66,7 @@ const AddJob = () => {
 
  const onSubmit = async (data: JobCreateType) => {
   const jobData = {
-    ...data,
-    company: companyId as string,
+    ...data, company: companyId as string,
   };
   const result = await dispatch(addJob(jobData));
   

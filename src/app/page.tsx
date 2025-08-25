@@ -8,9 +8,10 @@ import NotificationToggleButton from "@/components/ToggleNotification";
 export default function Home() {
   return (
     <div>
+      {/* <LoginPage/> */}
       {/* <AddCompany/> */}
       {/* <ListCompanies/> */}
-      {/* <ListJob/> */}
+      <ListJob/>
       {/* <ListUsers/> */}
       {/* <JobSearch/> */}
       <NotificationToggleButton/>

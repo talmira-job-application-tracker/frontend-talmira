@@ -19,7 +19,7 @@ export type FormData = {
   phone: string;
   age: string;
   image?: FileList;
-  skills: string[];     
+  skills: string[];    
   interests: string[];   
 };
 
@@ -126,7 +126,7 @@ const EditProfile = () => {
           <div className="flex flex-col items-center">
             <div className="w-24 h-24 relative mb-2">
               <Image
-                src={preview || "/images/banner7.jpg"}
+                src={preview || "/images/noprofile.png"}
                 alt="Profile Preview"
                 fill
                 className="rounded-full object-cover border border-gray-300"

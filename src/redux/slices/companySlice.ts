@@ -1,6 +1,7 @@
 import api from "@/api";
 import { CompanyType } from "@/types/companyType";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { create } from "domain";
 
 interface CompanyState {
     companies: CompanyType[];
@@ -24,10 +25,35 @@ export const listCompany = createAsyncThunk('company/list', async() => {
     return res.data;
 });
 
+export const getCompany = createAsyncThunk(
+  "company/get",
+  async (id: string) => {
+    const res = await api.get(`/company/view/${id}`);
+    return res.data.data;   
+  }
+);
+
 export const addCompany = createAsyncThunk('company/add', async(companyData: FormData) => {
     const res = await api.post('/company/add', companyData);
     return res.data;
 })
+
+export const updateCompany = createAsyncThunk(
+  "company/update",
+  async ({ id, formData }: { id: string; formData: FormData }) => {
+    const res = await api.patch(`/company/edit/${id}`, formData);
+    return res.data;
+  }
+);
+
+
+export const deleteCompany = createAsyncThunk(
+  "company/delete",
+  async (id: string) => {
+    await api.delete(`/company/delete/${id}`);
+    return id;
+  }
+);
 
 
 //slice
@@ -51,6 +77,20 @@ const companySlice = createSlice({
             state.error = action.error.message || 'Failed to list companies'
         })
 
+        // getCompany
+        .addCase(getCompany.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(getCompany.fulfilled, (state, action) => {
+            state.loading = false;
+            state.company = action.payload;
+        })
+        .addCase(getCompany.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || "Failed to fetch company";
+        })
+
         //add company
         .addCase(addCompany.pending, state => {
             state.loading = true;
@@ -64,6 +104,33 @@ const companySlice = createSlice({
             state.loading = false;
             state.error = action.error.message || 'Failed to add company';
         })
+
+        //editcompany
+        .addCase(updateCompany.pending, state => {
+            state.loading = true;
+        })
+        .addCase(updateCompany.fulfilled, ( state, action ) => {
+            state.loading = false;
+            state.company = action.payload;
+        })
+        .addCase(updateCompany.rejected ,(state,action) => {
+            state.loading = false;
+            state.error = action.error.message || 'Failed to edit company'
+        })
+
+        //deleteCompany
+        .addCase(deleteCompany.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(deleteCompany.fulfilled, (state) => {
+            state.loading = false;
+            state.company = null;
+        })
+        .addCase(deleteCompany.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message || "Failed to delete company";
+        });
     },
 });
 

@@ -50,6 +50,7 @@ export const schema = yup.object({
     .required("Work mode is required"),
 });
 
+
 const AddJob = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { id: companyId } = useParams();

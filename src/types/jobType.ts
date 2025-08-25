@@ -27,3 +27,10 @@ export interface JobCreateType {
   workMode: "Hybrid" | "On-Site" | "Remote";
 }
 
+export interface JobSearchFilters {
+  title: string;
+  location: string;
+  jobType?: "Full-time" | "Part-time" | "Contract" | "Internship" | "";
+  workMode?: "Hybrid" | "On-Site" | "Remote" | "";
+  keyword: string;
+}

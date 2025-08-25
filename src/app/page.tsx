@@ -4,6 +4,8 @@ import AddCompany from "./company/add/page";
 import ListUsers from "@/components/ListUsers";
 import JobSearch from "@/components/JobSearchBar";
 import NotificationToggleButton from "@/components/ToggleNotification";
+import ListApplications from "@/components/ListApplications";
+import CompanySearch from "@/components/CompanySearch";
 
 export default function Home() {
   return (
@@ -11,10 +13,13 @@ export default function Home() {
       {/* <LoginPage/> */}
       {/* <AddCompany/> */}
       {/* <ListCompanies/> */}
-      <ListJob/>
+      {/* <ListJob/> */}
       {/* <ListUsers/> */}
       {/* <JobSearch/> */}
-      <NotificationToggleButton/>
+      {/* <NotificationToggleButton/> */}
+
+      {/* <ListApplications/> */}
+      <CompanySearch/>
     </div>
   );
 }

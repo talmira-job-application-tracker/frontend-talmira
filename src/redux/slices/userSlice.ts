@@ -69,7 +69,7 @@ const userSlice = createSlice({
             state.error = action.error.message || 'Failed to edit profile'
         })
 
-        //listallusers
+        //list users
         .addCase(listusers.pending, state => {
             state.loading = true;
         })

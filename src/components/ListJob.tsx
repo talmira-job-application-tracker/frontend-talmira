@@ -15,6 +15,10 @@ const ListJob = () => {
     dispatch(listJobs());
   }, [dispatch]);
 
+  const handleSearch = (query: any) => {
+    dispatch(listJobs(query));
+  };
+
   return (
     <div>
       <h2>Job List</h2>

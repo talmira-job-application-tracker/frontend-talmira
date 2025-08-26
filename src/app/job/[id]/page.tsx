@@ -35,8 +35,8 @@ const ViewJob = () => {
     if (!id) return;
     dispatch(viewJob(id))
       .unwrap()
-      .then(() => toast.success("Fetched job successfully"))
-      .catch(() => toast.error("Failed to fetch job"));
+      // .then(() => toast.success("Fetched job successfully"))
+      // .catch(() => toast.error("Failed to fetch job"));
   }, [id, dispatch]);
 
   if (error) {

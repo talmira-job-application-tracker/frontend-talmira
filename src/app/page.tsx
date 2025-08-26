@@ -20,6 +20,8 @@ export default function Home() {
       {/* <NotificationToggleButton/> */}
       {/* <ListApplications/> */}
       {/* <CompanySearch/> */}
+      <JobSearch/>
+      {/* <NotificationToggleButton/> */}
     </div>
   );
 }

@@ -34,7 +34,8 @@ const JobSearch = () => {
         setLoading(false);
       });
   };
-
+  
+//debounce effect
   useEffect(() => {
     const timer = setTimeout(() => {
       if (query) {

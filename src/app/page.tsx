@@ -6,20 +6,20 @@ import JobSearch from "@/components/JobSearchBar";
 import NotificationToggleButton from "@/components/ToggleNotification";
 import ListApplications from "@/components/ListApplications";
 import CompanySearch from "@/components/CompanySearch";
+import LoginPage from "./login/page";
 
 export default function Home() {
   return (
     <div>
-      {/* <LoginPage/> */}
+      <LoginPage/>
       {/* <AddCompany/> */}
       {/* <ListCompanies/> */}
       {/* <ListJob/> */}
       {/* <ListUsers/> */}
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
-
       {/* <ListApplications/> */}
-      <CompanySearch/>
+      {/* <CompanySearch/> */}
     </div>
   );
 }

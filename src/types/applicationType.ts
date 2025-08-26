@@ -1,17 +1,26 @@
-import { JobType } from "./jobType";
-import { UserType } from "./userType";
+export interface ApplicationUser {
+  _id: string;
+  name: string;
+}
+
+export interface ApplicationJob {
+  _id: string;
+  title: string;
+  company: { _id: string; name: string };
+}
 
 export interface ApplicationType {
-  _id: string; // backend sends _id
-  user?: UserType; // optional: only included for admin
-  job: JobType;
+  _id: string;
+  user?: ApplicationUser;
+  job: ApplicationJob;
   appliedAt: string;
   status: "applied" | "under review" | "rejected" | "selected";
-  resume?: string; // optional in case not uploaded
+  resume?: string;
   contactInfo?: {
     name?: string;
     email?: string;
     phone?: string;
   };
-  isRead?: boolean; // optional unless you're explicitly storing this in backend
+  isRead?: boolean;
 }
+

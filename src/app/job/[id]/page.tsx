@@ -128,6 +128,14 @@ const ViewJob = () => {
           </Dialog>
         </>
       )}
+        <Button
+          onClick={() => router.push(`/job/${id}/apply`)}
+          color="primary"
+          variant="contained"
+          sx={{ mt: 2, mr: 2 }}
+        >
+          Apply
+        </Button>
     </div>
   );
 };

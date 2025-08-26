@@ -78,7 +78,7 @@ const ListApplications = () => {
             <span className="font-semibold">Resume:</span>{" "}
             {app.resume ? (
               <a
-                href={app.resume}
+                href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${app.resume}`}
                 target="_blank"
                 className="text-blue-600 underline"
               >

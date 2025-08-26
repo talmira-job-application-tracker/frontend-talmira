@@ -47,7 +47,7 @@ const  AddApplication = () => {
             formData.append("phone", data.phone);
             formData.append("resume", data.resume[0]);
             
-            const res = await api.post("/application/add", formData)
+            const res = await api.post(`/application/${id}/apply`, formData)
 
             toast.success(res.data.message || "Application submitted!")
             reset();

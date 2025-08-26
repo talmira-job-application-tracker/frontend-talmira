@@ -14,13 +14,13 @@ export default function Home() {
       {/* <LoginPage/> */}
       {/* <AddCompany/> */}
       {/* <ListCompanies/> */}
-      {/* <ListJob/> */}
+      <ListJob/>
       {/* <ListUsers/> */}
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
-      <ListApplications/>
+      {/* <ListApplications/> */}
       {/* <CompanySearch/> */}
-      <JobSearch/>
+      {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
     </div>
   );

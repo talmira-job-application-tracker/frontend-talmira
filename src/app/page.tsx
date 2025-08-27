@@ -14,6 +14,7 @@ import SubscribedCompanies from "@/components/ListSubscribedCompanies";
 import Cookies from 'js-cookie'
 import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
+import ListAlerts from "./alerts/list/page";
 
 export default function Home() {
   const [token, setToken] = useState<string | null>(null);
@@ -39,8 +40,8 @@ export default function Home() {
       {/* <LoginPage/> */}
       {/* <AddCompany/> */}
       {/* <ListCompanies/> */}
-      <ListJob/>
-      <ListUsers/>
+      {/* <ListJob/> */}
+      {/* <ListUsers/> */}
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
       {/* {/* <ListApplications/> */}
@@ -49,6 +50,7 @@ export default function Home() {
       {/* <JobSearch/> */}
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
+      <ListAlerts/>
             <Footer/>
 
     </div>

@@ -8,6 +8,7 @@ export type AlertType = {
     location: string
     jobType: string
     workMode: string
+    description: string
   }
   createdAt: string
 }

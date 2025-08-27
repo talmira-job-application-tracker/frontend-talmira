@@ -25,7 +25,7 @@ const EditCompany = () => {
   const router = useRouter();
   const [preview, setPreview] = useState<string | null>(null);
   const dispatch = useDispatch<AppDispatch>();
-  const { company, loading } = useSelector((state: RootState) => state.company);
+  const { loading } = useSelector((state: RootState) => state.company);
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),

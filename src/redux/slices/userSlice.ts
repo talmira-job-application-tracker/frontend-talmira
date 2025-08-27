@@ -18,6 +18,16 @@ const initialState: UserState = {
     isRefresh: false,
 }
 
+//admin viewing by id
+export const viewUserById = createAsyncThunk("user/viewUserById", async (id: string, thunkAPI) => {
+  try {
+    const res = await api.get(`/user/${id}`); 
+    return res.data.data;
+  } catch (err: any) {
+    return thunkAPI.rejectWithValue(err.response?.data?.message || "Failed to fetch user");
+  }
+});
+
 export const viewProfile = createAsyncThunk('profile/view', async() => {
     const res = await api.get('/user/view');
  console.log("viewProfile response:", res.data); 
@@ -41,6 +51,20 @@ const userSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
+
+         // viewUserById
+        .addCase(viewUserById.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(viewUserById.fulfilled, (state, action) => {
+            state.loading = false;
+            state.user = action.payload;
+        })
+        .addCase(viewUserById.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload as string;
+        })
 
         //viewProfile
         .addCase(viewProfile.pending, state => {

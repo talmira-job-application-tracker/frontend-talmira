@@ -1,24 +1,35 @@
-"use client"
+"use client";
 
 import { AppDispatch, RootState } from "@/redux/store";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
-import { viewProfile } from "@/redux/slices/userSlice";
+import { viewProfile, viewUserById } from "@/redux/slices/userSlice";
 import Image from "next/image";
 
 const ViewProfile = () => {
   const router = useRouter();
+  const params = useParams();
+  const userId = params?.id?.[0]; // optional param
   const dispatch = useDispatch<AppDispatch>();
   const { user, loading, error } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     const token = Cookies.get("token");
-    if (token) {
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
+    if (userId) {
+      // Admin is viewing another user
+      dispatch(viewUserById(userId));
+    } else {
+      // Logged-in user’s own profile
       dispatch(viewProfile());
     }
-  }, [dispatch]);
+  }, [dispatch, userId, router]);
 
   if (loading) {
     return <div className="text-center py-10 text-gray-500">Loading profile...</div>;
@@ -40,7 +51,7 @@ const ViewProfile = () => {
             src={
               user.image
                 ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${user.image.replace(/\\/g, "/")}`
-                : "/images/banner4.jpeg"
+                : "/images/noprofile.png"
             }
             alt={user.name || "profile picture"}
             fill
@@ -67,23 +78,31 @@ const ViewProfile = () => {
         </div>
         <div className="flex items-start gap-2">
           <span className="font-semibold w-20">Skills:</span>
-          <span className="break-words text-sm">{user.skills}</span>
+          <span className="break-words text-sm">
+            {Array.isArray(user.skills) ? user.skills.join(", ") : user.skills}
+          </span>
         </div>
       </div>
 
-      <div className="mt-8 flex justify-center gap-4">
-        <button
-          onClick={() => router.push(`/profile/edit`)}
-          className="px-5 py-2 bg-[#6f4e37] text-white rounded-lg shadow hover:bg-[#5d4037] transition-all duration-200"
-        >
-          Edit Profile
-        </button>
-        <button
-          onClick={() => router.push(`/profile/delete`)}
-          className="px-5 py-2 bg-[#6f4e37] text-white rounded-lg shadow hover:bg-[#5d4037] transition-all duration-200"
-        >
-          Delete Profile
-        </button>
+      {/* Show edit/delete only if user is viewing own profile */}
+      {!userId && (
+        <div className="mt-8 flex justify-center gap-4">
+          <button
+            onClick={() => router.push(`/profile/edit`)}
+            className="px-5 py-2 bg-[#6f4e37] text-white rounded-lg shadow hover:bg-[#5d4037] transition-all duration-200"
+          >
+            Edit Profile
+          </button>
+          <button
+            onClick={() => router.push(`/profile/delete`)}
+            className="px-5 py-2 bg-[#6f4e37] text-white rounded-lg shadow hover:bg-[#5d4037] transition-all duration-200"
+          >
+            Delete Profile
+          </button>
+        </div>
+      )}
+
+      <div className="mt-8 flex justify-center">
         <button
           onClick={() => router.push("/")}
           className="px-5 py-2 bg-white/70 text-[#5d4037] border border-[#d7ccc8] rounded-lg shadow hover:bg-white hover:text-[#3e2723] transition-all duration-200"

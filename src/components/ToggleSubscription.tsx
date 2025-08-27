@@ -21,7 +21,7 @@ const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({ companyId }) =>
       const res = await api.get(`/subscription/subs-companies`);
       console.log("API response:", res.data);
 
-      const companies = res.data?.data || []; // <- access the array correctly
+      const companies = res.data?.data || [];
       const subscribedCompanyIds = companies.map((c: any) => c._id);
 
       setIsSubscribed(subscribedCompanyIds.includes(companyId));

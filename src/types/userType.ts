@@ -22,3 +22,14 @@ export type RegisterFormValues = {
   interests: string;  
 };
 
+export interface SubscriberType {
+  _id: string;
+  userId: {
+    _id: string;
+    name: string;
+    email: string;
+  };
+  companyId: string;
+  subscribedAt: string;
+  isActive: boolean;
+}

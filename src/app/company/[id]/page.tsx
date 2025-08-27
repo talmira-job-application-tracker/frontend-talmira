@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompany, deleteCompany } from "@/redux/slices/companySlice";
 import SubscriptionButton from "@/components/ToggleSubscription";
+import ListSubscribers from "@/components/ListSubscribers";
 
 const ViewCompany = () => {
   const params = useParams<{ id: string }>();
@@ -77,6 +78,13 @@ const ViewCompany = () => {
               + Add job
             </button>
           </Link>
+
+          <Link href={`/company/${id}/subscribers`}>
+            <button className="bg-blue-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+              Subscribers
+            </button>
+          </Link>
+
           <Link href={`/company/${id}/edit`}>
             <button className="bg-blue-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
                Edit Company

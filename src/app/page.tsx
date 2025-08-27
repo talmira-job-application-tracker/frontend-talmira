@@ -44,7 +44,7 @@ export default function Home() {
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
       {/* {/* <ListApplications/> */}
-      <SubscribedCompanies/> 
+      {/* <SubscribedCompanies/>  */}
       {/* <CompanySearch/> */}
       {/* <JobSearch/> */}
       {/* <JobSearch/> */}

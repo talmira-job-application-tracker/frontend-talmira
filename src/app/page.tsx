@@ -7,11 +7,8 @@ import NotificationToggleButton from "@/components/ToggleNotification";
 import ListApplications from "@/components/ListApplications";
 import CompanySearch from "@/components/CompanySearch";
 import LoginPage from "./login/page";
-<<<<<<< Updated upstream
 import Header from "@/components/Header";
-=======
 import SubscribedCompanies from "@/components/ListSubscribedCompanies";
->>>>>>> Stashed changes
 
 export default function Home() {
   return (

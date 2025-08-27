@@ -16,6 +16,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { viewJob } from "@/redux/slices/jobSlice";
+import Link from "next/link";
 
 const ViewJob = () => {
   const params = useParams();
@@ -79,7 +80,12 @@ const ViewJob = () => {
     <div className="p-4 max-w-xl mx-auto">
       <h2 className="text-2xl font-bold mb-2">{job.title}</h2>
       <p><strong>Location:</strong> {job.location}</p>
-      <p><strong>Company:</strong> {job.company.name}</p>
+
+      <Link href={`/company/${job.company._id}`}>
+        <p><strong>Company:</strong> {job.company.name}</p>
+      </Link>
+
+
       <p><strong>Description:</strong> {job.description}</p>
       <p><strong>Job Type:</strong> {job.jobType}</p>
       <p><strong>Salary:</strong> {job.salary}</p>

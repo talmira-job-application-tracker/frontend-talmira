@@ -19,9 +19,7 @@ const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({ companyId }) =>
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const res = await api.get(`/subscription/subs-companies`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await api.get(`/subscription/subs-companies`);
 
 
         const subscribedCompanyIds = res.data.map((c: any) => c._id);

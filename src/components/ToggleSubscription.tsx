@@ -16,20 +16,23 @@ const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({ companyId }) =>
   const token = Cookies.get("token");
 
   useEffect(() => {
-    const fetchStatus = async () => {
-      try {
-        const res = await api.get(`/subscription/subs-companies`);
+  const fetchStatus = async () => {
+    try {
+      const res = await api.get(`/subscription/subs-companies`);
+      console.log("API response:", res.data);
 
+      const companies = res.data?.data || []; // <- access the array correctly
+      const subscribedCompanyIds = companies.map((c: any) => c._id);
 
-        const subscribedCompanyIds = res.data.map((c: any) => c._id);
-        setIsSubscribed(subscribedCompanyIds.includes(companyId));
-      } catch (err) {
-        console.error("Fetch subscription status failed:", err);
-        setIsSubscribed(false);
-      }
-    };
-    fetchStatus();
-  }, [companyId, token]);
+      setIsSubscribed(subscribedCompanyIds.includes(companyId));
+    } catch (err) {
+      console.error("Fetch subscription status failed:", err);
+      setIsSubscribed(false);
+    }
+  };
+  fetchStatus();
+}, [companyId, token]);
+
 
   const handleToggle = async () => {
     setLoading(true);

@@ -2,7 +2,8 @@
 
 import api from "@/api";
 import { CompanyType } from "@/types/companyType";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const CompanySearch = () => {
   const [query, setQuery] = useState("");
@@ -10,9 +11,9 @@ const CompanySearch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSearch = async () => {
-    if (!query.trim()) {
-      setResults([]); // do not fetch all companies
+  const fetchCompanies = async (searchQuery: string) => {
+    if (!searchQuery.trim()) {
+      setResults([]);
       return;
     }
 
@@ -20,7 +21,7 @@ const CompanySearch = () => {
     setError("");
 
     try {
-      const res = await api.get(`/company/list?query=${encodeURIComponent(query)}`);
+      const res = await api.get(`/company/list?query=${encodeURIComponent(searchQuery)}`);
       setResults(res.data.data || []);
     } catch (err: any) {
       console.error("Error fetching companies:", err);
@@ -31,11 +32,18 @@ const CompanySearch = () => {
     }
   };
 
-  const handleReset = () => {
-    setQuery("");
-    setResults([]);
-    setError("");
-  };
+  // debounce effect
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (query) {
+        fetchCompanies(query);
+      } else {
+        setResults([]);
+      }
+    }, 500); // half-second delay after typing
+
+    return () => clearTimeout(timer);
+  }, [query]);
 
   return (
     <div className="p-4 space-y-4">
@@ -48,18 +56,6 @@ const CompanySearch = () => {
           onChange={(e) => setQuery(e.target.value)}
           className="border p-2 rounded w-80"
         />
-        <button
-          onClick={handleSearch}
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Search
-        </button>
-        <button
-          onClick={handleReset}
-          className="bg-gray-400 text-white px-4 py-2 rounded"
-        >
-          Reset
-        </button>
       </div>
 
       {/* Loading / Error */}
@@ -71,29 +67,30 @@ const CompanySearch = () => {
         {results.length > 0 ? (
           results.map((company) => {
             const logoPath = company.logo?.replace(/\\/g, "/");
-            const logoUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}${logoPath?.startsWith("/") ? "" : "/"}${logoPath}`;
+            const logoUrl = logoPath
+              ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${logoPath?.startsWith("/") ? "" : "/"}${logoPath}`
+              : null;
 
             return (
-              <div
-                key={company._id}
-                className="border p-4 rounded shadow-sm hover:shadow-md transition"
-              >
-                {company.logo && (
-                  <img
-                    src={logoUrl}
-                    alt={company.name}
-                    width={100}
-                    height={100}
-                    className="mb-2"
-                  />
-                )}
-                <h3 className="font-semibold">{company.name}</h3>
-                <p>{company.description}</p>
-              </div>
+              <Link key={company._id} href={`/company/${company._id}`}>
+                <div className="border p-4 rounded shadow-sm hover:shadow-md transition cursor-pointer">
+                  {logoUrl && (
+                    <img
+                      src={logoUrl}
+                      alt={company.name}
+                      width={100}
+                      height={100}
+                      className="mb-2"
+                    />
+                  )}
+                  <h3 className="font-semibold">{company.name}</h3>
+                  <p className="text-sm text-gray-600 line-clamp-2">{company.description}</p>
+                </div>
+              </Link>
             );
           })
         ) : (
-          query.trim() && <p>No companies found.</p>
+          query.trim() && !loading && <p>No companies found.</p>
         )}
       </div>
     </div>

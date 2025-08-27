@@ -61,6 +61,8 @@ const ViewCompany = () => {
       <h2 className="text-2xl font-bold mb-2">{company.name}</h2>
       <p><strong>Location:</strong> {company.location}</p>
       <p><strong>Industry:</strong> {company.industry}</p>
+      <p><strong>Description:</strong> {company.description}</p>
+
 
       {!isAdmin && (
         <div className="mt-4">

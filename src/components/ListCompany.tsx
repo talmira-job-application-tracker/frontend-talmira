@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const ListCompanies = () => {
   const router = useRouter();
-
   const dispatch = useDispatch<AppDispatch>();
   const { companies } = useSelector((state: RootState) => state.company);
 

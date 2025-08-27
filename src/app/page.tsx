@@ -13,6 +13,7 @@ import Header from "@/components/Header";
 import SubscribedCompanies from "@/components/ListSubscribedCompanies";
 import Cookies from 'js-cookie'
 import { useEffect, useState } from "react";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [token, setToken] = useState<string | null>(null);
@@ -35,12 +36,11 @@ export default function Home() {
           isAdmin ? <CompanySearch/> : <JobSearch/>
         )}
       </div>
-
       {/* <LoginPage/> */}
       {/* <AddCompany/> */}
       {/* <ListCompanies/> */}
       <ListJob/>
-      {/* <ListUsers/> */}
+      <ListUsers/>
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
       {/* {/* <ListApplications/> */}
@@ -49,6 +49,8 @@ export default function Home() {
       {/* <JobSearch/> */}
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
+            <Footer/>
+
     </div>
   );
 }

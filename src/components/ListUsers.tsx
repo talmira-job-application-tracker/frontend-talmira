@@ -20,12 +20,13 @@ const ListUsers = () => {
       {error && <p style={{ color: "red" }}>{error}</p>}
       {users.length > 0 ? (
         <ul>
-          {users.map((u) => (
-            <li key={u.id}>
-              {u.name} - {u.email} - {u.age}
-            </li>
-          ))}
-        </ul>
+        {users.map((u) => (
+          <li key={ u._id}>
+            {u.name} - {u.email} - {u.age}
+          </li>
+        ))}
+      </ul>
+
       ) : (
         <p>No users found</p>
       )}

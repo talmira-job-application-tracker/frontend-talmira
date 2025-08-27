@@ -2,11 +2,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import api from "@/api";
 import { ApplicationType } from "@/types/applicationType";
 import toast from "react-hot-toast";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 
 const ViewApplication = () => {
   const { id } = useParams();
@@ -17,6 +18,9 @@ const ViewApplication = () => {
 
   const user = JSON.parse(Cookies.get("user") || "{}");
   const isAdmin = user?.role === "admin";
+
+  const [openDialog, setOpenDialog] = useState(false);
+  const router = useRouter()
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -53,6 +57,21 @@ const ViewApplication = () => {
       })
       .finally(() => setUpdating(false));
   };
+
+  const handleOpenDialog = () => setOpenDialog(true);
+  const handleCloseDialog = () => setOpenDialog(false);
+
+  //delete application
+  const handleDelete = async (res : any) => {
+    res = await api.delete(`/application/${id}`)
+    .then(()=> {
+      toast.success("Application deleted");
+      router.push("/");
+    })
+    .catch(()=> toast.error("Failed to delete"))
+    .finally(() => setOpenDialog(false));
+  }
+  
 
   if (loading) return <p>Loading...</p>;
   if (!application) return <p>No application found</p>;
@@ -132,6 +151,32 @@ const ViewApplication = () => {
           </button>
         </div>
       )}
+
+      <Button
+            variant="contained"
+            color="error"
+            className="mt-4"
+            onClick={handleOpenDialog}
+          >
+            Delete Application
+          </Button>
+
+          <Dialog open={openDialog} onClose={handleCloseDialog}>
+            <DialogTitle>Delete Application</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Are you sure you want to delete this application?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCloseDialog} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={handleDelete} color="error" disabled={loading}>
+                {loading ? "Deleting..." : "Delete"}
+              </Button>
+            </DialogActions>
+          </Dialog>
     </div>
   );
 };

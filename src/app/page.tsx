@@ -14,7 +14,7 @@ export default function Home() {
       {/* <LoginPage/> */}
       {/* <AddCompany/> */}
       {/* <ListCompanies/> */}
-      <ListJob/>
+      {/* <ListJob/> */}
       {/* <ListUsers/> */}
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}

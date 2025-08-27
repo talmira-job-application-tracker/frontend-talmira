@@ -18,10 +18,10 @@ export default function Home() {
       {/* <ListUsers/> */}
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
-      {/* <ListApplications/> */}
+      <ListApplications/>
       {/* <CompanySearch/> */}
       {/* <JobSearch/> */}
-      <JobSearch/>
+      {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
     </div>
   );

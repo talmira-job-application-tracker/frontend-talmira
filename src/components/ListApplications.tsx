@@ -5,6 +5,7 @@ import { ApplicationType } from "@/types/applicationType";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 const ListApplications = () => {
   const [applications, setApplications] = useState<ApplicationType[]>([]);
@@ -19,7 +20,9 @@ const ListApplications = () => {
     api
       .get("/application/list")
       .then((res) => {
+        console.log("Applications:", res.data.data)
         setApplications(res.data.data);
+
         setLoading(false);
         toast.success("Applications fetched successfully");
       })
@@ -45,18 +48,24 @@ const ListApplications = () => {
         >
           {isAdmin && (
             <p>
-              <span className="font-semibold">User:</span>{" "}
+              <span className="font-semibold">Username:</span>{" "}
               {app.user?.name || "-"}
             </p>
           )}
 
           <p>
-            <span className="font-semibold">Job:</span> {app.job?.title}
+            <strong>Job:</strong>{" "}
+            {app.job?.title ||
+              (isAdmin ? "Job Deleted" : "This job is no longer available")}
           </p>
           <p>
-            <span className="font-semibold">Company:</span>{" "}
-            {app.job?.company?.name || "-"}
+            <strong>Company:</strong>{" "}
+            {app.job
+              ? (app.job.company?.name ||
+                  (isAdmin ? "Company Deleted" : "This company is no longer available"))
+              : "-"}
           </p>
+
           <p>
             <span className="font-semibold">Applied At:</span>{" "}
             {new Date(app.appliedAt).toLocaleDateString()}
@@ -65,14 +74,13 @@ const ListApplications = () => {
             <span className="font-semibold">Status:</span> {app.status}
           </p>
 
-          {isAdmin && (
-            <p>
-              <span className="font-semibold">Contact:</span>{" "}
-              {app.contactInfo
-                ? `${app.contactInfo.name || ""} ${app.contactInfo.email || ""} ${app.contactInfo.phone || ""}`
-                : "-"}
-            </p>
-          )}
+          {/* {isAdmin && app.contactInfo && (
+            // <div className="mt-2">
+            //   <p><span className="font-semibold">Name:</span> {app.contactInfo.name || "-"}</p>
+            //   <p><span className="font-semibold">Email:</span> {app.contactInfo.email || "-"}</p>
+            //   <p><span className="font-semibold">Phone:</span> {app.contactInfo.phone || "-"}</p>
+            // </div>
+          )} */}
 
           <p>
             <span className="font-semibold">Resume:</span>{" "}
@@ -88,6 +96,15 @@ const ListApplications = () => {
               "-"
             )}
           </p>
+
+           <div className="mt-3">
+            <Link
+              href={`/application/${app._id}`}
+              className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              View Application
+            </Link>
+          </div>
         </div>
       ))}
     </div>

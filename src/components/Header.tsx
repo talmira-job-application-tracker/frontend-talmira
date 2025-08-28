@@ -27,81 +27,82 @@ const Header = () => {
     router.push("/");
   };
 
-  return (
-    <header className="w-full flex items-center justify-between px-6 py-3 bg-gray-100 border-b border-gray-300">
-      {/* Left Section: Logo */}
-      <h1
-        className="text-lg font-semibold cursor-pointer"
-        onClick={() => router.push("/")}
-      >
-        JobTracker
+return (
+  <header className="absolute top-0 left-0 w-full z-50 
+  flex items-center justify-between px-6 py-3 
+  bg-black/20 backdrop-blur-md border-b border-white/10">
+    
+    {/* Left: Logo */}
+    <a className="flex items-center gap-3 cursor-pointer" onClick={() => router.push("/")}>
+      <img src={'/Group.svg'} alt="Talmira Logo" className="h-8 w-8" />
+      <h1 className="text-lg font-semibold text-white hover:text-[#309689] transition-colors">
+        TALMIRA
       </h1>
+    </a>
 
-      {/* Right Section: Buttons */}
-      <div className="flex items-center gap-4">
-        {!token ? (
-          <>
-            <button
-              className="px-3 py-1 rounded bg-blue-500 text-white"
-              onClick={() => router.push("/login")}
-            >
-              Login
-            </button>
-            <button
-              className="px-3 py-1 rounded bg-green-500 text-white"
-              onClick={() => router.push("/register")}
-            >
-              Register
-            </button>
-          </>
-        ) : (
-          <>
-            {/* Notifications: ONLY visible if role is "user" */}
-            {role === "user" && (
-              <button
-                className="p-2 rounded hover:bg-gray-200"
-                onClick={() => router.push("/alerts/list")}
-              >
-                <Bell className="w-5 h-5" />
-              </button>
-            )}
+    {/* Center: Navigation */}
+    <nav className="flex gap-6">
+      {role === "admin" && (
+        <>
+          <span
+            className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
+            onClick={() => router.push("/application")}
+          >
+            Applications
+          </span>
+          <span
+            className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
+            onClick={() => router.push("/job")}
+          >
+            Jobs
+          </span>
+          <span
+            className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
+            onClick={() => router.push("/company")}
+          >
+            Companies
+          </span>
+        </>
+      )}
+      {role === "user" && (
+        <span
+          className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
+          onClick={() => router.push("/alerts/list")}
+        >
+          Alerts
+        </span>
+      )}
+    </nav>
 
-            {/* Role-based Actions */}
-            {role === "admin" && (
-              <div className="flex gap-3">
-                <button
-                  className="px-3 py-1 rounded bg-gray-700 text-white"
-                  onClick={() => router.push("/application")}
-                >
-                  Applications
-                </button>
-                <button
-                  className="px-3 py-1 rounded bg-gray-700 text-white"
-                  onClick={() => router.push("/job")}
-                >
-                  Jobs
-                </button>
-                <button
-                  className="px-3 py-1 rounded bg-gray-700 text-white"
-                  onClick={() => router.push("/company")}
-                >
-                  Companies
-                </button>
-              </div>
-            )}
+    {/* Right: Auth */}
+    <div className="flex items-center gap-4">
+      {!token ? (
+        <>
+          <span
+            className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
+            onClick={() => router.push("/login")}
+          >
+            Login
+          </span>
+          <span
+            className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
+            onClick={() => router.push("/register")}
+          >
+            Register
+          </span>
+        </>
+      ) : (
+        <span
+          onClick={handleLogout}
+          className="text-white hover:text-red-400 hover:font-semibold cursor-pointer transition"
+        >
+          Logout
+        </span>
+      )}
+    </div>
+  </header>
+)
 
-            {/* Logout */}
-            <button
-              onClick={handleLogout}
-              className="px-3 py-1 rounded bg-red-500 text-white"
-            >
-              Logout
-            </button>
-          </>
-        )}
-      </div>
-    </header>
-  );
 };
 
 export default Header;

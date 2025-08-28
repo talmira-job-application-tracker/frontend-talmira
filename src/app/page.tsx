@@ -15,6 +15,7 @@ import Cookies from 'js-cookie'
 import { useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import ListAlerts from "./alerts/list/page";
+import AutoSlider from "@/components/Banner";
 
 export default function Home() {
   const [token, setToken] = useState<string | null>(null);
@@ -31,6 +32,7 @@ export default function Home() {
   return (
     <div>
       <Header/>
+      <AutoSlider/>
 
       <div className="flex-1 flex justify-center">
         {token && (
@@ -50,8 +52,8 @@ export default function Home() {
       {/* <JobSearch/> */}
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
-      <ListAlerts/>
-            <Footer/>
+      {/* <ListAlerts/> */}
+            {/* <Footer/> */}
 
     </div>
   );

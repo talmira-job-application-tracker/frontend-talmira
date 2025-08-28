@@ -34,7 +34,7 @@ return (
     
     {/* Left: Logo */}
     <a className="flex items-center gap-3 cursor-pointer" onClick={() => router.push("/")}>
-      <img src={'/Group.svg'} alt="Talmira Logo" className="h-8 w-8" />
+      <img src={'/icons/Group.svg'} alt="Talmira Logo" className="h-8 w-8" />
       <h1 className="text-lg font-semibold text-white hover:text-[#309689] transition-colors">
         TALMIRA
       </h1>

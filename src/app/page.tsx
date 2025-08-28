@@ -44,6 +44,9 @@ export default function Home() {
       {/* <ListCompanies/> */}
       {/* <ListJob/> */}
       {/* <ListUsers/> */}
+      <ListCompanies/>
+      <ListJob/>
+      <ListUsers/>
       {/* <JobSearch/> */}
       {/* <NotificationToggleButton/> */}
       {/* {/* <ListApplications/> */}
@@ -54,6 +57,7 @@ export default function Home() {
       {/* <NotificationToggleButton/> */}
       {/* <ListAlerts/> */}
             {/* <Footer/> */}
+      <Footer/>
 
     </div>
   );

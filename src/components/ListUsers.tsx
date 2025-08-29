@@ -41,7 +41,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/redux/store"
-import { listusers } from "@/redux/slices/userSlice"
+import { listUsers,  } from "@/redux/slices/userSlice"
 import { FiEye } from "react-icons/fi"
 import Link from "next/link"
 import { UserType } from "@/types/userType"
@@ -52,7 +52,7 @@ const ListUsers = () => {
   const { users, loading, error } = useSelector((state: RootState) => state.user)
 
   useEffect(() => {
-    dispatch(listusers())
+    dispatch(listUsers ())
   }, [dispatch])
 
   return (
@@ -102,7 +102,6 @@ const ListUsers = () => {
                     {u.isDeleted ? "Inactive" : "Active"}
                   </td>
                   <td className="px-4 py-2">
-                    {/* View Button */}
                     <Link href={`/profile/${u._id}`} className="inline-flex items-center gap-2 px-3 py-1 bg-white text-[#309689] rounded hover:bg-grey">
                       <FiEye /> View
                     </Link>

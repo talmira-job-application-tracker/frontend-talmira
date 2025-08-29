@@ -39,7 +39,7 @@ export const editProfile = createAsyncThunk('profile/edit', async(formData: Form
     console.log("editProfile response:", res.data);  
     return res.data;
 })
-export const listusers = createAsyncThunk('/listusers', async () => {
+export const listUsers  = createAsyncThunk('/listusers', async () => {
     const res = await api.get('/user/list')
     return res.data;
 })
@@ -94,14 +94,14 @@ const userSlice = createSlice({
         })
 
         //list users
-        .addCase(listusers.pending, state => {
+        .addCase(listUsers .pending, state => {
             state.loading = true;
         })
-        .addCase(listusers.fulfilled, (state,action) => {
+        .addCase(listUsers .fulfilled, (state,action) => {
             state.loading = false;
             state.users = action.payload.data;
         })
-        .addCase(listusers.rejected, (state,action) => {
+        .addCase(listUsers .rejected, (state,action) => {
             state.loading = false;
             state.error = action.error.message || 'failed to list jobs'
         })

@@ -221,10 +221,23 @@ return (
                   <Image src="/icons/clock.svg" alt="Job Type" width={16} height={16} />
                   {job.jobType || "Full Time"}
                 </span>
+                {/* <span className="flex items-center gap-1">
+                  <Image src="/icons/workmode.svg" alt="Work Mode" width={16} height={16} />
+                  {job.workMode || "On-site"}
+                </span> */}
                 <span className="flex items-center gap-1">
-                  <Image src="/icons/laptop.png" alt="Work Mode" width={16} height={16} />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="#309689"   
+                  >
+                    <path d="M4 5c-1.1 0-2 .9-2 2v9h20V7c0-1.1-.9-2-2-2H4zm0 2h16v7H4V7zm-2 11v2h20v-2H2z"/>
+                  </svg>
                   {job.workMode || "On-site"}
                 </span>
+
               </div>
             </div>
 

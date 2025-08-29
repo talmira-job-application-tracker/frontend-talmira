@@ -30,36 +30,108 @@
 
 // export default adminDashboard
 
+// 'use client'
+
+// import { useState } from "react"
+// import { Box, Tab, Tabs, Grid, List, ListItem, ListItemButton, ListItemText } from "@mui/material"
+// import ListApplications from "@/components/ListApplications"
+// import ListCompanies from "@/components/ListCompany"
+// import ListJob from "@/components/ListJob"
+// import ListUsers from "@/components/ListUsers"
+// import Header from "@/components/Header"
+
+// const AdminDashboard = () => {
+//   const [tabIndex, setTabIndex] = useState(0)
+//   const [sideAction, setSideAction] = useState("list")
+
+//   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
+//     setTabIndex(newValue)
+//     setSideAction("list") // reset sidebar on tab change
+//   }
+
+//   const renderMainContent = () => {
+//     switch (tabIndex) {
+//       case 0: return <ListApplications />
+//       case 1: return <ListCompanies />
+//       case 2: return <ListJob />
+//       case 3: return <ListUsers />
+//       default: return null
+//     }
+//   }
+
+//   const renderSideMenu = () => {
+//     let actions: string[] = []
+
+//     switch (tabIndex) {
+//       case 0: actions = ["List Applications", "Add Application", "Edit Application", "Delete Application"]; break
+//       case 1: actions = ["List Companies", "Add Company", "Edit Company", "Delete Company"]; break
+//       case 2: actions = ["List Jobs", "Add Job", "Edit Job", "Delete Job"]; break
+//       case 3: actions = ["List Users", "Add User", "Edit User", "Delete User"]; break
+//       default: actions = []
+//     }
+
+//     return (
+      
+//       <List sx={{ borderRight: "1px solid #ddd" }}>
+//         {actions.map((action) => (
+//           <ListItem key={action} disablePadding>
+//             <ListItemButton
+//               selected={sideAction === action}
+//               onClick={() => setSideAction(action)}
+//             >
+//               <ListItemText primary={action} />
+//             </ListItemButton>
+//           </ListItem>
+//         ))}
+//       </List>
+//     )
+//   }
+
+//   return (
+//     <Box sx={{ mt: "64px" }}>
+//       {/* Header */}
+//       <Header />
+
+//       {/* Tabs */}
+//       <Box sx={{ borderBottom: 1, borderColor: "divider", display: "flex", justifyContent: "center" }}>
+//         <Tabs value={tabIndex} onChange={handleTabChange} textColor="primary" indicatorColor="primary">
+//           <Tab label="Applications" />
+//           <Tab label="Companies" />
+//           <Tab label="Jobs" />
+//           <Tab label="Users" />
+//         </Tabs>
+//       </Box>
+
+//       {/* Layout with Grid: Sidebar + Content */}
+//       <Grid container spacing={2} sx={{ mt: 2, p: 2 }}>
+//         {/* <Grid item xs={3}> */}
+//           {renderSideMenu()}
+//         {/* </Grid> */}
+//         {/* <Grid item xs={9}> */}
+//           {renderMainContent()}
+//         {/* </Grid> */}
+//       </Grid>
+//     </Box>
+//   )
+// }
+
+// export default AdminDashboard
+
 'use client'
 
 import { useState } from "react"
-import Grid from "@mui/material/Grid"
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Tabs,
-  Tab,
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material"
-
+import { Box, Tab, Tabs } from "@mui/material"
+import ListApplications from "@/components/ListApplications"
 import ListCompanies from "@/components/ListCompany"
 import ListJob from "@/components/ListJob"
 import ListUsers from "@/components/ListUsers"
-import ListApplications from "@/components/ListApplications"
 import Header from "@/components/Header"
 
 const AdminDashboard = () => {
   const [tabIndex, setTabIndex] = useState(0)
-  const [sideAction, setSideAction] = useState("list")
 
   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabIndex(newValue)
-    setSideAction("list")
   }
 
   const renderMainContent = () => {
@@ -72,48 +144,26 @@ const AdminDashboard = () => {
     }
   }
 
-  const renderSideMenu = () => {
-    let actions: string[] = []
-
-    switch (tabIndex) {
-      case 0: actions = ["List Applications", "Add Application", "Edit", "Delete"]; break
-      case 1: actions = ["List Companies", "Add Company", "Edit", "Delete"]; break
-      case 2: actions = ["List Jobs", "Add Job", "Edit", "Delete"]; break
-      case 3: actions = ["List Users", "Add User", "Edit", "Delete"]; break
-      default: actions = []
-    }
-
-    return (
-      <List>
-        {actions.map((action) => (
-          <ListItem key={action} disablePadding>
-            <ListItemButton
-              selected={sideAction === action}
-              onClick={() => setSideAction(action)}
-            >
-              <ListItemText primary={action} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    )
-  }
-
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      {/* Header */}
-      {/* <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Admin Dashboard
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
-      <Header/>
+    <Box sx={{ mt: "64px" }}>
+      {/* ✅ Global Header */}
+      <Header />
 
-      {/* Tabs */}
-      <Box sx={{ borderBottom: 1, borderColor: "divider", display: "flex", justifyContent: "center" }}>
-        <Tabs value={tabIndex} onChange={handleTabChange} textColor="primary" indicatorColor="primary">
+      {/* ✅ Tabs */}
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: "divider",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Tabs
+          value={tabIndex}
+          onChange={handleTabChange}
+          textColor="primary"
+          indicatorColor="primary"
+        >
           <Tab label="Applications" />
           <Tab label="Companies" />
           <Tab label="Jobs" />
@@ -121,15 +171,10 @@ const AdminDashboard = () => {
         </Tabs>
       </Box>
 
-      {/* Layout with Grid */}
-      <Grid container spacing={2} sx={{ mt: 2, p: 2 }}>
-        
-          {renderSideMenu()}
-        
-        
-          {renderMainContent()}
-        
-      </Grid>
+      {/* ✅ Main Content */}
+      <Box sx={{ mt: 2, p: 2 }}>
+        {renderMainContent()}
+      </Box>
     </Box>
   )
 }

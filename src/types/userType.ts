@@ -9,6 +9,7 @@ export interface UserType {
     skills: string[],
     interests: string[],
     receiveNotification: boolean,
+    isDeleted:boolean
 }
 
 export type RegisterFormValues = {

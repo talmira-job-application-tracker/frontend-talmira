@@ -49,7 +49,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#309689]/10 backdrop-blur-sm">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-[#0d1f1e] to-[#103c37] backdrop-blur-sm">
       <div className="w-full max-w-md p-8 rounded-2xl shadow-lg bg-white/10 backdrop-blur-md border border-white/20">
         <h2 className="text-2xl font-bold text-black mb-6 text-center">
           Welcome Back
@@ -57,11 +57,11 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Email */}
           <div>
-            <label className="block text-black text-sm mb-1">Email</label>
+            <label className="block text-white text-sm mb-1">Email</label>
             <input
               type="email"
               {...register("email")}
-              className="w-full p-3 rounded-xl bg-white/20 text-black placeholder-black/60 focus:outline-none focus:ring-2 focus:ring-[#309689]"
+              className="w-full p-3 rounded-xl bg-white/20 text-white placeholder-black/60 focus:outline-none focus:ring-2 focus:ring-[#309689]"
               placeholder="Enter your email"
             />
             <p className="text-red-400 text-sm mt-1">{errors.email?.message}</p>
@@ -69,11 +69,11 @@ const LoginPage = () => {
 
           {/* Password */}
           <div>
-            <label className="block text-black text-sm mb-1">Password</label>
+            <label className="block text-white text-sm mb-1">Password</label>
             <input
               type="password"
               {...register("password")}
-              className="w-full p-3 rounded-xl bg-white/20 text-black placeholder-black/60 focus:outline-none focus:ring-2 focus:ring-[#309689]"
+              className="w-full p-3 rounded-xl bg-white/20 text-white placeholder-black/60 focus:outline-none focus:ring-2 focus:ring-[#309689]"
               placeholder="Enter your password"
             />
             <p className="text-red-400 text-sm mt-1">{errors.password?.message}</p>

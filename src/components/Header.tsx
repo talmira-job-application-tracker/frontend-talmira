@@ -24,7 +24,7 @@ const Header = () => {
     Cookies.remove("user");
     setToken(null);
     setRole(null);
-    router.push("/");
+    router.push("/")
   };
 
 return (
@@ -42,7 +42,7 @@ return (
 
     {/* Center: Navigation */}
     <nav className="flex gap-6">
-      {role === "admin" && (
+      {/* {role === "admin" && (
         <>
           <span
             className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
@@ -63,14 +63,23 @@ return (
             Companies
           </span>
         </>
-      )}
+      )} */}
+
       {role === "user" && (
+      <>
         <span
           className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
           onClick={() => router.push("/alerts/list")}
         >
           Alerts
         </span>
+        <span
+          className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
+          onClick={() => router.push("/application")}
+        >
+          Applications
+        </span>
+      </>
       )}
     </nav>
 
@@ -92,12 +101,20 @@ return (
           </span>
         </>
       ) : (
+        <>
+        <span
+          className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
+          onClick={() => router.push("/profile")}
+        >
+          Profile
+        </span>
         <span
           onClick={handleLogout}
           className="text-white hover:text-red-400 hover:font-semibold cursor-pointer transition"
         >
           Logout
         </span>
+        </>
       )}
     </div>
   </header>

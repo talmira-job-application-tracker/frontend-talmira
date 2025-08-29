@@ -52,12 +52,46 @@ const AutoSlider = () => {
             priority={index === 0}
           />
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm flex flex-col items-center justify-center text-center px-4">
-            <h2 className="text-2xl md:text-4xl font-bold text-[#309689] mb-2 drop-shadow">
+            <h2 className="text-2xl md:text-4xl font-bold text-[#fff] mb-2 drop-shadow">
               {banner.title}
             </h2>
-            <p className="text-sm md:text-lg text-white/90 drop-shadow">
+            <p className="text-sm md:text-lg text-white/90 drop-shadow mb-16">
               {banner.subtitle}
             </p>
+
+          {/* icons section */}
+          <div className='flex flex-row gap-12'>
+          <div className='flex flex-row gap-1 text-left'>
+            <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
+              <img src="/icons/job-icon.svg" className="h-5 w-5" />
+            </div>
+            <div>
+              <p className='text-white font-bold'>25,850</p>
+              <p className='text-white/80'>Jobs</p>
+            </div>
+          </div>
+
+          <div className='flex flex-row gap-1 text-left'>
+            <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
+              <img src="/icons/users-icon.svg" className="h-5 w-5" />
+            </div>
+            <div>
+              <p className='text-white font-bold'>10,250</p>
+              <p className='text-white/80'>Applicants</p>
+            </div>
+          </div>
+          
+          <div className='flex flex-row gap-1 text-left'>
+            <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
+              <img src="/icons/company-icon.svg" className="h-5 w-5" />
+            </div>
+            <div>
+              <p className=' text-white font-bold '>18,400</p>
+              <p className='text-white/80 '>Companies</p>
+            </div>
+          </div>
+          </div>
+
           </div>
         </div>
       ))}

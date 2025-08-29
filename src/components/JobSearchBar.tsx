@@ -34,8 +34,8 @@ const JobSearch = () => {
         setLoading(false);
       });
   };
-  
-//debounce effect
+
+  // debounce effect
   useEffect(() => {
     const timer = setTimeout(() => {
       if (query) {
@@ -43,44 +43,67 @@ const JobSearch = () => {
       } else {
         setResults([]);
       }
-    }, 500); 
+    }, 500);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, [query]);
 
   return (
-    <div className="p-4 space-y-4">
-      <div className="flex gap-2 items-center">
+    <div className="p-6 space-y-6">
+      {/* Search Box */}
+      <div className="flex justify-center ">
         <input
           type="text"
-          placeholder="Search jobs by title, location, company..."
-          value={query}
+          placeholder="Search jobs ..."
+          value={query || ""}
           onChange={(e) => setQuery(e.target.value)}
-          className="border p-2 rounded w-80"
+          className=" px-4 py-3 rounded-2xl bg-white/20 placeholder:text-black/40 
+            focus:outline-none focus:ring-1 focus:ring-white/20 
+            shadow-md"
         />
       </div>
 
-      {loading && <p>Loading jobs...</p>}
-      {error && <p className="text-red-600">{error}</p>}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {/* Loading / Error */}
+      {loading && (
+        <p className="text-center text-gray-300 animate-pulse">
+          Loading jobs...
+        </p>
+      )}
+      {error && <p className="text-center text-red-400">{error}</p>}
+
+      {/* Results */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {results.length > 0 ? (
           results.map((job) => (
             <Link key={job._id} href={`/job/${job._id}`}>
-              <div className="border p-4 rounded shadow-sm hover:shadow-md transition cursor-pointer">
-                <h3 className="font-semibold">{job.title}</h3>
-                <p className="text-gray-600">{job.company?.name}</p>
-                <p className="text-sm text-gray-500">
-                  {job.location} | {job.jobType} | {job.workMode}
+              <div
+                className="p-5 rounded-2xl 
+                  bg-white/10 backdrop-blur-lg 
+                  border border-white/20 
+                  shadow-md hover:shadow-lg hover:scale-[1.02] 
+                  transition transform cursor-pointer"
+              >
+                <h3 className="font-semibold text-lg text-white">
+                  {job.title}
+                </h3>
+                <p className="text-sm text-gray-300">{job.company?.name}</p>
+                <p className="text-xs text-gray-400 mb-3">
+                  {job.location} • {job.jobType} • {job.workMode}
                 </p>
-                <p className="mt-2 text-gray-700 line-clamp-3">
+                <p className="text-sm text-gray-200 line-clamp-3">
                   {job.description}
                 </p>
               </div>
             </Link>
           ))
         ) : (
-          query.trim() && !loading && <p>No jobs found.</p>
+          query.trim() &&
+          !loading && (
+            <p className="text-gray-400 text-center">
+              No jobs match your search.
+            </p>
+          )
         )}
       </div>
     </div>

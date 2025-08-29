@@ -138,6 +138,7 @@ import { registerUser } from "@/redux/slices/authSlice";
 import type { AppDispatch } from "@/redux/store";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import Image from "next/image";
 
 type RegisterFormValues = {
   name: string;
@@ -216,7 +217,7 @@ const Register = () => {
 
         toast.success("Register successfully");
         reset();
-        router.push("/list");
+        router.push("/");
       })
       .catch((err: any) => {
         console.error("Registration failed:", err);
@@ -226,20 +227,28 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-black px-6 relative">
-      <div className="fixed top-6 left-6">
-        <Link href="/" className="text-1xl font-extrabold text-[#309689]">
-          TALMIRA
+      <div className="fixed top-6 left-6 flex items-center space-x-2">
+        <Link href="/" className="flex items-center">
+          <Image 
+            src="/icons/Group.svg"   
+            alt="Talmira Logo" 
+            width={20} 
+            height={20} 
+          />
+          <span className="ml-2 text-xl font-extrabold text-[#309689]">
+            TALMIRA
+          </span>
         </Link>
       </div>
-      <div className="flex flex-col items-center justify-center flex-grow">
-        <h1 className="text-[21px] font-bold text-white mb-6 text-center">
-          FIND YOUR DREAM JOB TODAY!
-        </h1>
-        <div className="w-full max-w-5xl bg-white shadow-2xl rounded-2xl p-10">
 
+      <div className="flex flex-col items-center justify-center flex-grow">
+        <div className="w-full max-w-4xl bg-white shadow-2xl rounded-2xl p-5">
+            <h2 className="text-3xl font-bold text-center text-gray-600 mb-5">
+            Create an Account!
+          </h2>
           <form
             onSubmit={handleSubmit(handleRegister)}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 gap-7"
           >
             <div>
               <input
@@ -265,7 +274,6 @@ const Register = () => {
 
             <div className="md:col-span-2">
               <input
-              
                 type="file"
                 {...register("image")}
                 className="w-full rounded-full border border-gray-300 px-4 py-2 bg-gray-50 
@@ -289,7 +297,7 @@ const Register = () => {
             <div>
               <input
                 type="text"
-                placeholder="Phone"
+                placeholder="Phone Number"
                 {...register("phone")}
                 className="w-full rounded-full border border-gray-300 px-4 py-2 
                            focus:ring-2 focus:ring-[#309689] outline-none"
@@ -329,7 +337,7 @@ const Register = () => {
               </button>
             </div>
 
-            <div className="md:col-span-2 text-center mt-4">
+            <div className="md:col-span-2 text-center ">
               <p className="text-sm text-gray-600">
                 Already have an account?{" "}
                 <Link
@@ -345,8 +353,6 @@ const Register = () => {
       </div>
     </div>
   );
-
-
 };
 
 export default Register;

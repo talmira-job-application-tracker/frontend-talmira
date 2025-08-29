@@ -153,30 +153,29 @@ const ViewApplication = () => {
       )}
 
       <Button
-            variant="contained"
-            color="error"
-            className="mt-4"
-            onClick={handleOpenDialog}
-          >
-            Delete Application
-          </Button>
+        variant="contained"
+        className="mt-4 !bg-[#26786f] hover:!bg-[#309689] !text-white !rounded-full shadow-md"
+        onClick={handleOpenDialog}
+      >
+        Delete Application
+      </Button>
 
-          <Dialog open={openDialog} onClose={handleCloseDialog}>
-            <DialogTitle>Delete Application</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Are you sure you want to delete this application?
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseDialog} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={handleDelete} color="error" disabled={loading}>
-                {loading ? "Deleting..." : "Delete"}
-              </Button>
-            </DialogActions>
-          </Dialog>
+      <Dialog open={openDialog} onClose={handleCloseDialog}>
+        <DialogTitle>Delete Application</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this application?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDelete} color="error" disabled={loading}>
+            {loading ? "Deleting..." : "Delete"}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

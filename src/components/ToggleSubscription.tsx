@@ -16,29 +16,24 @@ const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({ companyId }) =>
   const token = Cookies.get("token");
 
   useEffect(() => {
-  const fetchStatus = async () => {
-    try {
-      const res = await api.get(`/subscription/subs-companies`);
-      console.log("API response:", res.data);
-
-      const companies = res.data?.data || [];
-      const subscribedCompanyIds = companies.map((c: any) => c._id);
-
-      setIsSubscribed(subscribedCompanyIds.includes(companyId));
-    } catch (err) {
-      console.error("Fetch subscription status failed:", err);
-      setIsSubscribed(false);
-    }
-  };
-  fetchStatus();
-}, [companyId, token]);
-
+    const fetchStatus = async () => {
+      try {
+        const res = await api.get(`/subscription/subs-companies`);
+        const companies = res.data?.data || [];
+        const subscribedCompanyIds = companies.map((c: any) => c._id);
+        setIsSubscribed(subscribedCompanyIds.includes(companyId));
+      } catch (err) {
+        console.error("Fetch subscription status failed:", err);
+        setIsSubscribed(false);
+      }
+    };
+    fetchStatus();
+  }, [companyId, token]);
 
   const handleToggle = async () => {
     setLoading(true);
     try {
-      const res = await api.patch(`/subscription/toggle/${companyId}`,);
-
+      const res = await api.patch(`/subscription/toggle/${companyId}`);
       if (res.data.action === "subscribed" || res.data.action === "resubscribed") {
         setIsSubscribed(true);
         toast.success("Subscribed successfully!");
@@ -54,18 +49,24 @@ const SubscriptionButton: React.FC<SubscriptionButtonProps> = ({ companyId }) =>
     }
   };
 
-  if (isSubscribed === null) return <p>Loading subscription...</p>;
+  if (isSubscribed === null) return <p className="text-gray-500">Loading subscription...</p>;
 
   return (
     <button
       onClick={handleToggle}
       disabled={loading}
-      className={`px-4 py-2 rounded-lg text-white font-medium transition
-        ${isSubscribed ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"}
+      className={`px-5 py-2.5 rounded-full font-semibold transition 
+        flex items-center justify-center shadow-md 
+        transform active:scale-95 duration-150 ease-in-out
+        ${loading ? "opacity-70 cursor-not-allowed" : ""}
+        ${isSubscribed 
+          ? "bg-[#309689] hover:bg-[#26786f] text-white" 
+          : "bg-[#309689] hover:bg-[#26786f] text-white"}
       `}
-    >
+      >
       {loading ? "Please wait..." : isSubscribed ? "Unsubscribe" : "Subscribe"}
     </button>
+
   );
 };
 

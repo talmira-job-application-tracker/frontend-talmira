@@ -28,7 +28,7 @@ const ListSubscribers: React.FC<SubscriptionProps> = ({ companyId }) => {
         setUsers(res.data.data);
       })
       .finally(() => setLoading(false));
-  }, [companyId]);
+  }, [companyId ?? ""]);
 
   if (loading) return <p className="text-gray-600">Loading...</p>;
 

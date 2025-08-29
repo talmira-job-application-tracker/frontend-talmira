@@ -38,7 +38,7 @@ export default function Home() {
   }, [router]);
 
   return (
-    <div>
+    <div className='flex flex-col justify-items-start gap-10 mt-15'>
       <Header />
 
       {!token && <AutoSlider />}

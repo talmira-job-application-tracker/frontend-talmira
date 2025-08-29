@@ -193,7 +193,7 @@ const ListJob = () => {
 
 return (
   <div className="min-h-screen px-8 py-6">
-    <div className="h-[80vh] overflow-y-auto space-y-4">
+    <div className="space-y-4">
       {loading && <p className="text-gray-600">Loading jobs...</p>}
       {error && <p className="text-red-500">Error: {error}</p>}
 

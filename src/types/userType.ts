@@ -29,6 +29,7 @@ export interface SubscriberType {
     _id: string;
     name: string;
     email: string;
+    image?: string | null;
   };
   companyId: string;
   subscribedAt: string;

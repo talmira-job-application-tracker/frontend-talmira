@@ -57,7 +57,7 @@ const JobSearch = () => {
           placeholder="Search jobs ..."
           value={query || ""}
           onChange={(e) => setQuery(e.target.value)}
-          className=" px-4 py-3 rounded-2xl bg-white/20 placeholder:text-black/40 
+          className=" px-4 py-3 rounded-2xl bg-white placeholder:text-black/40 
             focus:outline-none focus:ring-1 focus:ring-white/20 
             shadow-md"
         />

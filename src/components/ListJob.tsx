@@ -192,7 +192,7 @@ const ListJob = () => {
   };
 
 return (
-  <div className="min-h-screen bg-white px-8 py-6">
+  <div className="min-h-screen px-8 py-6">
     <div className="h-[80vh] overflow-y-auto space-y-4">
       {loading && <p className="text-gray-600">Loading jobs...</p>}
       {error && <p className="text-red-500">Error: {error}</p>}
@@ -201,7 +201,7 @@ return (
         jobs.map((job: any) => (
           <div
             key={job._id}
-            className="flex items-center justify-between p-4 border rounded-xl shadow-sm transition hover:shadow-md hover:border-[#309689]"
+            className="flex items-center bg-white justify-between p-4 border rounded-xl shadow-sm transition hover:shadow-md hover:border-[#309689]"
           >
             {/* ✅ Left side: Job info */}
             <div>

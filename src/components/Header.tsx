@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import { Bell } from "lucide-react";
+import { Menu, X, Bell, FileText, User, LogOut, LogIn, UserPlus } from "lucide-react";
 
 const Header = () => {
   const router = useRouter();
 
   const [token, setToken] = useState<string | null>(null);
   const [role, setRole] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const storedToken = Cookies.get("token") || null;
@@ -24,102 +25,117 @@ const Header = () => {
     Cookies.remove("user");
     setToken(null);
     setRole(null);
-    router.push("/")
+    router.push("/");
   };
 
-return (
-  <header className="absolute top-0 left-0 w-full z-50 
-  flex items-center justify-between px-6 py-3 
-  bg-black/20 backdrop-blur-md border-b border-white/10">
-    
-    {/* Left: Logo */}
-    <a className="flex items-center gap-3 cursor-pointer" onClick={() => router.push("/")}>
-      <img src={'/icons/Group.svg'} alt="Talmira Logo" className="h-8 w-8" />
-      <h1 className="text-lg font-semibold text-white hover:text-[#309689] transition-colors">
-        TALMIRA
-      </h1>
-    </a>
-
-    {/* Center: Navigation */}
-    <nav className="flex gap-6">
-      {/* {role === "admin" && (
+  const NavLinks = () => (
+    <>
+      {role === "user" && (
         <>
           <span
-            className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
-            onClick={() => router.push("/application")}
+            className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
+            onClick={() => {
+              router.push("/alerts/list");
+              setMenuOpen(false);
+            }}
           >
-            Applications
+            <Bell size={18} /> Alerts
           </span>
           <span
-            className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
-            onClick={() => router.push("/job")}
+            className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
+            onClick={() => {
+              router.push("/application");
+              setMenuOpen(false);
+            }}
           >
-            Jobs
-          </span>
-          <span
-            className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
-            onClick={() => router.push("/company")}
-          >
-            Companies
+            <FileText size={18} /> Applications
           </span>
         </>
-      )} */}
-
-      {role === "user" && (
-      <>
-        <span
-          className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
-          onClick={() => router.push("/alerts/list")}
-        >
-          Alerts
-        </span>
-        <span
-          className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
-          onClick={() => router.push("/application")}
-        >
-          Applications
-        </span>
-      </>
       )}
-    </nav>
 
-    {/* Right: Auth */}
-    <div className="flex items-center gap-4">
       {!token ? (
         <>
           <span
-            className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
-            onClick={() => router.push("/login")}
+            className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
+            onClick={() => {
+              router.push("/login");
+              setMenuOpen(false);
+            }}
           >
-            Login
+            <LogIn size={18} /> Login
           </span>
           <span
-            className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
-            onClick={() => router.push("/register")}
+            className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
+            onClick={() => {
+              router.push("/register");
+              setMenuOpen(false);
+            }}
           >
-            Register
+            <UserPlus size={18} /> Register
           </span>
         </>
       ) : (
         <>
-        <span
-          className="text-white hover:text-[#309689] hover:font-semibold cursor-pointer transition"
-          onClick={() => router.push("/profile")}
-        >
-          Profile
-        </span>
-        <span
-          onClick={handleLogout}
-          className="text-white hover:text-red-400 hover:font-semibold cursor-pointer transition"
-        >
-          Logout
-        </span>
+          <span
+            className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
+            onClick={() => {
+              router.push("/profile");
+              setMenuOpen(false);
+            }}
+          >
+            <User size={18} /> Profile
+          </span>
+          <span
+            onClick={() => {
+              handleLogout();
+              setMenuOpen(false);
+            }}
+            className="flex items-center gap-2 text-white hover:text-red-400 cursor-pointer transition"
+          >
+            <LogOut size={18} /> Logout
+          </span>
         </>
       )}
-    </div>
-  </header>
-)
+    </>
+  );
 
+  return (
+    <header className="absolute top-0 left-0 w-full z-50 
+      flex items-center justify-between px-6 py-3 
+      bg-black/20 backdrop-blur-md border-b border-white/10">
+      
+      {/* Logo */}
+      <a
+        className="flex items-center gap-3 cursor-pointer"
+        onClick={() => router.push("/")}
+      >
+        <img src={"/icons/Group.svg"} alt="Talmira Logo" className="h-8 w-8" />
+        <h1 className="text-lg font-semibold text-white hover:text-[#309689] transition-colors">
+          TALMIRA
+        </h1>
+      </a>
+
+      {/* Desktop Nav */}
+      <nav className="hidden md:flex items-center gap-6">
+        <NavLinks />
+      </nav>
+
+      {/* Mobile Hamburger */}
+      <button
+        className="md:hidden text-white"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        {menuOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="absolute top-full left-0 w-full bg-black/90 backdrop-blur-md border-t border-white/10 flex flex-col items-start p-6 gap-4 md:hidden">
+          <NavLinks />
+        </div>
+      )}
+    </header>
+  );
 };
 
 export default Header;

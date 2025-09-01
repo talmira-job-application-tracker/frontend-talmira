@@ -4,7 +4,7 @@ import { listCompany } from "@/redux/slices/companySlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const ListCompanies = () => {
@@ -17,27 +17,45 @@ const ListCompanies = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      {companies.map((company) => {
-        const logoPath = company.logo?.replace(/\\/g, "/");
-        const logoUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}${logoPath.startsWith("/") ? "" : "/"}${logoPath}`;
+    <div className="min-h-screen px-6 py-12">
+      <div className="max-w-4xl mx-auto flex flex-col gap-4">
+        {companies.map((company) => {
+          const logoPath = company.logo?.replace(/\\/g, "/");
+          const logoUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}${
+            logoPath.startsWith("/") ? "" : "/"
+          }${logoPath}`;
 
-        return (
-          <div key={company._id}>
-            <Image
-              src={logoUrl}
-              alt={company.name}
-              width={100}
-              height={100}
-            />
-            <h3>{company.name}</h3>
-            <p>{company.description}</p>
-            <button onClick={() => router.push(`/company/${company._id}`)}>
-              View Company
-            </button>
-          </div>
-        );
-      })}
+          return (
+            <div
+              key={company._id}
+              className="flex items-center justify-between backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 p-4"
+            >
+              {/* Left: Logo + Name */}
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 relative rounded-xl overflow-hidden border border-white/30">
+                  <Image
+                    src={logoUrl}
+                    alt={company.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <h3 className="text-lg font-medium text-gray-100">
+                  {company.name}
+                </h3>
+              </div>
+
+              {/* Right: Button */}
+              <button
+                onClick={() => router.push(`/company/${company._id}`)}
+                className="bg-teal-700 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition border border-white/30"
+              >
+                View
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

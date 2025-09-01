@@ -4,60 +4,66 @@ import api from "@/api"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import Cookies from "js-cookie"
+import { TriangleAlert } from "lucide-react"
+import Header from "@/components/Header"
 
 const DeleteUser = () => {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
- const handleDelete = () => {
-  setLoading(true);
-  api.delete("/user/delete")
-    .then(() => {
-      Cookies.remove("token");
-      Cookies.remove("user");
-
-      router.push("/");
-    })
-    .catch((err) => {
-      console.error("Error deleting account:", err);
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-}
-
+  const handleDelete = () => {
+    setLoading(true)
+    api.delete("/user/delete")
+      .then(() => {
+        Cookies.remove("token")
+        Cookies.remove("user")
+        router.push("/")
+      })
+      .catch((err) => {
+        console.error("Error deleting account:", err)
+      })
+      .finally(() => setLoading(false))
+  }
 
   return (
-    <div className="max-w-md mx-auto mt-20 bg-white p-6 rounded-xl shadow-md text-center space-y-4">
-      <h2 className="text-xl font-bold text-gray-800">Delete Account</h2>
+    <div className="min-h-screen flex items-center justify-center  p-4">
+      <Header/>
+      <div className="w-full bg-white/50 max-w-md rounded-2xl shadow-lg p-6 sm:p-8 space-y-6">
 
-      <p className="text-gray-600">
-        We’re sorry to see you go. Once you delete your account, all your data
-        will be permanently removed and cannot be recovered.
-      </p>
+        <div className="flex justify-center">
+          <TriangleAlert className="text-red-600 w-12 h-12" />
+        </div>
 
-      <p className="text-gray-600 italic">
-        Thank you for being with us. If you ever decide to return, we’ll always
-        welcome you back.
-      </p>
+        <h2 className="text-2xl font-bold text-gray-800 text-center">
+          Delete Account 
+        </h2>
+        <p className="text-gray-600 text-center">
+          We’re sorry to see you go. Deleting your account will permanently remove all your data.
+        </p>
 
-      <div className="flex justify-center gap-4 mt-6">
-        <button
-          onClick={() => router.push("/profile")}
-          className="px-4 py-2 border rounded-lg text-gray-700"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleDelete}
-          disabled={loading}
-          className="px-4 py-2 bg-red-600 text-white rounded-lg"
-        >
-          {loading ? "Deleting..." : "Confirm Delete"}
-        </button>
+        <p className="text-gray-500 italic text-center">
+          Thank you for being with us. You’re always welcome back!
+        </p>
+
+        <div className="flex flex-col sm:flex-row justify-center gap-4 mt-4">
+          <button
+            onClick={() => router.push("/profile")}
+            className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleDelete}
+            disabled={loading}
+            className="px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition disabled:opacity-50"
+          >
+            {loading ? "Deleting..." : "Confirm Delete"}
+          </button>
+        </div>
       </div>
     </div>
   )
 }
 
 export default DeleteUser
+

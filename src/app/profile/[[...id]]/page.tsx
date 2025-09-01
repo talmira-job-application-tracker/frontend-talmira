@@ -121,7 +121,7 @@ const ViewProfile = () => {
                 onClick={() => router.push(`/profile/delete`)}
                 className="px-6 py-2 rounded-xl bg-teal-500 text-white shadow hover:bg-red-400 hover:shadow-lg transition-all duration-200"
               >
-                Delete Profile
+                Delete Account
               </button>
             </div>
           )}

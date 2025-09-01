@@ -237,7 +237,6 @@ const EditCompany = () => {
       </h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-12">
-        {/* Section 1 - Basic Information */}
         <section>
           <h3 className="text-lg font-semibold text-[#309689] mb-4">
             Basic Information
@@ -286,7 +285,6 @@ const EditCompany = () => {
           </div>
         </section>
 
-        {/* Section 2 - Location & Contact */}
         <section>
           <h3 className="text-lg font-semibold text-[#309689] mb-4">
             Location & Contact
@@ -322,7 +320,6 @@ const EditCompany = () => {
           </div>
         </section>
 
-        {/* Section 3 - Branding */}
         <section className="mb-6">
           <h3 className="text-lg font-semibold text-[#309689] mb-2">
             Branding
@@ -354,7 +351,6 @@ const EditCompany = () => {
           </div>
         </section>
 
-        {/* Action Buttons */}
         <div className="flex justify-end">
           <button
             type="submit"

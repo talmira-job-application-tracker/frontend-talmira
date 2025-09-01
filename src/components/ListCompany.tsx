@@ -28,11 +28,11 @@ const ListCompanies = () => {
           return (
             <div
               key={company._id}
-              className="flex items-center justify-between backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 p-4"
+              className="flex items-center justify-between backdrop-blur-md bg-white border border-white/20 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 p-4"
             >
               {/* Left: Logo + Name */}
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 relative rounded-xl overflow-hidden border border-white/30">
+                <div className="w-14 h-14 relative rounded-xl overflow-hidden border border-black/30">
                   <Image
                     src={logoUrl}
                     alt={company.name}
@@ -40,7 +40,7 @@ const ListCompanies = () => {
                     className="object-cover"
                   />
                 </div>
-                <h3 className="text-lg font-medium text-gray-100">
+                <h3 className="text-lg font-medium text-black">
                   {company.name}
                 </h3>
               </div>

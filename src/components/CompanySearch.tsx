@@ -49,21 +49,23 @@ const CompanySearch = () => {
   return (
     <div className="p-6 space-y-6">
       {/* Search Input */}
-      <div className="relative w-full max-w-lg">
-        <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+      <div className="relative w-full max-w-xl mx-auto">
+        <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
         <input
           type="text"
-          placeholder="Search companies by name, industry, or location..."
+          placeholder="Search companies..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="w-full pl-10 pr-10 py-3 rounded-xl border border-gray-200 shadow-sm 
-                     focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-sans"
+          className="w-full pl-12 pr-12 py-3 rounded-2xl border border-gray-300 bg-white/60 
+                     backdrop-blur-md shadow-sm focus:outline-none font-medium text-gray-800 placeholder-gray-400"
         />
-        {loading && <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 animate-spin text-indigo-500" size={18} />}
+        {loading && (
+          <Loader2 className="absolute right-4 top-1/2 -translate-y-1/2 animate-spin text-indigo-500" size={20} />
+        )}
       </div>
 
       {/* Error */}
-      {error && <p className="text-red-600 font-medium">{error}</p>}
+      {error && <p className="text-red-600 font-medium text-center">{error}</p>}
 
       {/* Results */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -76,25 +78,38 @@ const CompanySearch = () => {
 
             return (
               <Link key={company._id} href={`/company/${company._id}`}>
-                <div className="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl 
-                                shadow-md hover:shadow-lg hover:scale-[1.02] transition-all p-5 cursor-pointer flex flex-col gap-3">
-                  {logoUrl && (
-                    <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
+                <div className="group backdrop-blur-md bg-white/30 border border-white/20 
+                                rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] 
+                                transition-all p-6 cursor-pointer flex flex-col items-center gap-4">
+                  
+                  {/* Logo */}
+                  {logoUrl ? (
+                    <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-100 border border-gray-200">
                       <img
                         src={logoUrl}
                         alt={company.name}
                         className="object-contain w-full h-full"
                       />
                     </div>
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
+                      No Logo
+                    </div>
                   )}
-                  <h3 className="font-semibold text-lg text-gray-900">{company.name}</h3>
-                  <p className="text-sm text-gray-600 line-clamp-2">{company.description}</p>
+
+                  {/* Name */}
+                  <h3 className="font-semibold text-lg text-gray-800 group-hover:text-indigo-600 text-center">
+                    {company.name}
+                  </h3>
                 </div>
               </Link>
             )
           })
         ) : (
-          query.trim() && !loading && <p className="text-gray-500">No companies found.</p>
+          query.trim() &&
+          !loading && (
+            <p className="text-gray-500 text-center col-span-full">No companies found.</p>
+          )
         )}
       </div>
     </div>

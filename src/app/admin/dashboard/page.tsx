@@ -126,6 +126,7 @@ import ListCompanies from "@/components/ListCompany"
 import ListJob from "@/components/ListJob"
 import ListUsers from "@/components/ListUsers"
 import Header from "@/components/Header"
+import CompanySearch from "@/components/CompanySearch"
 
 const AdminDashboard = () => {
   const [tabIndex, setTabIndex] = useState(0)
@@ -148,6 +149,8 @@ const AdminDashboard = () => {
     <Box sx={{ mt: "64px" }}>
       {/* ✅ Global Header */}
       <Header />
+
+      <CompanySearch/>
 
       {/* ✅ Tabs */}
       <Box

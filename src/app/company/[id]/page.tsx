@@ -151,6 +151,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import Image from "next/image";
+import SubscriptionButton from "@/components/ToggleSubscription";
 
 const ViewCompany = () => {
   const params = useParams<{ id: string }>();
@@ -203,6 +204,7 @@ const ViewCompany = () => {
       {/* Header */}
       <div className="text-center mb-10">
         <h1 className="text-4xl font-bold text-gray-900">{company.name}</h1>
+          {!isAdmin && <SubscriptionButton companyId={id} />}
       </div>
 
       {/* Company Info Card */}
@@ -261,6 +263,7 @@ const ViewCompany = () => {
           {company.description || "No description available"}
         </p>
       </div>
+      
 
       {/* Action Buttons */}
       {isAdmin && (

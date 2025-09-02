@@ -30,13 +30,41 @@ const ListApplications = () => {
       });
   }, []);
 
-  if (loading) return <p className="text-black text-center">Loading applications...</p>;
-  if (error) return <p className="text-black text-center">{error}</p>;
-  if (applications.length === 0) return <p className="text-black text-center">No applications found</p>;
+  if (loading) {
+    return <p className="text-black text-center">Loading applications...</p>;
+  }
+
+  if (error) {
+    return <p className="text-black text-center">{error}</p>;
+  }
+  if (applications.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        {isAdmin ? (
+          <p className="text-gray-500 text-lg font-medium">
+            📭 No job applications have been submitted yet
+          </p>
+        ) : (
+          <div className="flex flex-col items-center space-y-4">
+            <p className="text-gray text-lg font-medium">
+               You haven’t applied to any jobs yet. Start applying to see them here!
+            </p>
+            <Link
+              href="/job"
+              className="px-4 py-2 bg-[#309689] hover:bg-[#26786f] 
+                         text-white font-medium rounded-lg shadow-sm 
+                         transition-transform transform hover:scale-105"
+            >
+              Browse Jobs
+            </Link>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 max-w-5xl mx-auto">
-
       <div className="space-y-4">
         {applications.map((app) => (
           <div

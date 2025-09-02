@@ -252,7 +252,7 @@ const ViewApplication = () => {
     try {
       await api.delete(`/application/${id}`);
       toast.success("Application deleted");
-      router.push("/adminDashboard?tab=applications");
+      router.push("/");
     } catch {
       toast.error("Failed to delete");
     } finally {
@@ -261,7 +261,12 @@ const ViewApplication = () => {
   };
 
   if (loading) return <p className="text-gray-600">Loading...</p>;
-  if (!application) return <p className="text-red-500">No application found</p>;
+  if (!application)
+    return (
+      <div className="flex items-center justify-center h-64">
+        <p className="text-gray">No application found!</p>
+      </div>
+    );
 
   return (
 <div className="min-h-screen flex flex-col p-4 sm:p-8 ">

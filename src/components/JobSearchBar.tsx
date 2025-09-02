@@ -7,7 +7,7 @@ import { Search } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
-const JobSearchCompact = () => {
+const JobSearch = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<JobType[]>([]);
   const [loading, setLoading] = useState(false);
@@ -101,4 +101,4 @@ const JobSearchCompact = () => {
   );
 };
 
-export default JobSearchCompact;
+export default JobSearch;

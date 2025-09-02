@@ -148,10 +148,11 @@ import {
   Edit3,
   Trash2,
   Globe,
-  ArrowLeft,
 } from "lucide-react";
 import Image from "next/image";
 import SubscriptionButton from "@/components/ToggleSubscription";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const ViewCompany = () => {
   const params = useParams<{ id: string }>();
@@ -187,30 +188,16 @@ const ViewCompany = () => {
       .finally(() => setOpenDialog(false));
   };
 
-  if (loading) return <p className="text-gray-600">Loading...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
-  if (!company) return <p className="text-gray-500">No company found</p>;
+  if (loading) return <p className="text-gray-600 text-center">Loading...</p>;
+  if (error) return <p className="text-red-500 text-center">{error}</p>;
+  if (!company) return <p className="text-gray-500 text-center">No company found</p>;
 
   return (
-    <div className="min-h-screen px-6 py-10">
-      {/* Back Button */}
-      <button
-        onClick={() => router.push("/")}
-        className="flex items-center gap-2 text-[#309689] mb-6 hover:underline"
-      >
-        <ArrowLeft size={18} /> Back 
-      </button>
-
-      {/* Header */}
-      <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-gray-900">{company.name}</h1>
-          {!isAdmin && <SubscriptionButton companyId={id} />}
-      </div>
-
-      {/* Company Info Card */}
-      <div className="flex flex-col md:flex-row items-center gap-8 mb-10 p-6 border rounded-lg shadow-sm">
-        {/* Logo */}
-        <div className="w-28 h-28 relative border rounded-lg bg-gray-50 shadow-sm overflow-hidden flex-shrink-0">
+    <div className="min-h-screen px-4 sm:px-6 py-10">
+      <Header />
+      <div className="mt-10">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-6 p-6 rounded-lg shadow-sm bg-white/50 backdrop-blur-md">
+        <div className="w-28 h-28 sm:w-32 sm:h-32 relative border rounded-lg bg-gray-50 shadow overflow-hidden flex-shrink-0">
           <Image
             src={
               company.logo
@@ -227,72 +214,74 @@ const ViewCompany = () => {
           />
         </div>
 
-        {/* Info */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full text-gray-700">
-          {company.website && (
-            <a
-              href={
-                company.website.startsWith("http")
-                  ? company.website
-                  : `https://${company.website}`
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-gray-700 hover:underline"
-            >
-              <Globe size={18} className="text-[#309689]" /> {company.website}
-            </a>
+        <div className="flex flex-col gap-3 w-full text-center md:text-left">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{company.name}</h1>
+
+          <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center md:justify-start gap-3 text-gray-700">
+            {company.website && (
+              <a
+                href={
+                  company.website.startsWith("http")
+                    ? company.website
+                    : `https://${company.website}`
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:underline justify-center md:justify-start"
+              >
+                <Globe size={18} className="text-[#309689]" /> {company.website}
+              </a>
+            )}
+
+            <p className="flex items-center gap-2 justify-center md:justify-start">
+              <MapPin className="text-[#309689]" size={18} /> {company.location}
+            </p>
+
+            <p className="flex items-center gap-2 justify-center md:justify-start">
+              <Building2 className="text-[#309689]" size={18} /> {company.industry}
+            </p>
+          </div>
+
+          {!isAdmin && (
+            <div className="mt-3 flex justify-center md:justify-start">
+              <SubscriptionButton companyId={id} />
+            </div>
           )}
-
-          <p className="flex items-center gap-2">
-            <MapPin className="text-[#309689]" size={18} />
-            {company.location}
-          </p>
-
-          <p className="flex items-center gap-2">
-            <Building2 className="text-[#309689]" size={18} />
-            {company.industry}
-          </p>
         </div>
       </div>
+      </div>
 
-      {/* Description */}
-      <div className="mb-12">
-        <h2 className="text-lg font-semibold text-gray-800 mb-3">About</h2>
-        <p className="text-gray-700 leading-relaxed">
+      <div className="max-w-6xl mx-auto mt-10 px-2 sm:px-0">
+        <h2 className="text-lg font-semibold text-gray-800 mb-3 text-center md:text-left">About</h2>
+        <p className="text-gray-700 leading-relaxed text-center md:text-left">
           {company.description || "No description available"}
         </p>
       </div>
-      
 
-      {/* Action Buttons */}
       {isAdmin && (
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          {/* Left: Subscribers */}
-          <Link href={`/company/${id}/subscribers`} className="w-full md:w-auto">
-            <button className="flex items-center justify-center gap-2 px-6 py-3 bg-[#309689] hover:bg-[#26776d] text-white rounded-md shadow w-full md:w-auto">
+        <div className="max-w-6xl mx-auto mt-12 flex flex-col sm:flex-row justify-center md:justify-between items-center gap-6">
+          <Link href={`/company/${id}/subscribers`} className="w-full sm:w-auto">
+            <button className="flex items-center justify-center gap-2 px-6 py-3 bg-[#309689] hover:bg-[#26776d] text-white rounded-md shadow w-full sm:w-auto">
               <Users size={18} /> Subscribers
             </button>
           </Link>
 
-          {/* Center: Add Job */}
-          <Link href={`/company/${id}/addjob`} className="w-full md:w-auto">
-            <button className="flex items-center justify-center gap-2 px-6 py-3 bg-[#26776d] hover:bg-[#1f5e56] text-white rounded-md shadow w-full md:w-auto">
+          <Link href={`/company/${id}/addjob`} className="w-full sm:w-auto">
+            <button className="flex items-center justify-center gap-2 px-6 py-3 bg-[#26776d] hover:bg-[#1f5e56] text-white rounded-md shadow w-full sm:w-auto">
               <PlusCircle size={18} /> Add Job
             </button>
           </Link>
 
-          {/* Right: Edit + Delete */}
-          <div className="flex gap-3 w-full md:w-auto justify-center">
-            <Link href={`/company/${id}/edit`} className="w-full md:w-auto">
-              <button className="flex items-center justify-center gap-2 px-6 py-3 bg-[#309689] hover:bg-[#26776d] text-white rounded-md shadow w-full md:w-auto">
+          <div className="flex gap-3 w-full sm:w-auto justify-center">
+            <Link href={`/company/${id}/edit`} className="w-full sm:w-auto">
+              <button className="flex items-center justify-center gap-2 px-6 py-3 bg-[#309689] hover:bg-[#26776d] text-white rounded-md shadow w-full sm:w-auto">
                 <Edit3 size={18} /> Edit
               </button>
             </Link>
 
             <button
               onClick={handleOpenDialog}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-md shadow w-full md:w-auto"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-md shadow w-full sm:w-auto"
             >
               <Trash2 size={18} /> Delete
             </button>
@@ -323,6 +312,7 @@ const ViewCompany = () => {
 };
 
 export default ViewCompany;
+
 
 
 

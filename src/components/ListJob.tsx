@@ -16,8 +16,8 @@ const ListJob = () => {
   }, [dispatch]);
 
   return (
-    <div className="min-h-screen px-8 py-6">
-      <div className="space-y-3">
+    <div className="min-h-screen px-4 sm:px-8 py-6">
+      <div className="space-y-4">
         {loading && <p className="text-gray-600">Loading jobs...</p>}
         {error && <p className="text-red-500">Error: {error}</p>}
 
@@ -25,13 +25,17 @@ const ListJob = () => {
           jobs.map((job: any) => (
             <div
               key={job._id}
-              className="flex items-center bg-white justify-between p-4 border rounded-xl shadow-sm transition hover:shadow-md hover:border-[#309689]"
+              className="flex flex-col sm:flex-row sm:items-center bg-white 
+                         justify-between p-4 border rounded-xl shadow-sm 
+                         transition hover:shadow-md hover:border-[#309689] gap-3"
             >
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800">{job.title}</h3>
+              <div className="flex-1">
+                <h3 className="text-base sm:text-lg font-semibold text-gray-800 truncate">
+                  {job.title}
+                </h3>
                 <p className="text-sm text-gray-600 mb-2">{job.company?.name}</p>
 
-                <div className="flex items-center gap-4 text-sm text-gray-600">
+                <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-gray-600">
                   <span className="flex items-center gap-1">
                     <Image src="/icons/salary.svg" alt="Salary" width={16} height={16} />
                     {job.salary || "N/A"}
@@ -47,8 +51,8 @@ const ListJob = () => {
                   <span className="flex items-center gap-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
+                      width="18"
+                      height="18"
                       viewBox="0 0 24 24"
                       fill="#309689"
                     >
@@ -59,10 +63,11 @@ const ListJob = () => {
                 </div>
               </div>
 
-
               <Link
                 href={`/job/${job._id}`}
-                className="px-3 py-2 bg-[#309689] text-white rounded-lg shadow hover:bg-[#26776d] transition"
+                className="w-full sm:w-auto text-center px-4 py-2 
+                           bg-[#309689] text-white text-sm sm:text-base 
+                           rounded-lg shadow hover:bg-[#26776d] transition self-start sm:self-auto"
               >
                 Job Details
               </Link>

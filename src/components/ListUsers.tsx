@@ -56,7 +56,7 @@ const ListUsers = () => {
   }, [dispatch])
 
   return (
-    <div className="min-h-screen px-8 py-6 bg-white">
+    <div className="min-h-screen px-8 py-6 bg-white/80">
       <h1 className="text-2xl font-bold text-[#309689] mb-6">Users List</h1>
 
       {loading && <p className="text-gray-600">Loading...</p>}

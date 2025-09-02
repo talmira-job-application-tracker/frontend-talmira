@@ -265,14 +265,14 @@ const Header = () => {
         )}
 
         {/* Admin-only */}
-        {role === "admin" && (
-          <span
-            className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
-            onClick={() => router.push("/admin/dashboard")}
-          >
-            <LayoutDashboard size={18} /> Dashboard
-          </span>
-        )}
+        {/* {role === "admin" && (
+          // <span
+          //   className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
+          //   onClick={() => router.push("/admin/dashboard")}
+          // >
+          //   <LayoutDashboard size={18} /> Dashboard
+          // </span>
+        )} */}
 
         {!token ? (
           <>

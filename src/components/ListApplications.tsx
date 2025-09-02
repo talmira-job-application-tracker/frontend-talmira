@@ -11,11 +11,12 @@ const ListApplications = () => {
   const [applications, setApplications] = useState<ApplicationType[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const user = JSON.parse(Cookies.get("user") || "{}");
-  const isAdmin = user?.role === "admin";
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null); 
 
   useEffect(() => {
+    const user = JSON.parse(Cookies.get("user") || "{}");
+    setIsAdmin(user?.role === "admin");
+
     setLoading(true);
     api
       .get("/application/list")
@@ -26,7 +27,6 @@ const ListApplications = () => {
       .catch((err) => {
         setError(err.response?.data?.message || "Failed to fetch applications");
         setLoading(false);
-        toast.error("Failed to fetch applications");
       });
   }, []);
 
@@ -37,6 +37,11 @@ const ListApplications = () => {
   if (error) {
     return <p className="text-black text-center">{error}</p>;
   }
+
+  if (isAdmin === null) {
+    return null;
+  }
+
   if (applications.length === 0) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -46,8 +51,8 @@ const ListApplications = () => {
           </p>
         ) : (
           <div className="flex flex-col items-center space-y-4">
-            <p className="text-gray text-lg font-medium">
-               You haven’t applied to any jobs yet. Start applying to see them here!
+            <p className="text-gray-600 text-lg font-medium">
+              ✨ You haven’t applied to any jobs yet. Start applying to see them here!
             </p>
             <Link
               href="/job"

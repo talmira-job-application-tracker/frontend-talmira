@@ -25,7 +25,7 @@ const ListJob = () => {
           jobs.map((job: any) => (
             <div
               key={job._id}
-              className="flex flex-col sm:flex-row sm:items-center bg-white 
+              className="flex flex-col sm:flex-row sm:items-center bg-white/80
                          justify-between p-4 border rounded-xl shadow-sm 
                          transition hover:shadow-md hover:border-[#309689] gap-3"
             >

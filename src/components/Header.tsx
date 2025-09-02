@@ -217,14 +217,14 @@ const Header = () => {
     router.push("/");
   };
 
-  // ✅ Dynamic Home Redirect
+
   const handleHomeClick = () => {
     if (!token) {
-      router.push("/"); // Landing page
+      router.push("/"); 
     } else if (role === "admin") {
       router.push("/admin/dashboard");
     } else if (role === "user") {
-      router.push("/"); // User home page (change if needed)
+      router.push("/"); 
     } else {
       router.push("/");
     }
@@ -246,7 +246,6 @@ const Header = () => {
         </h1>
       </a>
 
-      {/* Desktop Nav */}
       <nav className="hidden md:flex items-center gap-6">
         <span
           className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
@@ -275,7 +274,6 @@ const Header = () => {
           </span>
         )}
 
-        {/* Auth Links */}
         {!token ? (
           <>
             <span

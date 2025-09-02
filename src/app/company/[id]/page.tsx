@@ -195,7 +195,7 @@ const ViewCompany = () => {
     <div className="min-h-screen px-6 py-10">
       {/* Back Button */}
       <button
-        onClick={() => router.push("/admin/dashboard")}
+        onClick={() => router.push("/")}
         className="flex items-center gap-2 text-[#309689] mb-6 hover:underline"
       >
         <ArrowLeft size={18} /> Back 

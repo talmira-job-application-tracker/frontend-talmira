@@ -1,186 +1,323 @@
-// 'use client'
-// import ListApplications from "@/components/ListApplications"
-// import ListCompanies from "@/components/ListCompany"
-// import ListJob from "@/components/ListJob"
-// import ListUsers from "@/components/ListUsers"
-// import { Box, Tab, Tabs } from "@mui/material"
-// import { useState } from "react"
-
-// const adminDashboard = () => {
-//   const [tabIndex, setTabIndex] = useState(0)
-
-//   return (
-//     <div>
-//       <Tabs value={tabIndex} onChange={(e, newValue) => setTabIndex(newValue)}>
-//         <Tab label="Applications" />
-//         <Tab label="Jobs" />
-//         <Tab label="Companies" />
-//         <Tab label="Users" />
-//       </Tabs>
-
-//       <Box sx={{ mt: 2 }}>
-//         {tabIndex === 0 && <ListApplications />}
-//         {tabIndex === 1 && <ListJob />}
-//         {tabIndex === 2 && <ListCompanies />}
-//         {tabIndex === 3 && <ListUsers />}
-//       </Box>
-//     </div>
-//   )
-// }
-
-// export default adminDashboard
-
-// 'use client'
-
-// import { useState } from "react"
-// import { Box, Tab, Tabs, Grid, List, ListItem, ListItemButton, ListItemText } from "@mui/material"
-// import ListApplications from "@/components/ListApplications"
-// import ListCompanies from "@/components/ListCompany"
-// import ListJob from "@/components/ListJob"
-// import ListUsers from "@/components/ListUsers"
-// import Header from "@/components/Header"
-
-// const AdminDashboard = () => {
-//   const [tabIndex, setTabIndex] = useState(0)
-//   const [sideAction, setSideAction] = useState("list")
-
-//   const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
-//     setTabIndex(newValue)
-//     setSideAction("list") // reset sidebar on tab change
-//   }
-
-//   const renderMainContent = () => {
-//     switch (tabIndex) {
-//       case 0: return <ListApplications />
-//       case 1: return <ListCompanies />
-//       case 2: return <ListJob />
-//       case 3: return <ListUsers />
-//       default: return null
-//     }
-//   }
-
-//   const renderSideMenu = () => {
-//     let actions: string[] = []
-
-//     switch (tabIndex) {
-//       case 0: actions = ["List Applications", "Add Application", "Edit Application", "Delete Application"]; break
-//       case 1: actions = ["List Companies", "Add Company", "Edit Company", "Delete Company"]; break
-//       case 2: actions = ["List Jobs", "Add Job", "Edit Job", "Delete Job"]; break
-//       case 3: actions = ["List Users", "Add User", "Edit User", "Delete User"]; break
-//       default: actions = []
-//     }
-
-//     return (
-      
-//       <List sx={{ borderRight: "1px solid #ddd" }}>
-//         {actions.map((action) => (
-//           <ListItem key={action} disablePadding>
-//             <ListItemButton
-//               selected={sideAction === action}
-//               onClick={() => setSideAction(action)}
-//             >
-//               <ListItemText primary={action} />
-//             </ListItemButton>
-//           </ListItem>
-//         ))}
-//       </List>
-//     )
-//   }
-
-//   return (
-//     <Box sx={{ mt: "64px" }}>
-//       {/* Header */}
-//       <Header />
-
-//       {/* Tabs */}
-//       <Box sx={{ borderBottom: 1, borderColor: "divider", display: "flex", justifyContent: "center" }}>
-//         <Tabs value={tabIndex} onChange={handleTabChange} textColor="primary" indicatorColor="primary">
-//           <Tab label="Applications" />
-//           <Tab label="Companies" />
-//           <Tab label="Jobs" />
-//           <Tab label="Users" />
-//         </Tabs>
-//       </Box>
-
-//       {/* Layout with Grid: Sidebar + Content */}
-//       <Grid container spacing={2} sx={{ mt: 2, p: 2 }}>
-//         {/* <Grid item xs={3}> */}
-//           {renderSideMenu()}
-//         {/* </Grid> */}
-//         {/* <Grid item xs={9}> */}
-//           {renderMainContent()}
-//         {/* </Grid> */}
-//       </Grid>
-//     </Box>
-//   )
-// }
-
-// export default AdminDashboard
-
 'use client'
 
-import { useState } from "react"
-import { Box, Tab, Tabs } from "@mui/material"
+import { useState, useEffect } from "react"
+import Link from "next/link"
+import {
+  Box,
+  Typography,
+  List,
+  ListItemButton,
+  ListItemText,
+  Card,
+  CardContent,
+  Stack,
+  useTheme,
+  useMediaQuery,
+  Tabs,
+  Tab,
+  Button,
+} from "@mui/material"
+import {
+  PieChart,
+  Pie,
+  Cell,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts"
+
+import DashboardIcon from "@mui/icons-material/Dashboard"
+import AssignmentIcon from "@mui/icons-material/Assignment"
+import BusinessIcon from "@mui/icons-material/Business"
+import WorkIcon from "@mui/icons-material/Work"
+import PeopleIcon from "@mui/icons-material/People"
+import AddIcon from "@mui/icons-material/Add"
+
+import Header from "@/components/Header"
 import ListApplications from "@/components/ListApplications"
 import ListCompanies from "@/components/ListCompany"
 import ListJob from "@/components/ListJob"
 import ListUsers from "@/components/ListUsers"
-import Header from "@/components/Header"
-import CompanySearch from "@/components/CompanySearch"
+
+// Dummy data
+const applicationsData = [
+  { month: "Jan", count: 40 },
+  { month: "Feb", count: 55 },
+  { month: "Mar", count: 70 },
+  { month: "Apr", count: 90 },
+]
+
+const jobsData = [
+  { name: "Design", value: 30},
+  { name: "Tech", value:30 },
+  { name: "Finance", value:25},
+  { name: "Other", value: 15},
+]
+
+const COLORS = ["#309689", "#00796B", "#80CBC4", "#B2DFDB"]
 
 const AdminDashboard = () => {
-  const [tabIndex, setTabIndex] = useState(0)
+  const [selected, setSelected] = useState("dashboard")
+  const [mounted, setMounted] = useState(false)
+  const theme = useTheme()
+  const isMobileQuery = useMediaQuery(theme.breakpoints.down("sm"))
+  const isMobile = mounted && isMobileQuery
 
-  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
-    setTabIndex(newValue)
-  }
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
-  const renderMainContent = () => {
-    switch (tabIndex) {
-      case 0: return <ListApplications />
-      case 1: return <ListCompanies />
-      case 2: return <ListJob />
-      case 3: return <ListUsers />
-      default: return null
+  const mobileTabs = [
+    { key: "dashboard", label: "Dashboard" },
+    { key: "applications", label: "Applications" },
+    { key: "companies", label: "Companies" },
+    { key: "jobs", label: "Jobs" },
+    { key: "users", label: "Users" },
+  ]
+
+  const renderContent = () => {
+    if (selected === "dashboard") {
+      return (
+        <>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2} flexWrap="wrap" mb={3}>
+            {[
+              { title: "Applications", value: 320 },
+              { title: "Companies", value: 45 },
+              { title: "Jobs", value: 120 },
+              { title: "Users", value: 560 },
+            ].map((stat, idx) => (
+              <Box key={idx} flex={{ xs: "1 1 100%", sm: "1 1 45%", md: "1 1 22%" }} minWidth={0}>
+                <Card
+                  elevation={0}
+                  sx={{
+                    borderRadius: 2,
+                    backgroundColor: "rgba(48,150,137,0.15)",
+                    color: "#fff",
+                  }}
+                >
+                  <CardContent>
+                    <Typography variant="subtitle2" sx={{ opacity: 0.8 }}>
+                      {stat.title}
+                    </Typography>
+                    <Typography variant="h5" fontWeight="bold">
+                      {stat.value}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Box>
+            ))}
+          </Stack>
+
+          <Stack direction={{ xs: "column", md: "row" }} spacing={3} flexWrap="wrap">
+            {/* Line Chart */}
+            <Box
+              sx={{
+                flex: 1,
+                minWidth: 0,
+                p: 2,
+                borderRadius: 2,
+                backgroundColor: "rgba(29, 117, 105, 0.25)",
+              }}
+            >
+              <Typography variant="h6" gutterBottom color="#fff">
+                Applications Over Time
+              </Typography>
+              <Box sx={{ width: "100%", height: 250 }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={applicationsData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                    <XAxis dataKey="month" stroke="#ccc" />
+                    <YAxis stroke="#ccc" />
+                    <Tooltip />
+                    <Line type="monotone" dataKey="count" stroke="#309689" strokeWidth={2} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </Box>
+            </Box>
+
+            {/* Pie Chart */}
+            <Box
+              sx={{
+                flex: 1,
+                minWidth: 0,
+                p: 2,
+                borderRadius: 2,
+                backgroundColor: "rgba(29, 117, 105, 0.25)",
+              }}
+            >
+              <Typography variant="h6" gutterBottom color="#fff">
+                Jobs by Category
+              </Typography>
+              <Box sx={{ width: "100%", height: 250 }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={jobsData}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      outerRadius={80}
+                      labelLine={false}
+                      label={(props) => {
+                      const { cx, cy, midAngle = 0, innerRadius = 0, outerRadius = 0, index } = props
+                      const RADIAN = Math.PI / 180
+                      const radius = innerRadius + (outerRadius - innerRadius) / 2
+                      const x = cx + radius * Math.cos(-midAngle * RADIAN)
+                      const y = cy + radius * Math.sin(-midAngle * RADIAN)
+                      const item = jobsData[index as number]
+                      return item ? (
+                        <text
+                          x={x}
+                          y={y}
+                          fill="#fff"
+                          textAnchor="middle"
+                          dominantBaseline="central"
+                          fontSize={8}
+                        >
+                          {`${item.name} (${item.value})`}
+                        </text>
+                      ) : null
+                    }}
+
+                    >
+                      {jobsData.map((entry, index) => (
+                        <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+              </Box>
+            </Box>
+          </Stack>
+        </>
+      )
     }
+
+    if (selected === "applications") return <ListApplications />
+
+    if (selected === "companies")
+      return (
+        <Box sx={{ position: "relative", width: "100%", mt: 3 }}>
+          <Link href="/add-company" passHref>
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              sx={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                zIndex: 10,
+                backgroundColor: "#309689",
+                "&:hover": { backgroundColor: "#26786d" },
+              }}
+            >
+              Add Company
+            </Button>
+          </Link>
+
+          <ListCompanies />
+        </Box>
+      )
+
+    if (selected === "jobs") return <ListJob />
+    if (selected === "users") return <ListUsers />
   }
 
   return (
-    <Box sx={{ mt: "64px" }}>
-      {/* ✅ Global Header */}
+    <Box sx={{ minHeight: "100vh" }}>
       <Header />
 
-      <CompanySearch/>
+      <Box sx={{ display: "flex", flexDirection: isMobile ? "column" : "row", pt: 8 }}>
+        {/* Sidebar for desktop */}
+        {!isMobile && (
+          <Box
+            sx={{
+              width: { md: "240px" },
+              minHeight: "calc(100vh - 64px)",
+              p: 2,
+              borderRight: "1px solid rgba(255,255,255,0.1)",
+              bgcolor: "transparent",
+            }}
+          >
+            <Typography variant="h6" fontWeight="bold" mb={2} color="#fff">
+              Admin Panel
+            </Typography>
+            <List>
+              {[
+                { key: "dashboard", label: "Dashboard", icon: <DashboardIcon /> },
+                { key: "applications", label: "Applications", icon: <AssignmentIcon /> },
+                { key: "companies", label: "Companies", icon: <BusinessIcon /> },
+                { key: "jobs", label: "Jobs", icon: <WorkIcon /> },
+                { key: "users", label: "Users", icon: <PeopleIcon /> },
+              ].map((item) => (
+                <ListItemButton
+                  key={item.key}
+                  selected={selected === item.key}
+                  onClick={() => setSelected(item.key)}
+                  sx={{
+                    borderRadius: 1,
+                    mb: 1,
+                    color: "#ccc",
+                    "&.Mui-selected": {
+                      backgroundColor: "rgba(48,150,137,0.3)",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  {item.icon}
+                  <ListItemText primary={item.label} sx={{ ml: 1 }} />
+                </ListItemButton>
+              ))}
+            </List>
+          </Box>
+        )}
 
-      {/* ✅ Tabs */}
-      <Box
-        sx={{
-          borderBottom: 1,
-          borderColor: "divider",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Tabs
-          value={tabIndex}
-          onChange={handleTabChange}
-          textColor="primary"
-          indicatorColor="primary"
+        {/* Main content */}
+        <Box
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            bgcolor: "transparent",
+            minHeight: "calc(100vh - 64px)",
+          }}
         >
-          <Tab label="Applications" />
-          <Tab label="Companies" />
-          <Tab label="Jobs" />
-          <Tab label="Users" />
-        </Tabs>
-      </Box>
+          {/* Tabs for mobile */}
+          {mounted && isMobile && (
+            <Tabs
+              value={selected}
+              onChange={(e, value) => setSelected(value)}
+              variant="scrollable"
+              scrollButtons="auto"
+              sx={{
+                mb: 2,
+                bgcolor: "rgba(48,150,137,0.15)",
+                borderRadius: 1,
+              }}
+            >
+              {mobileTabs.map((tab) => (
+                <Tab key={tab.key} label={tab.label} value={tab.key} />
+              ))}
+            </Tabs>
+          )}
 
-      {/* ✅ Main Content */}
-      <Box sx={{ mt: 2, p: 2 }}>
-        {renderMainContent()}
+          {renderContent()}
+        </Box>
       </Box>
     </Box>
   )
 }
 
 export default AdminDashboard
+
+
+
+
+
+
+
 

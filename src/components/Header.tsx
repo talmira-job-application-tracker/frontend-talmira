@@ -60,7 +60,7 @@ const Header = () => {
     Cookies.remove("user");
     setToken(null);
     setRole(null);
-    router.push("/");
+    router.push("/login");
   };
 
   return (
@@ -80,7 +80,6 @@ const Header = () => {
       </a>
 
       <nav className="hidden md:flex items-center gap-6">
-        {/* User-only alerts */}
         {role === "user" && (
           <span
             className="flex items-center text-white hover:text-[#309689] cursor-pointer transition"
@@ -90,19 +89,37 @@ const Header = () => {
           </span>
         )}
 
+        {/* Show About Us + Contact Us ONLY when logged out */}
+        {!token && (
+          <>
+            <span
+              className="text-white hover:text-[#309689] cursor-pointer transition"
+              onClick={() => router.push("/about-us")}
+            >
+              About Us
+            </span>
+            <span
+              className="text-white hover:text-[#309689] cursor-pointer transition"
+              onClick={() => router.push("/contact-us")}
+            >
+              Contact Us
+            </span>
+          </>
+        )}
+
         {!token ? (
           <>
             <span
-              className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
+              className="text-white hover:text-[#309689] cursor-pointer transition"
               onClick={() => router.push("/login")}
             >
-              <LogIn size={18} /> Login
+              Login
             </span>
             <span
-              className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
+              className="text-white hover:text-[#309689] cursor-pointer transition"
               onClick={() => router.push("/register")}
             >
-              <UserPlus size={18} /> Register
+              Register
             </span>
           </>
         ) : (
@@ -228,6 +245,30 @@ const Header = () => {
             </span>
           )}
 
+          {/* About/Contact for logged-out mobile */}
+          {!token && (
+            <>
+              <span
+                className="text-white hover:text-[#309689] cursor-pointer transition"
+                onClick={() => {
+                  router.push("/about-us");
+                  setMenuOpen(false);
+                }}
+              >
+                About Us
+              </span>
+              <span
+                className="text-white hover:text-[#309689] cursor-pointer transition"
+                onClick={() => {
+                  router.push("/contact-us");
+                  setMenuOpen(false);
+                }}
+              >
+                Contact Us
+              </span>
+            </>
+          )}
+
           <span
             className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
             onClick={() => {
@@ -241,22 +282,22 @@ const Header = () => {
           {!token ? (
             <>
               <span
-                className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
+                className="text-white hover:text-[#309689] cursor-pointer transition"
                 onClick={() => {
                   router.push("/login");
                   setMenuOpen(false);
                 }}
               >
-                <LogIn size={18} /> Login
+                Login
               </span>
               <span
-                className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
+                className="text-white hover:text-[#309689] cursor-pointer transition"
                 onClick={() => {
                   router.push("/register");
                   setMenuOpen(false);
                 }}
               >
-                <UserPlus size={18} /> Register
+                Register
               </span>
             </>
           ) : (
@@ -265,9 +306,9 @@ const Header = () => {
                 handleLogout();
                 setMenuOpen(false);
               }}
-              className="flex items-center gap-2 text-red-400 hover:text-red-500 cursor-pointer transition"
+              className="text-red-400 hover:text-red-500 cursor-pointer transition"
             >
-              <LogOut size={18} /> Logout
+              Logout
             </span>
           )}
         </div>

@@ -28,8 +28,8 @@ export default function Home() {
   }, [router]);
 
   return (
-    <div className='flex flex-col justify-items-start gap-10'>
-      <Header />
+    <div className='flex flex-col justify-items-start'>
+      {/* <Header /> */}
 
       {!token && 
       <>

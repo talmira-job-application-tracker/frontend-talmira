@@ -5,14 +5,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import api from "@/api";
 import toast from "react-hot-toast";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { viewJob } from "@/redux/slices/jobSlice";
@@ -105,7 +98,7 @@ const ViewJob = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-teal-950 to-black py-12 px-4">
-      <div className="max-w-3xl mx-auto bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-xl p-8">
+      <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-xl p-8">
         {/* Job Title */}
         <h2 className="text-3xl font-bold text-white mb-2">{job.title}</h2>
 
@@ -121,22 +114,30 @@ const ViewJob = () => {
           <JobDetail icon={MapPin} title="Location" value={job.location} />
           <JobDetail icon={Briefcase} title="Job Type" value={job.jobType} />
           <JobDetail icon={Wallet} title="Salary" value={job.salary} />
-          <JobDetail icon={Languages} title="Language" value={Array.isArray(job.language) ? job.language.join(", ") : job.language} />
+          <JobDetail
+            icon={Languages}
+            title="Language"
+            value={
+              Array.isArray(job.language)
+                ? job.language.join(", ")
+                : job.language
+            }
+          />
           <JobDetail
             icon={GraduationCap}
             title="Qualification"
             value={job.qualification}
           />
-          <JobDetail
-            icon={BookOpen}
-            title="Description"
-            value={job.description}
-          />
+        </div>
+
+        {/* Full-width Description */}
+        <div className="mt-6">
+          <JobDetail icon={BookOpen} title="Description" value={job.description} />
         </div>
 
         {/* Buttons */}
         <div className="mt-10 flex flex-wrap gap-4">
-          {isAdmin && (
+          {isAdmin ? (
             <>
               <Button
                 onClick={() => router.push(`/job/${id}/edit`)}
@@ -159,22 +160,22 @@ const ViewJob = () => {
                 Delete Job
               </button>
             </>
+          ) : (
+            <Button
+              onClick={() => router.push(`/job/${id}/apply`)}
+              variant="contained"
+              sx={{
+                backgroundColor: "#1e293b",
+                "&:hover": { backgroundColor: "#0f172a" },
+                borderRadius: "12px",
+                padding: "8px 20px",
+                textTransform: "none",
+                color: "white",
+              }}
+            >
+              Apply
+            </Button>
           )}
-
-          <Button
-            onClick={() => router.push(`/job/${id}/apply`)}
-            variant="contained"
-            sx={{
-              backgroundColor: "#1e293b",
-              "&:hover": { backgroundColor: "#0f172a" },
-              borderRadius: "12px",
-              padding: "8px 20px",
-              textTransform: "none",
-              color: "white",
-            }}
-          >
-            Apply
-          </Button>
         </div>
       </div>
 
@@ -185,7 +186,8 @@ const ViewJob = () => {
             {/* Title */}
             <h2 className="text-xl font-semibold text-white mb-2">Delete Job</h2>
             <p className="text-gray-300 text-sm mb-6">
-              Are you sure you want to delete this job? This action cannot be undone.
+              Are you sure you want to delete this job? This action cannot be
+              undone.
             </p>
 
             {/* Actions */}
@@ -207,7 +209,6 @@ const ViewJob = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

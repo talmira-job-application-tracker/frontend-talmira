@@ -46,6 +46,7 @@ import { Figtree } from "next/font/google"
 import "./globals.css"
 import { ReduxProvider } from "@/redux/ReduxProvider"
 import { Toaster } from "react-hot-toast"
+import Header from "@/components/Header"
 
 const figtree = Figtree({ subsets: ["latin"] })
 
@@ -65,6 +66,7 @@ export default function RootLayout({
       <body className={`${figtree.className} antialiased bg-gradient-to-br from-[#366157] to-[#e6fffa] min-h-screen`}>
         <ReduxProvider>
           <Toaster position="top-right" reverseOrder={false} />
+          <Header/>
           {children}
         </ReduxProvider>
       </body>

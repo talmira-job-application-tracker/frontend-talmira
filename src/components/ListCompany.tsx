@@ -17,7 +17,7 @@ const ListCompanies = () => {
   }, [dispatch]);
 
   return (
-    <div className="min-h-screen px-6 py-12">
+    <div className="min-h-screen px-4 sm:px-6 py-8 sm:py-12">
       <div className="max-w-4xl mx-auto flex flex-col gap-4">
         {companies.map((company) => {
           const logoPath = company.logo?.replace(/\\/g, "/");
@@ -28,11 +28,11 @@ const ListCompanies = () => {
           return (
             <div
               key={company._id}
-              className="flex items-center justify-between backdrop-blur-md bg-white/80 border border-white/20 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 p-4"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 backdrop-blur-md bg-white/80 border border-white/20 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 p-4"
             >
               {/* Left: Logo + Name */}
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 relative rounded-xl overflow-hidden border border-black/30">
+                <div className="w-14 h-14 relative rounded-xl overflow-hidden border border-black/30 flex-shrink-0">
                   <Image
                     src={logoUrl}
                     alt={company.name}
@@ -40,7 +40,7 @@ const ListCompanies = () => {
                     className="object-cover"
                   />
                 </div>
-                <h3 className="text-lg font-medium text-black">
+                <h3 className="text-base sm:text-lg font-medium text-black">
                   {company.name}
                 </h3>
               </div>
@@ -48,7 +48,7 @@ const ListCompanies = () => {
               {/* Right: Button */}
               <button
                 onClick={() => router.push(`/company/${company._id}`)}
-                className="bg-teal-700 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition border border-white/30"
+                className="bg-teal-700 hover:bg-white/30 text-white px-4 py-2 rounded-lg text-sm font-medium transition border border-white/30 w-full sm:w-auto"
               >
                 View
               </button>

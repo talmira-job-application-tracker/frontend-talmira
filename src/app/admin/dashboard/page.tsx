@@ -203,7 +203,7 @@ const AdminDashboard = () => {
     if (selected === "companies")
       return (
         <Box sx={{ position: "relative", width: "100%", mt: 3 }}>
-          <Link href="/add-company" passHref>
+          <Link href="/company/add" passHref>
             <Button
               variant="contained"
               startIcon={<AddIcon />}

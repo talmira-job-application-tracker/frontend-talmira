@@ -77,123 +77,148 @@ const AddCompany = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-teal-900 to-indigo-900 flex items-center justify-center px-4">
-      <div className="w-full max-w-2xl my-3 bg-gray-900/80 backdrop-blur-xl border border-gray-700 rounded-2xl shadow-2xl p-8">
-        <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent mb-6">
+    <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-br from-black via-teal-900 to-black px-4 overflow-hidden">
+      {/* Decorative blurred shapes */}
+      <div className="absolute -top-24 -left-24 w-72 h-72 bg-teal-500/30 rounded-full mix-blend-screen filter blur-3xl animate-pulse" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-white/10 rounded-full mix-blend-overlay filter blur-2xl animate-[pulse_6s_ease-in-out_infinite]" />
+
+      <div className="w-full max-w-4xl bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-10 relative z-10">
+        <h2 className="text-4xl font-extrabold text-center text-white mb-8 tracking-wide drop-shadow-lg">
           Add Company
         </h2>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
-          {/* Company Info */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <input
-                type="text"
-                placeholder="Company Name"
-                {...register("name")}
-                className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-100 placeholder-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none"
-              />
-              <p className="text-red-400 text-sm">{errors.name?.message}</p>
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Industry"
-                {...register("industry")}
-                className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-100 placeholder-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none"
-              />
-              <p className="text-red-400 text-sm">{errors.industry?.message}</p>
-            </div>
+          {/* Company Name */}
+          <div className="flex flex-col">
+            <label className="text-sm font-semibold text-teal-200 mb-2">
+              Company Name
+            </label>
+            <input
+              type="text"
+              {...register("name")}
+              placeholder="Enter company name"
+              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-teal-400 focus:outline-none transition-all hover:bg-white/20"
+            />
+            <p className="text-red-400 text-xs mt-1">{errors.name?.message}</p>
+          </div>
+
+          {/* Industry */}
+          <div className="flex flex-col">
+            <label className="text-sm font-semibold text-teal-200 mb-2">
+              Industry
+            </label>
+            <input
+              type="text"
+              {...register("industry")}
+              placeholder="Industry type"
+              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-teal-400 focus:outline-none transition-all hover:bg-white/20"
+            />
+            <p className="text-red-400 text-xs mt-1">{errors.industry?.message}</p>
+          </div>
+
+          {/* Location */}
+          <div className="flex flex-col">
+            <label className="text-sm font-semibold text-teal-200 mb-2">
+              Location
+            </label>
+            <input
+              type="text"
+              {...register("location")}
+              placeholder="Enter location"
+              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-teal-400 focus:outline-none transition-all hover:bg-white/20"
+            />
+            <p className="text-red-400 text-xs mt-1">{errors.location?.message}</p>
+          </div>
+
+          {/* Website */}
+          <div className="flex flex-col">
+            <label className="text-sm font-semibold text-teal-200 mb-2">
+              Website
+            </label>
+            <input
+              type="text"
+              {...register("website")}
+              placeholder="https://example.com"
+              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-teal-400 focus:outline-none transition-all hover:bg-white/20"
+            />
+            <p className="text-red-400 text-xs mt-1">{errors.website?.message}</p>
           </div>
 
           {/* Description */}
-          <div>
+          <div className="col-span-1 md:col-span-2 flex flex-col">
+            <label className="text-sm font-semibold text-teal-200 mb-2">
+              Description
+            </label>
             <textarea
-              placeholder="Description"
               {...register("description")}
               rows={4}
-              className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-100 placeholder-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none"
+              placeholder="Company description"
+              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-teal-400 focus:outline-none transition-all hover:bg-white/20"
             />
-            <p className="text-red-400 text-sm">{errors.description?.message}</p>
-          </div>
-
-          {/* Location & Website */}
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <input
-                type="text"
-                placeholder="Location"
-                {...register("location")}
-                className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-100 placeholder-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none"
-              />
-              <p className="text-red-400 text-sm">{errors.location?.message}</p>
-            </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Website"
-                {...register("website")}
-                className="w-full p-3 rounded-lg bg-gray-800 border border-gray-700 text-gray-100 placeholder-gray-400 focus:ring-2 focus:ring-teal-500 focus:outline-none"
-              />
-              <p className="text-red-400 text-sm">{errors.website?.message}</p>
-            </div>
+            <p className="text-red-400 text-xs mt-1">
+              {errors.description?.message}
+            </p>
           </div>
 
           {/* Logo Upload */}
-            <div>
-            <label className="flex flex-col items-center justify-center w-full p-6 rounded-xl border border-gray-700 bg-gray-800 cursor-pointer hover:border-teal-400 transition">
-                {preview ? (
+          <div className="col-span-1 md:col-span-2">
+            <label className="text-sm font-semibold text-teal-200 mb-3 block">
+              Company Logo
+            </label>
+            <label className="flex flex-col items-center justify-center w-full p-6 rounded-xl border border-dashed border-white/20 bg-white/5 cursor-pointer hover:border-teal-400 transition-all">
+              {preview ? (
                 <img
-                    src={preview}
-                    alt="Preview"
-                    className="w-24 h-24 object-cover rounded-full shadow-md border-2 border-teal-500 mb-2"
+                  src={preview}
+                  alt="Preview"
+                  className="w-24 h-24 object-cover rounded-full shadow-md border-2 border-teal-500 mb-2"
                 />
-                ) : (
+              ) : (
                 <>
-                    <svg
+                  <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-12 h-12 text-gray-400 mb-2"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    >
+                  >
                     <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6h.1a5 5 0 010 10h-1m-4 4l-4-4m0 0l4-4m-4 4h12"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6h.1a5 5 0 010 10h-1m-4 4l-4-4m0 0l4-4m-4 4h12"
                     />
-                    </svg>
-                    <p className="text-gray-400">Tap to upload company logo</p>
+                  </svg>
+                  <p className="text-gray-400 text-sm">
+                    Tap to upload company logo
+                  </p>
                 </>
-                )}
-                <input type="file" className="hidden" {...register("logo")} />
+              )}
+              <input type="file" className="hidden" {...register("logo")} />
             </label>
-            <p className="text-red-400 text-sm">{errors.logo?.message}</p>
-            </div>
-
+            <p className="text-red-400 text-xs mt-1">{errors.logo?.message}</p>
+          </div>
 
           {/* Buttons */}
-          <div className="flex gap-4 justify-center mt-4">
+          <div className="col-span-1 md:col-span-2 flex gap-4 mt-4">
             <button
               type="button"
               onClick={() => router.push("/")}
-              className="px-5 py-2 rounded-lg border border-gray-600 bg-gray-800 text-gray-300 hover:bg-gray-700 transition"
+              className="w-1/2 px-5 py-3 rounded-xl border border-white/20 bg-white/10 text-gray-300 hover:bg-white/20 transition"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className={`px-6 py-2 rounded-lg text-white font-medium shadow-lg transition 
-              ${
-                loading
-                  ? "opacity-50 cursor-not-allowed bg-teal-600"
-                  : "bg-gradient-to-r from-teal-500 to-indigo-500 hover:from-teal-600 hover:to-indigo-600"
-              }`}
+              className={`w-1/2 px-6 py-3 rounded-xl text-white font-medium shadow-lg transition 
+                ${
+                  loading
+                    ? "opacity-50 cursor-not-allowed bg-teal-600"
+                    : "bg-gradient-to-r from-teal-600 via-teal-500 to-teal-700 hover:from-teal-500 hover:to-teal-600"
+                }`}
             >
               {loading ? "Adding..." : "Add Company"}
             </button>

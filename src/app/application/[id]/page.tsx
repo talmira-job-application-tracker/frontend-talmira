@@ -201,18 +201,18 @@ const ViewApplication = () => {
                 {updating ? "Updating..." : "Update"}
               </button>
             </div>
+            <div className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-2">
+              <Button
+                variant="contained"
+                className="!bg-red-500 hover:!bg-red-700 !text-white !rounded-lg shadow-md w-full sm:w-auto"
+                onClick={() => setOpenDialog(true)}
+              >
+                Delete Application
+              </Button>
+            </div>
           </div>
         )}
 
-        <div className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-2">
-          <Button
-            variant="contained"
-            className="!bg-red-500 hover:!bg-red-700 !text-white !rounded-lg shadow-md w-full sm:w-auto"
-            onClick={() => setOpenDialog(true)}
-          >
-            Delete Application
-          </Button>
-        </div>
       </div>
 
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>

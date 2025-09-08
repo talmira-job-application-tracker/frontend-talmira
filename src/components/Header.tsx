@@ -132,7 +132,7 @@ const Header = () => {
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-56 bg-[#3096891A] border border-white/10 rounded-lg shadow-lg flex flex-col p-2">
+              <div className="absolute right-0 mt-2 w-56 bg-black/50 border border-white/10 rounded-lg shadow-lg flex flex-col p-2">
                 <span
                   className="flex items-center gap-2 px-3 py-2 text-white hover:text-[#309689] cursor-pointer transition"
                   onClick={() => {

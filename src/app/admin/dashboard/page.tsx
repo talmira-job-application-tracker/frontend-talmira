@@ -42,6 +42,9 @@ import ListApplications from "@/components/ListApplications"
 import ListCompanies from "@/components/ListCompany"
 import ListJob from "@/components/ListJob"
 import ListUsers from "@/components/ListUsers"
+import CompanySearch from "@/components/CompanySearch"
+import { Search } from "lucide-react"
+import JobSearch from "@/components/JobSearchBar"
 
 // Dummy data
 const applicationsData = [
@@ -201,30 +204,63 @@ const AdminDashboard = () => {
     if (selected === "applications") return <ListApplications />
 
     if (selected === "companies")
-      return (
-        <Box sx={{ position: "relative", width: "100%", mt: 3 }}>
-          <Link href="/company/add" passHref>
-            <Button
-              variant="contained"
-              startIcon={<AddIcon />}
-              sx={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                zIndex: 10,
-                backgroundColor: "#309689",
-                "&:hover": { backgroundColor: "#26786d" },
-              }}
-            >
-              Add Company
-            </Button>
-          </Link>
+  return (
+    <Box sx={{ width: "100%", mt: 3 }}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        alignItems="center"
+        justifyContent="space-between"
+        spacing={2}
+        mb={2}
+      >
+        <CompanySearch  />
+        <Link href="/company/add" passHref>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            sx={{
+              backgroundColor: "#309689",
+              "&:hover": { backgroundColor: "#26786d" },
+            }}
+          >
+            Add Company
+          </Button>
+        </Link>
+      </Stack>
 
-          <ListCompanies />
-        </Box>
-      )
+      <ListCompanies />
+    </Box>
+  )
 
-    if (selected === "jobs") return <ListJob />
+   if (selected === "jobs")
+  return (
+    <Box sx={{ width: "100%", mt: 3 }}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        alignItems="center"
+        justifyContent="space-between"
+        spacing={2}
+        mb={2}
+      >
+        <JobSearch />
+        <Link href="/job/add" passHref>
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            sx={{
+              backgroundColor: "#309689",
+              "&:hover": { backgroundColor: "#26786d" },
+            }}
+          >
+            Add Job
+          </Button>
+        </Link>
+      </Stack>
+
+      <ListJob />
+    </Box>
+  )
+
     if (selected === "users") return <ListUsers />
   }
 

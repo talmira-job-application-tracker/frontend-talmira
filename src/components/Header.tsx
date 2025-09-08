@@ -237,7 +237,7 @@ const Header = () => {
             <span
               className="flex items-center gap-2 text-white hover:text-[#309689] cursor-pointer transition"
               onClick={() => {
-                router.push("/admin/dashboard");
+                router.push("hboard");
                 setMenuOpen(false);
               }}
             >

@@ -63,7 +63,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${figtree.className} antialiased bg-gradient-to-br from-[#366157] to-[#e6fffa] min-h-screen`}>
+      <body className={`pt-[60px] ${figtree.className} antialiased bg-gradient-to-br from-[#366157] to-[#e6fffa] min-h-screen`}>
         <ReduxProvider>
           <Toaster position="top-right" reverseOrder={false} />
           <Header/>

@@ -77,7 +77,7 @@ const ViewJob = () => {
       .delete(`/job/${id}`)
       .then(() => {
         toast.success("Job deleted successfully");
-        router.push("/");
+        router.push("/admin/dashboard?tab=jobs")
       })
       .catch(() => {
         toast.error("Failed to delete job");
@@ -114,15 +114,13 @@ const ViewJob = () => {
           <JobDetail icon={MapPin} title="Location" value={job.location} />
           <JobDetail icon={Briefcase} title="Job Type" value={job.jobType} />
           <JobDetail icon={Wallet} title="Salary" value={job.salary} />
-          <JobDetail
-            icon={Languages}
-            title="Language"
-            value={
-              Array.isArray(job.language)
-                ? job.language.join(", ")
-                : job.language
-            }
-          />
+          {job.language && job.language.length > 0 && (
+            <JobDetail
+              icon={Languages}
+              title="Language"
+              value={Array.isArray(job.language) ? job.language.join(", ") : job.language}
+            />
+          )}
           <JobDetail
             icon={GraduationCap}
             title="Qualification"
@@ -130,10 +128,16 @@ const ViewJob = () => {
           />
         </div>
 
-        {/* Full-width Description */}
-        <div className="mt-6">
-          <JobDetail icon={BookOpen} title="Description" value={job.description} />
+        <div className="mt-10 bg-white/10 p-6 rounded-2xl backdrop-blur-md border border-white/20 shadow-sm">
+          <h3 className="text-xs uppercase tracking-wide text-gray-400 flex items-center gap-2 mb-3">
+            <BookOpen className="w-5 h-5 text-teal-400" /> Description
+          </h3>
+          <p className="text-sm text-white leading-relaxed whitespace-pre-line">
+            {job.description}
+          </p>
         </div>
+
+
 
         {/* Buttons */}
         <div className="mt-10 flex flex-wrap gap-4">

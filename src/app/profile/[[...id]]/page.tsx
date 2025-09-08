@@ -128,11 +128,19 @@ const ViewProfile = () => {
 
           <div className="mt-6 flex justify-center">
             <button
-              onClick={() => router.push("/")}
+              onClick={() => {
+                const currentUser = JSON.parse(Cookies.get("user") || "{}");
+                if (currentUser?.role === "admin" && currentUser?.companyId) {
+                  router.push(`/company/${currentUser.companyId}/subscribers`);
+                } else {
+                  router.push("/"); // user home
+                }
+              }}
               className="px-6 py-2 bg-white text-gray-800 border border-gray-200 rounded-xl shadow hover:bg-gray-100 hover:text-black transition-all duration-200"
             >
               Go Back
             </button>
+
           </div>
         </div>
       </div>

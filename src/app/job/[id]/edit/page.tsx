@@ -97,7 +97,7 @@ const EditJob = () => {
       .unwrap()
       .then(() => {
         toast.success("Job updated successfully");
-        router.push("/");
+        router.push(`/job/${id}`);
       })
       .catch(() => toast.error("Failed to update job"));
   };

@@ -69,7 +69,7 @@ const AddCompany = () => {
       await dispatch(addCompany(formData)).unwrap();
       toast.success("Company added successfully");
       reset();
-      router.push("/");
+      router.push("/admin/dashboard");
     } catch (error) {
       console.error("Upload failed:", error);
       toast.error("Upload Failed");

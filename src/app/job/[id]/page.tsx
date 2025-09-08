@@ -126,6 +126,7 @@ const ViewJob = () => {
             title="Qualification"
             value={job.qualification}
           />
+          <JobDetail icon={Wallet} title="Salary" value={job.salary} />
         </div>
 
         <div className="mt-10 bg-white/10 p-6 rounded-2xl backdrop-blur-md border border-white/20 shadow-sm">

@@ -21,6 +21,8 @@ export interface ApplicationType {
     email?: string;
     phone?: string;
   };
+  prevPosition: string;
+  prevCompany: string;
   isRead?: boolean;
 }
 

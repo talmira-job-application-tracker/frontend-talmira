@@ -42,11 +42,11 @@ const ViewProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-teal-50 to-white py-12 px-6">
+    <div className="min-h-screen py-12 px-6">
       <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl border border-white/30">
         
         {/* Header Section */}
-        <div className="bg-gradient-to-r from-teal-600 to-teal-400 p-8 text-center relative">
+        <div className="bg-gradient-to-r from-teal-900 to-teal-400 p-8 text-center relative">
           <div className="w-32 h-32 mx-auto relative rounded-full border-4 border-white shadow-lg overflow-hidden">
             <Image
               src={
@@ -65,7 +65,7 @@ const ViewProfile = () => {
         </div>
 
         {/* Info Section */}
-        <div className="bg-white/70 backdrop-blur-xl p-8 space-y-6">
+        <div className=" backdrop-blur-xl p-8 space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {/* Always show Email */}
             <div className="flex items-center gap-3 bg-white/50 p-4 rounded-xl shadow-sm">

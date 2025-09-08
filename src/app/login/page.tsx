@@ -49,7 +49,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-[#0d1f1e] to-[#103c37] backdrop-blur-sm">
+    <div className="min-h-screen flex items-center justify-center  backdrop-blur-sm">
       <div className="w-full max-w-md p-8 rounded-2xl shadow-lg bg-white/10 backdrop-blur-md border border-white/20">
         <h2 className="text-2xl font-bold text-white mb-6 text-center">
           Welcome Back

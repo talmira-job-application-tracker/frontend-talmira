@@ -60,7 +60,7 @@ const Header = () => {
     Cookies.remove("user");
     setToken(null);
     setRole(null);
-    router.push("/login");
+    router.push("/");
   };
 
   return (

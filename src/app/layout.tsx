@@ -47,6 +47,7 @@ import "./globals.css"
 import { ReduxProvider } from "@/redux/ReduxProvider"
 import { Toaster } from "react-hot-toast"
 import Header from "@/components/Header"
+import { AuthProvider } from "@/context/AuthContext"
 
 const figtree = Figtree({ subsets: ["latin"] })
 
@@ -65,9 +66,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`pt-[60px] ${figtree.className} antialiased bg-gradient-to-br from-[#366157] to-[#e6fffa] min-h-screen`}>
         <ReduxProvider>
+          <AuthProvider>
           <Toaster position="top-right" reverseOrder={false} />
           <Header/>
           {children}
+          </AuthProvider>
         </ReduxProvider>
       </body>
     </html>

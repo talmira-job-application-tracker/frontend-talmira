@@ -321,6 +321,7 @@ const ViewApplication = () => {
     );
 
   return (
+<<<<<<< Updated upstream
     <div className="min-h-screen flex flex-col p-4 sm:p-8">
       <Header />
       <div className="mb-10" />
@@ -467,6 +468,135 @@ const ViewApplication = () => {
         </Dialog>
       </div>
     </div>
+=======
+          <div className="min-h-screen flex flex-col py-30">
+            <main className="flex-grow flex justify-center items-start px-4 sm:px-8">
+              <div className="w-full sm:max-w-3xl bg-white/90 p-6 sm:p-10 rounded-2xl shadow-xl backdrop-blur-md hover:shadow-2xl transition-shadow duration-300">
+                
+                <h1 className="text-3xl font-bold text-[#366157] mb-6 flex items-center gap-3">
+                  <Briefcase size={26} /> Application Details
+                </h1>
+
+                {/* Info section */}
+                <div className="grid gap-4 sm:grid-cols-2 text-gray-800">
+                  <p className="flex items-center gap-2">
+                    <Briefcase className="text-[#309689]" size={18} />
+                    <span className="font-semibold">Job:</span> {application.job?.title || "Job Deleted"}
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <Building2 className="text-[#309689]" size={18} />
+                    <span className="font-semibold">Company:</span> {application.job?.company?.name || "Company Deleted"}
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <FileText className="text-[#309689]" size={18} />
+                    <span className="font-semibold">Status:</span>
+                    <span className={`ml-1 px-2 py-0.5 rounded-full text-white text-sm ${
+                      application.status === "selected" ? "bg-green-500" : "bg-red-500"
+                    }`}>
+                      {application.status}
+                    </span>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <Calendar className="text-[#309689]" size={18} />
+                    <span className="font-semibold">Applied At:</span>{" "}
+                    {application.appliedAt ? new Date(application.appliedAt).toLocaleDateString() : "-"}
+                  </p>
+                  {application.prevPosition && (
+                    <p className="flex items-center gap-2">
+                      <Briefcase className="text-[#309689]" size={18} />
+                      <span className="font-semibold">Previous Position:</span> {application.prevPosition}
+                    </p>
+                  )}
+                  {application.prevCompany && (
+                    <p className="flex items-center gap-2">
+                      <Building2 className="text-[#309689]" size={18} />
+                      <span className="font-semibold">Previous Company:</span> {application.prevCompany}
+                    </p>
+                  )}
+                </div>
+
+                {/* Contact info */}
+                {application.contactInfo && (
+                  <div className="mt-6 p-5 rounded-xl border border-gray-200 bg-green-50 grid gap-4 sm:grid-cols-2">
+                    <h2 className="text-lg font-semibold text-[#366157] mb-2 flex items-center gap-2 col-span-full">
+                      <User size={20} /> Contact Information
+                    </h2>
+                    <p className="flex items-center gap-2">
+                      <User className="text-[#309689]" size={18} />
+                      <span className="font-semibold">Name:</span> {application.contactInfo.name || "-"}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <Mail className="text-[#309689]" size={18} />
+                      <span className="font-semibold">Email:</span> {application.contactInfo.email || "-"}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <Phone className="text-[#309689]" size={18} />
+                      <span className="font-semibold">Phone:</span> {application.contactInfo.phone || "-"}
+                    </p>
+                  </div>
+                )}
+
+                {/* Resume */}
+                <div className="mt-6 flex items-center gap-2 flex-wrap">
+                  <FileText className="text-[#309689]" size={18} />
+                  <span className="font-semibold">Resume:</span>{" "}
+                  {application.resume ? (
+                    <a
+                      href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${application.resume}`}
+                      target="_blank"
+                      className="text-[#26786f] underline hover:text-[#309689] font-medium"
+                    >
+                      View Resume
+                    </a>
+                  ) : (
+                    "-"
+                  )}
+                </div>
+
+                {/* Admin actions */}
+                {isAdmin && (
+                  <div className="mt-8 border-t pt-6 space-y-4">
+                    <h2 className="text-lg font-semibold text-[#366157] mb-3">Update Application Status</h2>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                      <select
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value as ApplicationType["status"])}
+                        className="border p-2 rounded-lg w-full sm:w-52 focus:ring-2 focus:ring-[#309689]"
+                      >
+                        <option value="" disabled>
+                          -- Select Status --
+                        </option>
+                        <option value="rejected">Rejected</option>
+                        <option value="selected">Selected</option>
+                      </select>
+
+                      <button
+                        onClick={handleUpdateStatus}
+                        disabled={updating}
+                        className="px-5 py-2 bg-[#309689] text-white rounded-lg hover:bg-[#26786f] transition-colors disabled:opacity-50 w-full sm:w-auto font-medium"
+                      >
+                        {updating ? "Updating..." : "Update"}
+                      </button>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:justify-end gap-2">
+                      <Button
+                        variant="contained"
+                        className="!bg-red-500 hover:!bg-red-700 !text-white !rounded-lg shadow-md w-full sm:w-auto"
+                        onClick={() => setOpenDialog(true)}
+                      >
+                        Delete Application
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </main>
+          </div>
+
+
+>>>>>>> Stashed changes
   );
 };
 

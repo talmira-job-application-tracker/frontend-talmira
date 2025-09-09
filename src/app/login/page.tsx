@@ -107,6 +107,8 @@ import toast from "react-hot-toast"
 import * as yup from "yup"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/context/AuthContext"  
+import Cookies from "js-cookie"
+
 
 const schema = yup.object().shape({
   email: yup.string().required("Enter your email").email("Invalid email format"),
@@ -142,6 +144,13 @@ const LoginPage = () => {
         { _id: user._id, role: user.role, name: user.name },
         token
       )
+
+      // also set cookie so middleware can read it
+      Cookies.set("token", token, {
+        expires: 1, // 1 day
+        path: "/",
+        sameSite: "Lax",
+      })
 
       toast.success("Login successful")
       router.push("/")

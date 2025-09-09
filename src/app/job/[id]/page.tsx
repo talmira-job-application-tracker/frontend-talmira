@@ -98,7 +98,7 @@ const ViewJob = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-teal-950 to-black py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-black via-teal-950 to-black py-30 px-4">
       <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-xl p-8">
         <h2 className="text-3xl font-bold text-white mb-2">{job.title}</h2>
 

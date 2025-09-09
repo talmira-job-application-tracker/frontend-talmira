@@ -107,7 +107,7 @@ const AddApplication = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-[#0d1f1e] to-[#103c37] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-[#0d1f1e] to-[#103c37] py-30 px-4">
       <div className="w-full max-w-lg bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-8">
         <h1 className="text-3xl font-bold text-center text-white mb-6">
           Apply for this Job

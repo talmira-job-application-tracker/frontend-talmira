@@ -1,4 +1,3 @@
-
 'use client'
 
 import { CompanyType } from "@/types/companyType"
@@ -38,10 +37,7 @@ const SubscribedCompanies = () => {
   }
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold text-center text-black mb-8">
-        Subscribed Companies
-      </h1>
+    <div className="py-30 max-w-6xl mx-auto">
 
       {companies.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -59,7 +55,7 @@ const SubscribedCompanies = () => {
                   <p className="text-lg font-semibold text-gray-800">{c.name}</p>
                 </div>
                 <p className="text-sm text-gray-600">
-                  <span className="font-medium">📍 Location:</span> {c.location || "Not specified"}
+                  <span className="font-medium">Location:</span> {c.location || "Not specified"}
                 </p>
               </div>
             </Link>

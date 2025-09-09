@@ -67,7 +67,7 @@ const ViewCompany = () => {
   if (!company) return <p className="text-gray-500 text-center">No company found</p>;
 
   return (
-    <div className="min-h-screen px-4 sm:px-6 py-10">
+    <div className="min-h-screen px-4 sm:px-6 py-20">
       <Header />
       <div className="mt-10">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-6 p-6 rounded-lg shadow-sm bg-white/50 backdrop-blur-md">

@@ -8,7 +8,6 @@ const jobs = () => {
         <div>
            <JobSearch/>
             <ListJob/>
-        
         </div>
     )
 }

@@ -18,6 +18,7 @@ import {
   GraduationCap,
   Languages,
   Building2,
+  Laptop,
 } from "lucide-react";
 
 const JobDetail = ({
@@ -99,34 +100,38 @@ const ViewJob = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-teal-950 to-black py-12 px-4">
       <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-xl p-8">
-        {/* Job Title */}
         <h2 className="text-3xl font-bold text-white mb-2">{job.title}</h2>
 
-        {/* Company Link */}
         <Link href={`/company/${job.company._id}`}>
           <p className="text-teal-400 hover:underline text-lg flex items-center gap-2">
             <Building2 className="w-5 h-5" /> {job.company.name}
           </p>
         </Link>
 
-        {/* Job Fields */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
           <JobDetail icon={MapPin} title="Location" value={job.location} />
           <JobDetail icon={Briefcase} title="Job Type" value={job.jobType} />
           <JobDetail icon={Wallet} title="Salary" value={job.salary} />
-          {job.language && job.language.length > 0 && (
+   
             <JobDetail
               icon={Languages}
               title="Language"
-              value={Array.isArray(job.language) ? job.language.join(", ") : job.language}
+              value={
+                job.language && job.language.length > 0
+                  ? Array.isArray(job.language)
+                    ? job.language.join(", ")
+                    : job.language
+                  : "N/A"
+              }
             />
-          )}
+
+        
           <JobDetail
             icon={GraduationCap}
             title="Qualification"
             value={job.qualification}
           />
-          <JobDetail icon={Wallet} title="Salary" value={job.salary} />
+          <JobDetail icon={Laptop} title="Work Mode" value={job.workMode} />
         </div>
 
         <div className="mt-10 bg-white/10 p-6 rounded-2xl backdrop-blur-md border border-white/20 shadow-sm">

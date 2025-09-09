@@ -85,6 +85,8 @@ const JobSearch = () => {
             <div className="px-4 py-2 hover:bg-[#309689]/10 cursor-pointer transition">
               <p className="font-medium text-gray-800 text-sm sm:text-base">{job.title}</p>
               <p className="text-gray-500 text-xs sm:text-sm">{job.company?.name}</p>
+              <p className="text-gray-500 text-xs sm:text-sm">{job.company?.location}</p>
+
             </div>
           </Link>
         ))

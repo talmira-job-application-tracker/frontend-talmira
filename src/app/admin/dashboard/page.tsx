@@ -607,27 +607,32 @@ const AdminDashboard = () => {
       return (
         <Box sx={{ width: "100%", mt: 3 }}>
           <Stack
-            direction={{ xs: "column", sm: "row" }}
-            alignItems="center"
-            justifyContent="space-between"
-            spacing={2}
-            mb={2}
+          direction={{ xs: "column", sm: "row" }}
+          alignItems="center"
+          justifyContent="space-between"  
+          spacing={2}
+          mb={2}
+          sx={{ width: "100%" }}
           >
+          <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", sm: "70%" } }}>
             <CompanySearch />
-            <Link href="/company/add" passHref>
-              <Button
-                variant="contained"
-                startIcon={<AddIcon />}
-                sx={{
-                  backgroundColor: "#309689",
-                  "&:hover": { backgroundColor: "#26786d" },
-                }}
-              >
-                Add Company
-              </Button>
-            </Link>
-          </Stack>
-          <ListCompanies />
+          </Box>
+
+          <Button
+            variant="contained"
+            startIcon={<AddIcon />}
+            sx={{
+              backgroundColor: "#309689",
+              "&:hover": { backgroundColor: "#26786d" },
+              flexShrink: 0, 
+            }}
+            component={Link}
+            href="/company/add"
+          >
+            Add Company
+          </Button>
+        </Stack>
+        <ListCompanies />
         </Box>
       )
 
@@ -637,26 +642,19 @@ const AdminDashboard = () => {
           <Stack
             direction={{ xs: "column", sm: "row" }}
             alignItems="center"
-            justifyContent="space-between"
+            justifyContent="flex-start" 
             spacing={2}
             mb={2}
+            sx={{ width: "100%" }}
           >
-            <JobSearch />
-            <Link href="/job/add" passHref>
-              <Button
-                variant="contained"
-                startIcon={<AddIcon />}
-                sx={{
-                  backgroundColor: "#309689",
-                  "&:hover": { backgroundColor: "#26786d" },
-                }}
-              >
-                Add Job
-              </Button>
-            </Link>
+          
+            <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", sm: "70%" } }}>
+              <JobSearch />
+            </Box>
           </Stack>
           <ListJob />
         </Box>
+
       )
 
     if (selected === "users") return <ListUsers />
@@ -665,7 +663,6 @@ const AdminDashboard = () => {
   return (
     <Box sx={{ minHeight: "100vh" }}>
       <Header />
-
       <Box
         sx={{
           display: "flex",

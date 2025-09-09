@@ -56,15 +56,15 @@ const ListUsers = () => {
   }, [dispatch])
 
   return (
-    <div className="min-h-screen px-8 py-6 bg-white/80">
-      <h1 className="text-2xl font-bold text-[#309689] mb-6">Users List</h1>
+    <div className="min-h-screen px-8 py-6 bg-gradient-to-r from-white/30 to-white/10 backdrop-blur-md ">
+      {/* <h1 className="text-2xl font-bold text-[#309689] mb-6">Users List</h1> */}
 
       {loading && <p className="text-gray-600">Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
       {users.length > 0 ? (
         <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-200 rounded-lg">
+          <table className="min-w-full  rounded-lg">
             <thead className="bg-[#309689] text-white">
               <tr>
                 <th className="px-4 py-2 text-left">Name</th>

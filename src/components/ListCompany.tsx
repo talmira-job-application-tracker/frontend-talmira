@@ -28,7 +28,7 @@ const ListCompanies = () => {
           return (
             <div
               key={company._id}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 backdrop-blur-md bg-white/80 border border-white/20 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 p-4"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-gradient-to-r from-white/30 to-white/10 backdrop-blur-md  border border-white/20 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 p-4"
             >
               {/* Left: Logo + Name */}
               <div className="flex items-center gap-4">

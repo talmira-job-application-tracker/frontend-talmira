@@ -7,6 +7,7 @@ export interface ApplicationJob {
   _id: string;
   title: string;
   company: { _id: string; name: string };
+  location?: string;
 }
 
 export interface ApplicationType {

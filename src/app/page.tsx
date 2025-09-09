@@ -247,7 +247,6 @@ export const Home = () => {
 
       {user && user.role !== "admin" && <HomePage />}
 
-      <Footer />
     </div>
   );
 }

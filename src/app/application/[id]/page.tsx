@@ -67,7 +67,7 @@ const ViewApplication = () => {
     try {
       await api.delete(`/application/${id}`);
       toast.success("Application deleted");
-      router.push("/application");
+      router.push("/admin/dashboard?tab=applications");
     } catch {
       toast.error("Failed to delete");
     } finally {

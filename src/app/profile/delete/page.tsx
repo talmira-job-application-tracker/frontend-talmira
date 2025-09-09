@@ -38,7 +38,7 @@ const DeleteUser = () => {
           Delete Account 
         </h2>
         <p className="text-gray-600 text-center">
-          We’re sorry to see you go. Deleting your account will permanently remove all your data.
+          Deleting your account will permanently remove all your data.
         </p>
 
         <p className="text-gray-500 italic text-center">

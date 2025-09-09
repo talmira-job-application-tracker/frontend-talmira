@@ -65,7 +65,7 @@ export default function NotFound() {
           </Link>
 
           <Link
-            href="/jobs"
+            href="/"
             className="inline-flex items-center rounded-2xl bg-white/10 px-5 py-3 text-white hover:bg-white/20 transition"
           >
             <Compass className="mr-2 h-4 w-4" />
@@ -73,7 +73,7 @@ export default function NotFound() {
           </Link>
 
           <Link
-            href="/contact"
+            href="/contact-us"
             className="inline-flex items-center rounded-2xl px-5 py-3 text-white hover:bg-white/10 transition"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />

@@ -56,7 +56,7 @@ const ViewCompany = () => {
       .unwrap()
       .then(() => {
         toast.success("Company deleted successfully");
-        router.push("/admin");
+        router.push("/admin/dashboard?tab=companies");
       })
       .catch(() => toast.error("Failed to delete company"))
       .finally(() => setOpenDialog(false));

@@ -45,7 +45,6 @@ const ViewProfile = () => {
     <div className="min-h-screen py-12 px-6">
       <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl border border-white/30">
         
-        {/* Header Section */}
         <div className="bg-gradient-to-r from-teal-900 to-teal-400 p-8 text-center relative">
           <div className="w-32 h-32 mx-auto relative rounded-full border-4 border-white shadow-lg overflow-hidden">
             <Image
@@ -64,10 +63,8 @@ const ViewProfile = () => {
           <span className="text-sm text-teal-100 tracking-wide uppercase">{user.role}</span>
         </div>
 
-        {/* Info Section */}
         <div className=" backdrop-blur-xl p-8 space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {/* Always show Email */}
             <div className="flex items-center gap-3 bg-white/50 p-4 rounded-xl shadow-sm">
               <Mail className="w-5 h-5 text-teal-600" />
               <div>
@@ -76,7 +73,6 @@ const ViewProfile = () => {
               </div>
             </div>
 
-            {/* Show extra fields ONLY if not admin */}
             {user.role !== "admin" && (
               <>
                 <div className="flex items-center gap-3 bg-white/50 p-4 rounded-xl shadow-sm">
@@ -108,26 +104,27 @@ const ViewProfile = () => {
             )}
           </div>
 
-          {/* Actions */}
-          {!userId && (
-            <div className="mt-6 flex flex-wrap justify-center gap-4">
-              <button
-                onClick={() => router.push(`/profile/edit`)}
-                className="px-6 py-2 rounded-xl bg-teal-600 text-white shadow hover:bg-teal-700 hover:shadow-lg transition-all duration-200"
-              >
-                Edit Profile
-              </button>
+          <div className="mt-6 flex flex-wrap justify-center gap-4">
+            <button
+              onClick={() => router.push(`/profile/edit`)}
+              className="px-6 py-2 rounded-xl bg-teal-600 text-white shadow hover:bg-teal-700 hover:shadow-lg transition-all duration-200"
+            >
+              Edit Profile
+            </button>
+
+            {user.role !== "admin" && (
               <button
                 onClick={() => router.push(`/profile/delete`)}
                 className="px-6 py-2 rounded-xl bg-teal-500 text-white shadow hover:bg-red-400 hover:shadow-lg transition-all duration-200"
               >
                 Delete Account
               </button>
-            </div>
-          )}
+            )}
+          </div>
+
 
           <div className="mt-6 flex justify-center">
-            <button
+            {/* <button
               onClick={() => {
                 const currentUser = JSON.parse(Cookies.get("user") || "{}");
                 if (currentUser?.role === "admin" && currentUser?.companyId) {
@@ -139,7 +136,7 @@ const ViewProfile = () => {
               className="px-6 py-2 bg-white text-gray-800 border border-gray-200 rounded-xl shadow hover:bg-gray-100 hover:text-black transition-all duration-200"
             >
               Go Back
-            </button>
+            </button> */}
 
           </div>
         </div>

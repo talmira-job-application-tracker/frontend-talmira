@@ -42,7 +42,7 @@ const ViewProfile = () => {
   }
 
   return (
-    <div className="min-h-screen py-12 px-6">
+    <div className="min-h-screen py-30 px-6">
       <div className="max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl border border-white/30">
         
         <div className="bg-gradient-to-r from-teal-900 to-teal-400 p-8 text-center relative">

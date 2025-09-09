@@ -662,7 +662,6 @@ const AdminDashboard = () => {
 
   return (
     <Box sx={{ minHeight: "100vh" }}>
-      <Header />
       <Box
         sx={{
           display: "flex",
@@ -730,7 +729,7 @@ const AdminDashboard = () => {
         <Box
           sx={{
             flexGrow: 1,
-            p: 3,
+            p: 2,
             bgcolor: "transparent",
             minHeight: "calc(100vh - 64px)",
           }}

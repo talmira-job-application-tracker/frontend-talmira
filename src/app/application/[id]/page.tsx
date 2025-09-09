@@ -322,7 +322,6 @@ const ViewApplication = () => {
 
   return (
     <div className="min-h-screen flex flex-col py-30 sm:p-8">
-      <Header />
       <div className="mb-10" />
 
       <div className="flex-grow flex justify-center items-start p-4 sm:p-8">
@@ -439,7 +438,7 @@ const ViewApplication = () => {
               <div className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-2">
                 <Button
                   variant="contained"
-                  className="!bg-red-500 hover:!bg-red-700 !text-white !rounded-lg shadow-md w-full sm:w-auto"
+                  className="!bg-black/50 hover:!bg-black/70 !text-white !rounded-lg shadow-md w-full sm:w-auto"
                   onClick={() => setOpenDialog(true)}
                 >
                   Delete Application
@@ -449,22 +448,37 @@ const ViewApplication = () => {
           )}
         </div>
 
-        <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-          <DialogTitle>Delete Application</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Are you sure you want to permanently delete this application?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={() => setOpenDialog(false)} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={handleDelete} color="error" disabled={loading}>
-              {loading ? "Deleting..." : "Delete"}
-            </Button>
-          </DialogActions>
-        </Dialog>
+        {/* Delete Dialog */}
+        {openDialog && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+            <div className="bg-white/10 border border-white/20 backdrop-blur-xl rounded-3xl p-6 max-w-sm w-full shadow-xl">
+              
+              {/* Title */}
+              <h2 className="text-xl font-semibold text-white mb-2">Delete Application</h2>
+              <p className="text-gray-300 text-sm mb-6">
+                Are you sure you want to permanently delete this application? This action cannot be undone.
+              </p>
+
+              {/* Actions */}
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={() => setOpenDialog(false)}
+                  className="px-4 py-2 rounded-xl border border-white/20 bg-white/5 text-gray-300 hover:bg-white/20 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDelete}
+                  disabled={loading}
+                  className="px-4 py-2 rounded-xl bg-teal-500 text-white font-medium hover:bg-teal-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Deleting..." : "Delete"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );

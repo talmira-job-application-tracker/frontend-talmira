@@ -68,7 +68,6 @@ const ViewCompany = () => {
 
   return (
     <div className="min-h-screen px-4 sm:px-6 py-20">
-      <Header />
       <div className="mt-10">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-6 p-6 rounded-lg shadow-sm bg-white/50 backdrop-blur-md">
         <div className="w-28 h-28 sm:w-32 sm:h-32 relative border rounded-lg bg-gray-50 shadow overflow-hidden flex-shrink-0">
@@ -155,7 +154,7 @@ const ViewCompany = () => {
 
     <button
       onClick={handleOpenDialog}
-      className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-md shadow w-full sm:w-auto"
+      className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-black/50 hover:bg-black/70 text-white rounded-md shadow w-full sm:w-auto"
     >
       <Trash2 size={18} /> Delete
     </button>
@@ -163,23 +162,36 @@ const ViewCompany = () => {
 )}
 
       {/* Delete Confirmation Dialog */}
-      <Dialog open={openDialog} onClose={handleCloseDialog}>
-        <DialogTitle>Delete Company</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure you want to delete this company? This action cannot be
-            undone.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleDelete} color="error" disabled={loading}>
-            {loading ? "Deleting..." : "Delete"}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      {openDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-white/10 border border-white/20 backdrop-blur-xl rounded-3xl p-6 max-w-sm w-full shadow-xl">
+            
+            {/* Title */}
+            <h2 className="text-xl font-semibold text-white mb-2">Delete Company</h2>
+            <p className="text-gray-300 text-sm mb-6">
+              Are you sure you want to delete this company? This action cannot be undone.
+            </p>
+
+            {/* Actions */}
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={handleCloseDialog}
+                className="px-4 py-2 rounded-xl border border-white/20 bg-white/5 text-gray-300 hover:bg-white/20 transition"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={loading}
+                className="px-4 py-2 rounded-xl bg-teal-500 text-white font-medium hover:bg-teal-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? "Deleting..." : "Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

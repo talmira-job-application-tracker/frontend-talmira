@@ -128,8 +128,8 @@ const Header = () => {
         <div className="absolute top-full left-0 w-full bg-[#309689] backdrop-blur-md border-t border-white/10 flex flex-col items-start p-6 gap-4 md:hidden">
           {user?.role === "user" && (
             <>
-              <span onClick={() => router.push("/alerts/list")} className="flex items-center text-white cursor-pointer">
-                <Bell size={18} />
+              <span onClick={() => router.push("/alerts/list")} className="flex items-center gap-2 text-white cursor-pointer">
+                <Bell size={18} /> Alerts
               </span>
               <span onClick={() => router.push("/application")} className="flex items-center gap-2 text-white cursor-pointer">
                 <FileText size={18} /> Applications

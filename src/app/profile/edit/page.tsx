@@ -132,7 +132,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="min-h-screen px-4 py-10 flex justify-center items-center bg-gradient-to-br from-teal-700 via-black to-gray-900">
+    <div className="min-h-screen px-4 py-30 flex justify-center items-center bg-gradient-to-br from-teal-700 via-black to-gray-900">
       <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg p-8 max-w-lg w-full">
         <h2 className="text-2xl font-semibold text-center mb-6 text-white">
           Edit Profile

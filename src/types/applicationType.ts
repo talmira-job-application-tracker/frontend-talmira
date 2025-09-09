@@ -7,7 +7,7 @@ export interface ApplicationJob {
   _id: string;
   title: string;
   company: { _id: string; name: string };
-  location?: string;
+  appliedAt?:Date;
 }
 
 export interface ApplicationType {

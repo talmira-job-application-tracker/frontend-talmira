@@ -275,7 +275,6 @@ const ViewApplication = () => {
       .get(`/application/${id}`)
       .then((res) => {
         setApplication(res.data.data);
-        // Initialize status safely
         setStatus(res.data.data.status ?? "");
         setLoading(false);
       })

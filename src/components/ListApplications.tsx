@@ -114,7 +114,7 @@ import { ApplicationType } from "@/types/applicationType";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Link from "next/link";
-import { Briefcase, Building2, MapPin, User } from "lucide-react";
+import { Briefcase, Building2, Calendar, MapPin, User } from "lucide-react";
 
 const ListApplications = () => {
   const [applications, setApplications] = useState<ApplicationType[]>([]);
@@ -181,8 +181,8 @@ const ListApplications = () => {
           >
             <div className="space-y-1">
               {isAdmin && (
-                <p className="flex items-center gap-2 text-lg font-semibold text-[#309689]">
-                  <User size={18} className="text-[#14b8a6]" /> {app.user?.name || "-"}
+                <p className="flex items-center gap-2 text-lg font-semibold ">
+                  <User size={18} className="text-[#26786d]" /> {app.user?.name || "-"}
                 </p>
               )}
 
@@ -199,12 +199,14 @@ const ListApplications = () => {
                 <span className="font-semibold"></span>{" "}
                 {app.job?.company?.name || "N/A"}
               </p>
-
               <p className="flex items-center gap-2 text-sm text-gray-700">
-                <MapPin size={16} className="text-[#26786d]" /> 
-                <span className="font-semibold"></span>{" "}
-                {app.job?.location || "N/A"}
-              </p>
+                <Calendar className="text-[#26786d]" size={16} />
+                <span className="font-semibold">Applied At:</span>{" "}
+                {app.appliedAt
+                  ? new Date(app.appliedAt).toLocaleDateString()
+                  : "N/A"}
+             </p>
+
             </div>
 
             <Link

@@ -23,22 +23,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    // <html lang="en">
-    //   <body className={` ${figtree.className} antialiased bg-gradient-to-br from-[#366157] to-[#e6fffa] min-h-screen`}>
-    //     <ReduxProvider>
-    //       <AuthProvider>
-    //       <Toaster position="top-right" reverseOrder={false} />
-    //       <Header/>
-    //       {children}
-    //       <Footer/>
-    //       </AuthProvider>
-    //     </ReduxProvider>
-    //   </body>
-    // </html>
    <html lang="en">
   <body
-    className={` ${figtree.className} antialiased bg-gradient-to-br from-[#366157] to-[#e6fffa] min-h-screen flex flex-col`}
-  >
+    className={` ${figtree.className} antialiased bg-gradient-to-br from-[#366157] to-[#e6fffa] min-h-screen flex flex-col`}>
     <ReduxProvider>
       <AuthProvider>
         <Toaster position="top-right" reverseOrder={false} />
@@ -48,7 +35,6 @@ export default function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
-
         <Footer />
       </AuthProvider>
     </ReduxProvider>

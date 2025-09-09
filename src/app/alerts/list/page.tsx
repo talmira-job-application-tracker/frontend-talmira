@@ -120,13 +120,15 @@ const ListAlerts = () => {
                   </div>
                 </Link>
 
-                <button
-                  onClick={() => handleDelete(alert._id)}
-                  className="absolute top-3 right-3 sm:top-10 sm:right-4 text-red-500 hover:text-red-700 opacity-0 group-hover:opacity-100 transition"
-                  title="Delete alert"
-                >
-                  <FiTrash2 size={20}/>
-                </button>
+              <button
+                onClick={() => handleDelete(alert._id)}
+                className="absolute top-3 right-3 sm:top-10 sm:right-4 text-red-500 hover:text-red-700 
+                          opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition"
+                title="Delete alert"
+              >
+                <FiTrash2 size={20}/>
+              </button>
+
               </li>
             ))}
           </ul>

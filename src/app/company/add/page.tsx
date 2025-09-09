@@ -69,7 +69,7 @@ const AddCompany = () => {
       await dispatch(addCompany(formData)).unwrap();
       toast.success("Company added successfully");
       reset();
-      router.push("/admin/dashboard");
+      router.push("/admin/dashboard?tab=companies");
     } catch (error) {
       console.error("Upload failed:", error);
       toast.error("Upload Failed");
@@ -119,7 +119,6 @@ const AddCompany = () => {
             <p className="text-red-400 text-xs mt-1">{errors.industry?.message}</p>
           </div>
 
-          {/* Location */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2">
               Location
@@ -205,7 +204,7 @@ const AddCompany = () => {
           <div className="col-span-1 md:col-span-2 flex gap-4 mt-4">
             <button
               type="button"
-              onClick={() => router.push("/")}
+              onClick={() => router.push("/admin/dashboard?tab=companies")}
               className="w-1/2 px-5 py-3 rounded-xl border border-white/20 bg-white/10 text-gray-300 hover:bg-white/20 transition"
             >
               Cancel

@@ -152,18 +152,6 @@ const Header = () => {
         ) : (
           <>
             <span
-              onClick={() => router.push("/about-us")}
-              className="text-white hover:text-[#309689] cursor-pointer transition"
-            >
-              About Us
-            </span>
-            <span
-              onClick={() => router.push("/contact-us")}
-              className="text-white hover:text-[#309689] cursor-pointer transition"
-            >
-              Contact Us
-            </span>
-            <span
               onClick={() => router.push("/login")}
               className="text-white hover:text-[#309689] cursor-pointer transition"
             >
@@ -174,6 +162,18 @@ const Header = () => {
               className="text-white hover:text-[#309689] cursor-pointer transition"
             >
               Register
+            </span>
+            <span
+              onClick={() => router.push("/about-us")}
+              className="text-white hover:text-[#309689] cursor-pointer transition"
+            >
+              About Us
+            </span>
+            <span
+              onClick={() => router.push("/contact-us")}
+              className="text-white hover:text-[#309689] cursor-pointer transition"
+            >
+              Contact Us
             </span>
           </>
         )}
@@ -228,6 +228,18 @@ const Header = () => {
 
           {!user && (
             <>
+             <span
+                onClick={() => router.push("/login")}
+                className="text-white cursor-pointer"
+              >
+                Login
+              </span>
+              <span
+                onClick={() => router.push("/register")}
+                className="text-white cursor-pointer"
+              >
+                Register
+              </span>
               <span
                 onClick={() => router.push("/about-us")}
                 className="text-white cursor-pointer"
@@ -240,18 +252,7 @@ const Header = () => {
               >
                 Contact Us
               </span>
-              <span
-                onClick={() => router.push("/login")}
-                className="text-white cursor-pointer"
-              >
-                Login
-              </span>
-              <span
-                onClick={() => router.push("/register")}
-                className="text-white cursor-pointer"
-              >
-                Register
-              </span>
+              
             </>
           )}
 

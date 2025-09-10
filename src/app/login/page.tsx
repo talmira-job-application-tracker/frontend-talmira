@@ -63,8 +63,8 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center backdrop-blur-sm">
-      <div className="w-full max-w-md p-8 rounded-2xl shadow-lg bg-white/10 backdrop-blur-md border border-white/20">
-        <h2 className="text-2xl font-bold text-black/80 mb-6 text-center">
+      <div className="w-full max-w-md p-8 rounded-2xl shadow-lg bg-black/30 backdrop-blur-md border border-white/20">
+        <h2 className="text-2xl font-bold text-white mb-6 text-center">
           Welcome Back To Talmira!
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -98,7 +98,7 @@ const LoginPage = () => {
             {loading ? "Logging in..." : "Login"}
           </button>
 
-          <p className="text-black text-center">
+          <p className="text-white text-center">
             Don't have an account?
             <a href="/register" className="text-[#257166] hover:underline"> Sign Up</a>
           </p>

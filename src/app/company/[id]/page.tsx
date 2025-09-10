@@ -94,7 +94,7 @@ const ViewCompany = () => {
             {company.website && (
               <a
                 href={
-                  company.website.startsWith("http")
+                  company.website?.startsWith("http")
                     ? company.website
                     : `https://${company.website}`
                 }

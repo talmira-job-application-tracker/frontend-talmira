@@ -49,6 +49,7 @@ const ViewJob = () => {
 
   const dispatch = useDispatch<AppDispatch>();
   const { job, loading, error } = useSelector((state: RootState) => state.job);
+  console.log(error,'error')
 
   const [openDialog, setOpenDialog] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
@@ -58,7 +59,7 @@ const ViewJob = () => {
     dispatch(viewJob(id)).unwrap();
   }, [id, dispatch]);
 
-  if (error) {
+  if (!job) {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <p className="text-red-500 text-lg">

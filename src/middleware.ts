@@ -16,7 +16,7 @@ export function middleware(request: NextRequest) {
         }
     }
 
-  const isAuthPage = pathname === '/login' || pathname === '/registration' 
+  const isAuthPage = pathname === '/login' || pathname === '/register' 
   const isPublicPage = pathname === '/' || pathname === "/about-us" || pathname === "/contact-us" || isAuthPage
 
   const isAdminPage =

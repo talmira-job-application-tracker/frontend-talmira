@@ -59,7 +59,6 @@ const ListAlerts = () => {
 
   return (
     <div className="min-h-screen w-full p-4 sm:p-6 md:p-8 ">
-      <Header />
       <div className="mt-11 w-full max-w-4xl mx-auto flex flex-col gap-4 px-2 sm:px-4">
         {loading && <p className="text-gray-600 text-center">Loading alerts...</p>}
         {error && <p className="text-red-600 text-center">{error}</p>}

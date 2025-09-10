@@ -40,7 +40,6 @@ const ContactUs = () => {
   return (
     <>
       <Box sx={{ minHeight: "100vh", pb: 6 }}>
-        <Header />
         <Box
           sx={{
             display: "flex",
@@ -65,7 +64,7 @@ const ContactUs = () => {
                 backdropFilter: "blur(10px)",
               }}
             >
-              <Typography variant="h4" fontWeight="bold" color="#091816ff" mb={3} textAlign="center">
+              <Typography variant="h4" fontWeight="bold" color="#ffffffff" mb={3} textAlign="center">
                 Contact Us
               </Typography>
 

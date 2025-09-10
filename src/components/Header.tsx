@@ -20,6 +20,7 @@ import api from "@/api";
 const Header = () => {
   const router = useRouter();
   const { user, logout } = useAuth();
+  console.log(user,'user..')
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -62,7 +63,7 @@ const Header = () => {
   }, [user]);
 
   return (
-    <header className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-3 bg-black/20 backdrop-blur-md border-b border-white/10">
+    <header className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-3 bg-black/30 backdrop-blur-md border-b border-white/10">
       <button
         onClick={() => router.push("/")}
         className="flex items-center gap-3 cursor-pointer"

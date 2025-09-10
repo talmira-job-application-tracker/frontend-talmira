@@ -15,6 +15,7 @@ const ViewProfile = () => {
   const userId = params?.id?.[0];
   const dispatch = useDispatch<AppDispatch>();
   const { user, loading, error } = useSelector((state: RootState) => state.user);
+  console.log(user,' left-0 w-fu....')
   const loggedInUser = Cookies.get("user") ? JSON.parse(Cookies.get("user") as string): null;
 
   useEffect(() => {

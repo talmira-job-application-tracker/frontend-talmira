@@ -76,7 +76,6 @@ const EditProfile = () => {
           reset({
             name: userData.name,
             email: userData.email,
-            password: userData.password,
             phone: userData.phone,
             age: userData.age,
             interests: userData.interests,
@@ -101,7 +100,11 @@ const EditProfile = () => {
     formData.append("name", data.name);
     formData.append("email", data.email);
 
-    if (data.password) formData.append("password", data.password);
+    if (data.password && data.password.trim() !== "" && data.password !== "undefined") {
+      formData.append("password", data.password);
+    }
+
+
 
     if (role === "user") {
       formData.append("age", data.age);

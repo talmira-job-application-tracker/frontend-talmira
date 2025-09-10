@@ -93,7 +93,7 @@ const EditCompany = () => {
   };
 
   return (
-    <div className="max-w-4xl m-auto px-6 py-10">
+    <div className="max-w-4xl m-auto px-6 py-30">
       <h1 className="text-3xl font-bold text-gray-800 mb-10">
         Edit Company Details
       </h1>

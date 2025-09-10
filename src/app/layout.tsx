@@ -1,5 +1,3 @@
-
-
 import type { Metadata } from "next"
 import { Figtree } from "next/font/google"
 import "./globals.css"
@@ -26,21 +24,19 @@ export default function RootLayout({
    <html lang="en">
   <body
     className={` ${figtree.className} antialiased bg-gradient-to-br from-[#366157] to-[#e6fffa] min-h-screen flex flex-col`}>
-    <ReduxProvider>
-      <AuthProvider>
-        <Toaster position="top-right" reverseOrder={false} />
-        <Header />
+      <ReduxProvider>
+        <AuthProvider>
+          <Toaster position="top-right" reverseOrder={false} />
+          <Header />
 
-        {/* Main content grows to push footer down */}
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
-      </AuthProvider>
-    </ReduxProvider>
-  </body>
-</html>
-
-
+          {/* Main content grows to push footer down */}
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </AuthProvider>
+      </ReduxProvider>
+    </body>
+  </html>
   )
 }

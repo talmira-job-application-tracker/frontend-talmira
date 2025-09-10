@@ -20,8 +20,7 @@ export function middleware(request: NextRequest) {
   const isPublicPage = pathname === '/' || pathname === "/about-us" || pathname === "/contact-us" || isAuthPage
 
   const isAdminPage =
-    pathname.startsWith("/admin") || 
-    pathname === "/application" ||
+    pathname.startsWith("/admin") ||
     pathname === "/company" ||  
     pathname.startsWith("/company/") && pathname.endsWith("/addjob") || 
     pathname.startsWith("/job/") && pathname.endsWith("/edit") ||

@@ -15,6 +15,7 @@ const ViewProfile = () => {
   const userId = params?.id?.[0];
   const dispatch = useDispatch<AppDispatch>();
   const { user, loading, error } = useSelector((state: RootState) => state.user);
+  const loggedInUser = Cookies.get("user") ? JSON.parse(Cookies.get("user") as string): null;
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -105,6 +106,8 @@ const ViewProfile = () => {
           </div>
 
           <div className="mt-6 flex flex-wrap justify-center gap-4">
+            {loggedInUser?.role !== "admin" && (
+              <>
             <button
               onClick={() => router.push(`/profile/edit`)}
               className="px-6 py-2 rounded-xl bg-teal-600 text-white shadow hover:bg-teal-700 hover:shadow-lg transition-all duration-200"
@@ -112,13 +115,13 @@ const ViewProfile = () => {
               Edit Profile
             </button>
 
-            {user.role !== "admin" && (
               <button
                 onClick={() => router.push(`/profile/delete`)}
                 className="px-6 py-2 rounded-xl bg-teal-500 text-white shadow hover:bg-red-400 hover:shadow-lg transition-all duration-200"
               >
                 Delete Account
               </button>
+              </>
             )}
           </div>
 

@@ -17,11 +17,21 @@ export function middleware(request: NextRequest) {
     }
 
   const isAuthPage = pathname === '/login' || pathname === '/registration' 
-  const isPublicPage = pathname === '/' || isAuthPage
+  const isPublicPage = pathname === '/' || pathname === "about-us" || pathname === "contact-us" || isAuthPage
 
-  //If NOT logged in and trying to access a protected route
+  const isAdminPage =
+    pathname.startsWith("/admin") || 
+    pathname === "/application" ||
+    pathname === "/company" ||  
+    pathname.startsWith("/company/") && pathname.endsWith("/addjob") || 
+    pathname.startsWith("/job/") && pathname.endsWith("/edit") ||
+    pathname.startsWith("/company/") && pathname.endsWith("/edit") || 
+    pathname.startsWith("/company/") && pathname.endsWith("/subscribers") ||
+    pathname === "/company/add" 
+
+  //If NOT logged in and trying to access a protected route 
   if (!token && !isPublicPage) {
-    return NextResponse.redirect(new URL('/login', request.url))
+    return NextResponse.redirect(new URL('/', request.url))
   }
 
   //If logged in and trying to visit login or registration
@@ -29,12 +39,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
+  if (role === "user" && isAdminPage) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   return NextResponse.next()
 }
 
 
 export const config = {
-  matcher: [
-    '/((?!_next|favicon.ico|images|static|api).*)'
-  ]
-}
+  matcher: ["/((?!_next|.*\\..*|api).*)"],
+};

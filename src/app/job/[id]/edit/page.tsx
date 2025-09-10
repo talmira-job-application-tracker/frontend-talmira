@@ -103,12 +103,11 @@ const EditJob = () => {
   };
 
   return (
-    <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-br from-black via-teal-900 to-black px-4 overflow-hidden">
-      {/* decorative blurred shapes */}
+    <div className="relative flex justify-center items-start min-h-screen bg-gradient-to-br from-black via-teal-900 to-black px-4 pt-24 pb-12 overflow-hidden">
       <div className="absolute -top-24 -left-24 w-72 h-72 bg-teal-500/30 rounded-full mix-blend-screen filter blur-3xl animate-pulse" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-white/10 rounded-full mix-blend-overlay filter blur-2xl animate-[pulse_6s_ease-in-out_infinite]" />
 
-      <div className="w-full max-w-4xl bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 p-10 relative z-10">
+      <div className="w-full max-w-4xl bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 mt-6 p-8 relative z-10">
         <h2 className="text-4xl font-extrabold text-center text-white mb-8 tracking-wide drop-shadow-lg">
           Edit Job Details
         </h2>
@@ -117,7 +116,6 @@ const EditJob = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
-          {/* Title */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2 tracking-wide">
               Title
@@ -131,7 +129,6 @@ const EditJob = () => {
             <p className="text-red-400 text-xs mt-1">{errors.title?.message}</p>
           </div>
 
-          {/* Location */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2 tracking-wide">
               Location
@@ -145,7 +142,6 @@ const EditJob = () => {
             <p className="text-red-400 text-xs mt-1">{errors.location?.message}</p>
           </div>
 
-          {/* Job Type */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2 tracking-wide">
               Job Type
@@ -162,7 +158,6 @@ const EditJob = () => {
             <p className="text-red-400 text-xs mt-1">{errors.jobType?.message}</p>
           </div>
 
-          {/* Salary */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2 tracking-wide">
               Salary
@@ -176,7 +171,6 @@ const EditJob = () => {
             <p className="text-red-400 text-xs mt-1">{errors.salary?.message}</p>
           </div>
 
-          {/* Languages */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2 tracking-wide">
               Languages
@@ -190,7 +184,6 @@ const EditJob = () => {
             <p className="text-red-400 text-xs mt-1">{errors.language?.message}</p>
           </div>
 
-          {/* Qualification */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2 tracking-wide">
               Qualification
@@ -204,7 +197,6 @@ const EditJob = () => {
             <p className="text-red-400 text-xs mt-1">{errors.qualification?.message}</p>
           </div>
 
-          {/* Keywords */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2 tracking-wide">
               Keywords
@@ -218,7 +210,6 @@ const EditJob = () => {
             <p className="text-red-400 text-xs mt-1">{errors.keyword?.message}</p>
           </div>
 
-          {/* Work Mode */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2 tracking-wide">
               Work Mode
@@ -235,7 +226,6 @@ const EditJob = () => {
             <p className="text-red-400 text-xs mt-1">{errors.workMode?.message}</p>
           </div>
 
-          {/* Description */}
           <div className="col-span-1 md:col-span-2">
             <label className="text-sm font-semibold text-teal-200 mb-2 block tracking-wide">
               Description

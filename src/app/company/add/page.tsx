@@ -19,15 +19,13 @@ const schema = yup.object().shape({
   website: yup.string().url().required("Website required"),
   logo: yup
     .mixed<FileList>()
-    .required("Logo is required")
+    .notRequired() // make it optional
     .test("fileType", "Unsupported file format", (value) => {
-      return (
-        value &&
-        value[0] &&
-        ["image/jpeg", "image/png", "image/webp"].includes(value[0].type)
-      );
+      if (!value || !value[0]) return true; // allow empty
+      return ["image/jpeg", "image/png", "image/webp"].includes(value[0].type);
     }),
 });
+
 
 const AddCompany = () => {
   const [preview, setPreview] = useState<string | null>(null);
@@ -39,7 +37,7 @@ const AddCompany = () => {
     reset,
     watch,
   } = useForm<cFormType>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema) as any,
   });
   const logoWatch = watch("logo");
   const dispatch = useDispatch<AppDispatch>();
@@ -63,7 +61,10 @@ const AddCompany = () => {
     formData.append("description", data.description);
     formData.append("location", data.location);
     formData.append("website", data.website);
-    formData.append("logo", data.logo[0] as File);
+
+    if (data.logo && data.logo[0]) {
+      formData.append("logo", data.logo[0] as File);
+    }
 
     try {
       await dispatch(addCompany(formData)).unwrap();

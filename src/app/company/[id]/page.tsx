@@ -71,21 +71,17 @@ const ViewCompany = () => {
       <div className="mt-10">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-6 p-6 rounded-lg shadow-sm bg-white/50 backdrop-blur-md">
         <div className="w-28 h-28 sm:w-32 sm:h-32 relative border rounded-lg bg-gray-50 shadow overflow-hidden flex-shrink-0">
-          <Image
-            src={
-              company.logo
-                ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${company.logo.replace(
-                    /\\/g,
-                    "/"
-                  )}`
-                : "/images/noprofile.png"
-            }
-            alt={company.name || "company logo"}
-            fill
-            className="object-contain p-2 bg-white"
-            unoptimized
-          />
+          {company.logo && (
+            <Image
+              src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${company.logo.replace(/\\/g, "/")}`}
+              alt={company.name || "company logo"}
+              fill
+              className="object-contain p-2 bg-white"
+              unoptimized
+            />
+          )}
         </div>
+
 
         <div className="flex flex-col gap-3 w-full text-center md:text-left">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{company.name}</h1>

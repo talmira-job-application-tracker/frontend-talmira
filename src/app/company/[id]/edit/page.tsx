@@ -1,4 +1,3 @@
-
 "use client";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -23,15 +22,14 @@ const schema = yup.object({
   name: yup.string().required("Company name is required"),
   industry: yup.string().required("Industry is required"),
   location: yup.string().required("Location is required"),
-  description: yup.string().optional(), 
+  description: yup.string().optional(),
   website: yup
     .string()
-    .required('website link is required')
-    .transform((value) => (value === "" ? null : value)) 
+    .required("Website link is required")
+    .transform((value) => (value === "" ? null : value))
     .url("Enter a valid URL"),
-  logo: yup.mixed().notRequired(),
+  logo: yup.mixed().notRequired(), 
 });
-
 
 const EditCompany = () => {
   const { id } = useParams();
@@ -40,6 +38,7 @@ const EditCompany = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const dispatch = useDispatch<AppDispatch>();
   const { loading } = useSelector((state: RootState) => state.company);
+  const [removeLogo, setRemoveLogo] = useState(false);
 
   const {
     register,
@@ -74,12 +73,17 @@ const EditCompany = () => {
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("industry", data.industry);
-    formData.append("description", data.description);
+    formData.append("description", data.description || "");
     formData.append("location", data.location);
     formData.append("website", data.website);
 
+    // Append logo only if user selected one
     if (data.logo && data.logo.length > 0) {
       formData.append("logo", data.logo[0]);
+    }
+
+    if (removeLogo) {
+      formData.append("removeLogo", "true");
     }
 
     const result = await dispatch(updateCompany({ id: companyId, formData }));
@@ -99,6 +103,7 @@ const EditCompany = () => {
       </h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-12">
+        {/* Basic Information */}
         <section>
           <h3 className="text-lg font-semibold text-[#309689] mb-4">
             Basic Information
@@ -106,15 +111,10 @@ const EditCompany = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm text-gray-600">
-                Company Name
-              </label>
+              <label className="block text-sm text-gray-600">Company Name</label>
               <div className="flex items-center gap-2 border-b border-gray-300 focus-within:border-[#309689] py-2">
                 <Type size={16} className="text-gray-500" />
-                <input
-                  {...register("name")}
-                  className="w-full focus:outline-none"
-                />
+                <input {...register("name")} className="w-full focus:outline-none" />
               </div>
               <p className="text-red-500 text-sm mt-1">{errors.name?.message}</p>
             </div>
@@ -123,14 +123,9 @@ const EditCompany = () => {
               <label className="block text-sm text-gray-600">Industry</label>
               <div className="flex items-center gap-2 border-b border-gray-300 focus-within:border-[#309689] py-2">
                 <Building2 size={16} className="text-gray-500" />
-                <input
-                  {...register("industry")}
-                  className="w-full focus:outline-none"
-                />
+                <input {...register("industry")} className="w-full focus:outline-none" />
               </div>
-              <p className="text-red-500 text-sm mt-1">
-                {errors.industry?.message}
-              </p>
+              <p className="text-red-500 text-sm mt-1">{errors.industry?.message}</p>
             </div>
           </div>
 
@@ -147,6 +142,7 @@ const EditCompany = () => {
           </div>
         </section>
 
+        {/* Location & Website */}
         <section>
           <h3 className="text-lg font-semibold text-[#309689] mb-4">
             Location & Contact
@@ -156,36 +152,25 @@ const EditCompany = () => {
               <label className="block text-sm text-gray-600">Location</label>
               <div className="flex items-center gap-2 border-b border-gray-300 focus-within:border-[#309689] py-2">
                 <MapPin size={16} className="text-gray-500" />
-                <input
-                  {...register("location")}
-                  className="w-full focus:outline-none"
-                />
+                <input {...register("location")} className="w-full focus:outline-none" />
               </div>
-              <p className="text-red-500 text-sm mt-1">
-                {errors.location?.message}
-              </p>
+              <p className="text-red-500 text-sm mt-1">{errors.location?.message}</p>
             </div>
 
             <div>
               <label className="block text-sm text-gray-600">Website</label>
               <div className="flex items-center gap-2 border-b border-gray-300 focus-within:border-[#309689] py-2">
                 <Globe size={16} className="text-gray-500" />
-                <input
-                  {...register("website")}
-                  className="w-full focus:outline-none"
-                />
+                <input {...register("website")} className="w-full focus:outline-none" />
               </div>
-              <p className="text-red-500 text-sm mt-1">
-                {errors.website?.message}
-              </p>
+              <p className="text-red-500 text-sm mt-1">{errors.website?.message}</p>
             </div>
           </div>
         </section>
 
+        {/* Logo */}
         <section className="mb-6">
-          <h3 className="text-lg font-semibold text-[#309689] mb-2">
-            Branding
-          </h3>
+          <h3 className="text-lg font-semibold text-[#309689] mb-2">Branding</h3>
           <div>
             <label className="block text-sm text-gray-600">Logo</label>
             <div className="flex items-center gap-2 border-b border-gray-300 focus-within:border-[#309689] py-2">
@@ -196,14 +181,30 @@ const EditCompany = () => {
                 {...register("logo")}
                 onChange={(e) => {
                   const file = e.target.files?.[0];
-                  if (file) {
-                    setPreview(URL.createObjectURL(file));
-                  }
+                  if (file) setPreview(URL.createObjectURL(file));
+                  setRemoveLogo(false); 
                 }}
                 className="focus:outline-none"
               />
+              {/* Remove button only if preview exists and it's not default logo */}
+              {preview && !preview.includes("default-logo.png") && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPreview(null);
+                    setRemoveLogo(true);
+                    const input = document.querySelector<HTMLInputElement>('input[name="logo"]');
+                    if (input) input.value = "";
+                  }}
+                  className="ml-2 text-red-500 border border-red-500 px-2 rounded hover:bg-red-500 hover:text-white transition"
+                >
+                  Remove
+                </button>
+              )}
             </div>
-            {preview && (
+
+            {/* Preview only if preview exists and it's not default logo */}
+            {preview && !preview.includes("default-logo.png") && (
               <img
                 src={preview}
                 alt="Logo Preview"
@@ -212,6 +213,7 @@ const EditCompany = () => {
             )}
           </div>
         </section>
+
 
         <div className="flex justify-end">
           <button
@@ -228,7 +230,3 @@ const EditCompany = () => {
 };
 
 export default EditCompany;
-
-
-
-

@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import api from '@/api' 
 
 const banners = [
   {
@@ -27,12 +28,35 @@ const banners = [
 const AutoSlider = () => {
   const [current, setCurrent] = useState(0)
 
+  
+  const [counts, setCounts] = useState({
+    jobs: 0,
+    applicants: 0,
+    companies: 0,
+  })
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % banners.length)
     }, 4000)
 
     return () => clearInterval(interval)
+  }, [])
+
+    
+  useEffect(() => {
+    api
+      .get("/dashboard/counts")
+      .then((res) => {
+        setCounts({
+          jobs: res.data.data.jobs,
+          applicants: res.data.data.applicants,
+          companies: res.data.data.companies,
+        })
+      })
+      .catch((err) => {
+        console.error("Failed to fetch counts", err)
+      })
   }, [])
 
   return (
@@ -59,39 +83,38 @@ const AutoSlider = () => {
               {banner.subtitle}
             </p>
 
-          {/* icons section */}
-          <div className='flex flex-row gap-12'>
-          <div className='flex flex-row gap-1 text-left'>
-            <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
-              <img src="/icons/job-icon.svg" className="h-5 w-5" />
-            </div>
-            <div>
-              <p className='text-white font-bold'>25,850</p>
-              <p className='text-white/80'>Jobs</p>
-            </div>
-          </div>
+            {/* icons section with dynamic counts */}
+            <div className="flex flex-row gap-12">
+              <div className="flex flex-row gap-1 text-left">
+                <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
+                  <img src="/icons/job-icon.svg" className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-white font-bold">{counts.jobs}</p>
+                  <p className="text-white/80">Jobs</p>
+                </div>
+              </div>
 
-          <div className='flex flex-row gap-1 text-left'>
-            <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
-              <img src="/icons/users-icon.svg" className="h-5 w-5" />
-            </div>
-            <div>
-              <p className='text-white font-bold'>10,250</p>
-              <p className='text-white/80'>Applicants</p>
-            </div>
-          </div>
-          
-          <div className='flex flex-row gap-1 text-left'>
-            <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
-              <img src="/icons/company-icon.svg" className="h-5 w-5" />
-            </div>
-            <div>
-              <p className=' text-white font-bold '>18,400</p>
-              <p className='text-white/80 '>Companies</p>
-            </div>
-          </div>
-          </div>
+              <div className="flex flex-row gap-1 text-left">
+                <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
+                  <img src="/icons/users-icon.svg" className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-white font-bold">{counts.applicants}</p>
+                  <p className="text-white/80">Applicants</p>
+                </div>
+              </div>
 
+              <div className="flex flex-row gap-1 text-left">
+                <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
+                  <img src="/icons/company-icon.svg" className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-white font-bold">{counts.companies}</p>
+                  <p className="text-white/80">Companies</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       ))}

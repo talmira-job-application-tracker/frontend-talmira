@@ -1,41 +1,3 @@
-// 'use client'
-
-// import { listusers } from "@/redux/slices/userSlice"
-// import { AppDispatch, RootState } from "@/redux/store"
-// import { useEffect } from "react"
-// import { useDispatch, useSelector } from "react-redux"
-
-// const ListUsers = () => {
-//   const dispatch = useDispatch<AppDispatch>()
-//   const { users, loading, error } = useSelector((state: RootState) => state.user)
-
-//   useEffect(() => {
-//     dispatch(listusers())
-//   }, [dispatch])
-
-//   return (
-//     <div>
-//       <h1>Users list</h1>
-//       {loading && <p>Loading...</p>}
-//       {error && <p style={{ color: "red" }}>{error}</p>}
-//       {users.length > 0 ? (
-//         <ul>
-//         {users.map((u) => (
-//           <li key={ u._id}>
-//             {u.name} - {u.email} - {u.age}
-//           </li>
-//         ))}
-//       </ul>
-
-//       ) : (
-//         <p>No users found</p>
-//       )}
-//     </div>
-//   )
-// }
-
-// export default ListUsers
-
 'use client'
 
 import { useEffect, useState } from "react"
@@ -75,38 +37,43 @@ const ListUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((u: UserType) => (
-                <tr key={u._id} className="hover:bg-gray-50">
-                  <td className="px-4 py-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 relative">
-                        <Image
-                          src={
-                            u.image
-                              ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${u.image.replace(/\\/g, "/")}`
-                              : "/images/noprofile.png"
-                          }
-                          alt={u.name || "profile picture"}
-                          fill
-                          className="object-cover rounded-full"
-                          unoptimized
-                        />
+              {users
+                .filter((u: UserType) => u.role !== "admin") // exclude admin users
+                .map((u: UserType) => (
+                  <tr key={u._id} className="hover:bg-gray-50">
+                    <td className="px-4 py-2">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 relative">
+                          <Image
+                            src={
+                              u.image
+                                ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${u.image.replace(/\\/g, "/")}`
+                                : "/images/noprofile.png"
+                            }
+                            alt={u.name || "profile picture"}
+                            fill
+                            className="object-cover rounded-full"
+                            unoptimized
+                          />
+                        </div>
+                        <>
+                        <Link href={`/profile/${u._id}`}>
+                        <span>{u.name}</span>
+                        </Link>
+                        </>
                       </div>
-                      <span>{u.name}</span>
-                    </div>
-                  </td>
-
-                  <td className="px-4 py-2">{u.role}</td>
-                  <td className="px-4 py-2">{u.email}</td>
-                  <td className={`px-4 py-2 font-semibold ${u.isDeleted ? "text-red-600" : "text-green-600"}`}>
-                    {u.isDeleted ? "Inactive" : "Active"}
-                  </td>
-                  <td className="px-4 py-2">
-                    <Link href={`/profile/${u._id}`} className="inline-flex items-center gap-2 px-3 py-1 bg-white text-[#309689] rounded hover:bg-grey">
-                      <FiEye /> View
-                    </Link>
-                  </td>
-                </tr>
+                    </td>
+                    <td className="px-4 py-2">{u.role}</td>
+                    <td className="px-4 py-2">{u.email}</td>
+                    <td className={`px-4 py-2 font-semibold ${u.isDeleted ? "text-red-600" : "text-green-600"}`}>
+                      {u.isDeleted ? "Inactive" : "Active"}
+                    </td>
+                    <td className="px-4 py-2">
+                      <Link href={`/profile/${u._id}`} className="inline-flex items-center gap-2 px-3 py-1 bg-white text-[#309689] rounded hover:bg-grey">
+                        <FiEye /> View
+                      </Link>
+                    </td>
+                  </tr>
               ))}
             </tbody>
           </table>

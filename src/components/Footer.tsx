@@ -11,7 +11,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="bg-black/30 backdrop-blur-md border-t border-white/10 text-gray-200 py-5 w-full">
+    <footer className="bg-black/30 backdrop-blur-md border-t border-white/10 text-gray-200 py-5 w-full ">
       <div className="flex flex-col md:flex-row justify-between items-center gap-6 w-full">
         
         <div className="text-center md:text-left px-6 md:px-12">

@@ -168,36 +168,52 @@ const AddCompany = () => {
             <label className="text-sm font-semibold text-teal-200 mb-3 block">
               Company Logo
             </label>
-            <label className="flex flex-col items-center justify-center w-full p-6 rounded-xl border border-dashed border-white/20 bg-white/5 cursor-pointer hover:border-teal-400 transition-all">
-              {preview ? (
-                <img
-                  src={preview}
-                  alt="Preview"
-                  className="w-24 h-24 object-cover rounded-full shadow-md border-2 border-teal-500 mb-2"
-                />
-              ) : (
-                <>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-12 h-12 text-gray-400 mb-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6h.1a5 5 0 010 10h-1m-4 4l-4-4m0 0l4-4m-4 4h12"
-                    />
-                  </svg>
-                  <p className="text-gray-400 text-sm">
-                    Tap to upload company logo
-                  </p>
-                </>
+            <div className="flex flex-col items-center">
+              <label className="flex flex-col items-center justify-center w-full p-6 rounded-xl border border-dashed border-white/20 bg-white/5 cursor-pointer hover:border-teal-400 transition-all">
+                {preview ? (
+                  <img
+                    src={preview}
+                    alt="Preview"
+                    className="w-24 h-24 object-cover rounded-full shadow-md border-2 border-teal-500 mb-2"
+                  />
+                ) : (
+                  <>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-12 h-12 text-gray-400 mb-2"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6h.1a5 5 0 010 10h-1m-4 4l-4-4m0 0l4-4m-4 4h12"
+                      />
+                    </svg>
+                    <p className="text-gray-400 text-sm">
+                      Tap to upload company logo
+                    </p>
+                  </>
+                )}
+                <input type="file" className="hidden" {...register("logo")} />
+              </label>
+
+              {/* Remove Button */}
+              {preview && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPreview(null); // clear preview
+                    reset({ ...watch(), logo: undefined, }); // clear file input
+                  }}
+                  className="mt-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                >
+                  Remove Logo
+                </button>
               )}
-              <input type="file" className="hidden" {...register("logo")} />
-            </label>
+            </div>
             <p className="text-red-400 text-xs mt-1">{errors.logo?.message}</p>
           </div>
 

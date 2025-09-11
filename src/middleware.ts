@@ -26,7 +26,8 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/job/") && pathname.endsWith("/edit") ||
     pathname.startsWith("/company/") && pathname.endsWith("/edit") || 
     pathname.startsWith("/company/") && pathname.endsWith("/subscribers") ||
-    pathname === "/company/add" 
+    pathname === "/company/add" ||
+    pathname === "/job/add"
 
   const isUserPage = 
     pathname === "/subscriptions" || pathname === "/alerts/list"

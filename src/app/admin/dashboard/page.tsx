@@ -187,23 +187,28 @@ const AdminDashboard = () => {
       );
     }
 
-    if (selected === "applications") return <ListApplications />;
-    if (selected === "companies") return (
-      <Box sx={{ width: "100%", mt: 3 }}>
-        <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" justifyContent="space-between" spacing={2} mb={2}>
-          <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", sm: "70%" } }}><CompanySearch /></Box>
-          <Button variant="contained" startIcon={<AddIcon />} sx={{ backgroundColor: "#309689", "&:hover": { backgroundColor: "#26786d" }, flexShrink: 0 }} component={Link} href="/company/add">Add Company</Button>
-        </Stack>
-        <ListCompanies />
-      </Box>
-    );
-    if (selected === "jobs") return (
-      <Box sx={{ width: "100%", mt: 3 }}>
-        <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", sm: "70%" } }}><JobSearch /></Box>
-        <ListJob />
-      </Box>
-    );
-    if (selected === "users") return <ListUsers />;
+    if (selected === "applications") return <ListApplications />
+    if (selected === "companies")
+      return (
+        <Box sx={{ width: "100%", mt: 3 }}>
+          <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" justifyContent="space-between" spacing={2} mb={2}>
+            <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", sm: "70%" } }}><CompanySearch /></Box>
+            <Button variant="contained" startIcon={<AddIcon />} sx={{ backgroundColor: "#309689", "&:hover": { backgroundColor: "#26786d" }, flexShrink: 0 }} component={Link} href="/company/add">Add Company</Button>
+          </Stack>
+          <ListCompanies />
+        </Box>
+      )
+    if (selected === "jobs")
+      return (
+        <Box sx={{ width: "100%", mt: 3 }}>
+          <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" justifyContent="space-between" spacing={2} mb={2}>
+            <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", sm: "70%" } }}><JobSearch /></Box>
+            <Button variant="contained" startIcon={<AddIcon />} sx={{ backgroundColor: "#309689", "&:hover": { backgroundColor: "#26786d" }, flexShrink: 0 }} component={Link} href="/job/add">Add Job</Button>
+          </Stack>
+          <ListJob />
+        </Box>
+      );
+    if (selected === "users") return <ListUsers />
   };
 
   if (!mounted) return null; // prevent hydration error

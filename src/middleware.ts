@@ -28,6 +28,9 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/company/") && pathname.endsWith("/subscribers") ||
     pathname === "/company/add" 
 
+  const isUserPage = 
+    pathname === "/subscriptions" || pathname === "/alerts/list"
+
   //If NOT logged in and trying to access a protected route 
   if (!token && !isPublicPage) {
     return NextResponse.redirect(new URL('/', request.url))
@@ -38,8 +41,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
+  //if user and trying to access admin routes
   if (role === "user" && isAdminPage) {
     return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  //if admin and trying to access user routes
+  if (role === "admin" && isUserPage) {
+    return NextResponse.redirect(new  URL("/", request.url));
   }
 
   return NextResponse.next()

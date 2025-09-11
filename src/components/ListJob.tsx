@@ -1,28 +1,52 @@
 "use client";
 
-import { listJobs } from "@/redux/slices/jobSlice";
-import { AppDispatch, RootState } from "@/redux/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
+import { listJobs } from "@/redux/slices/jobSlice";
+import Pagination from "./Pagination";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 import Image from "next/image";
 import Link from "next/link";
 
-const ListJob = () => {
+export default function ListJob() {
   const dispatch = useDispatch<AppDispatch>();
-  const { jobs, loading, error } = useSelector((state: RootState) => state.job);
+  const { jobs, loading, error, currentPage, totalPages } = useSelector(
+    (state: RootState) => state.job
+  );
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile screen
   useEffect(() => {
-    dispatch(listJobs());
+    const update = () => setIsMobile(window.innerWidth < 768);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  // Initial fetch (page 1)
+  useEffect(() => {
+    dispatch(listJobs({ page: 1, limit: 10, append: false }));
   }, [dispatch]);
+
+  // Infinite scroll only on mobile
+  useInfiniteScroll(
+    () => {
+      if (currentPage < totalPages && !loading) {
+        dispatch(listJobs({ page: currentPage + 1, limit: 10, append: true }));
+      }
+    },
+    isMobile
+  );
 
   return (
     <div className="min-h-screen px-4 sm:px-8 py-6">
-      <div className="space-y-4">
-        {loading && <p className="text-gray-600">Loading jobs...</p>}
-        {error && <p className="text-red-500">Error: {error}</p>}
+      {loading && <p className="text-gray-600">Loading jobs...</p>}
+      {error && <p className="text-red-500">{error}</p>}
 
-        {jobs.length > 0 ? (
-          jobs.map((job: any) => (
+      {jobs.length > 0 ? (
+        <div className="space-y-4">
+          {jobs.map((job: any) => (
             <div
               key={job._id}
               className="flex flex-col sm:flex-row sm:items-center bg-white/80
@@ -72,13 +96,20 @@ const ListJob = () => {
                 Job Details
               </Link>
             </div>
-          ))
-        ) : (
-          !loading && <p className="text-gray-500">No jobs found</p>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        !loading && <p className="text-gray-500">No jobs found</p>
+      )}
+
+      {/* Desktop pagination */}
+      {!isMobile && (
+        <Pagination
+          page={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) => dispatch(listJobs({ page, limit: 10, append: false }))}
+        />
+      )}
     </div>
   );
-};
-
-export default ListJob;
+}

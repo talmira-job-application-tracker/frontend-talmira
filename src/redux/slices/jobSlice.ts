@@ -10,23 +10,29 @@ interface jobState {
   loading: boolean;
   error: string | null;
   isRefresh: boolean;
+  currentPage: number,
+  totalPages: number,
+  totalJobs: number,
 }
 
 const initialState:jobState = {
-    jobs: [],
-    job: null,
-    loading: false,
-    error:null,
-    isRefresh: false,
+  jobs: [],
+  job: null,
+  loading: false,
+  error:null,
+  isRefresh: false,
+  currentPage: 1,
+  totalPages: 1,
+  totalJobs: 0,
 }
 
 //thunks
 //listjob
 export const listJobs = createAsyncThunk(
   "job/list",
-  async () => {
-    const res = await api.get("/job/list");
-    return res.data.data as JobType[]; 
+  async ({page, limit, append}: {page: number, limit: number, append: boolean}) => {
+    const res = await api.get(`/job/list?page=${page}&limit=${limit}`);
+    return res.data;
   }
 );
 
@@ -37,14 +43,6 @@ export const addJob = createAsyncThunk('job/add',
     return res.data.data as JobType
   }
 )
-
-// View Job
-// export const viewJob = createAsyncThunk('job/view', async (id: string) => {
-//   const res = await api.get(`/job/${id}`)
-//   console.log("View profile response:", res.data)
-//   return res.data;
-//  }
-// )
 
 // View Job
 export const viewJob = createAsyncThunk('job/view', async (id: string) => {
@@ -76,7 +74,18 @@ const jobSlice = createSlice({
         })
         .addCase(listJobs.fulfilled, (state,action) => {
             state.loading = false;
-            state.jobs = action.payload
+
+            const append = action.meta.arg.append;
+            
+            if (append) {
+              state.jobs = [...state.jobs, ...action.payload.data];
+            } else {
+              state.jobs = action.payload.data; // replace
+            }
+
+            state.currentPage = action.payload.currentPage;
+            state.totalPages = action.payload.totalPages;
+            state.totalJobs = action.payload.totalJobs;
         })
         .addCase(listJobs.rejected, (state,action) => {
             state.loading = false;

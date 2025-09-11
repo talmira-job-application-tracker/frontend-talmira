@@ -1,16 +1,17 @@
 export interface UserType {
-    _id: string,
-    role: "admin" | "user",
-    name: string,
-    email: string,
-    age?: number,
-    image?: string | null,
-    phone: string,
-    skills: string[],
-    interests: string[],
-    receiveNotification: boolean,
-    isDeleted:boolean
+  _id: string;
+  role: "admin" | "user";
+  name: string;
+  email?: string;
+  phone?: string;
+  age?: number;
+  image?: string | null;
+  skills?: string[];
+  interests?: string[];
+  receiveNotification?: boolean;
+  isDeleted?: boolean;
 }
+
 
 export type RegisterFormValues = {
   name: string;

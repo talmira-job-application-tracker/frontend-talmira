@@ -3,12 +3,13 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { UserType } from "@/types/userType";
 
-type UserType = {
-  _id: string;
-  role: string;
-  name: string;
-};
+// type UserType = {
+//   _id: string;
+//   role: string;
+//   name: string;
+// };
 
 type AuthContextType = {
   user: UserType | null;

@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import Cookies from "js-cookie";
 import { useDispatch } from "react-redux";
 import { registerUser } from "@/redux/slices/authSlice";
 import type { AppDispatch } from "@/redux/store";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 type RegisterFormValues = {
   name: string;
@@ -43,6 +43,7 @@ const schema = yup.object({
 const Register = () => {
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
+  const { login } = useAuth();
 
   const {
     register,
@@ -70,20 +71,9 @@ const Register = () => {
       .then((res: { token: string; data: any }) => {
         const { token, data: userData } = res;
 
-        Cookies.set("token", token, {
-          expires: 1,
-          path: "/",
-          sameSite: "Lax",
-        });
-
-        Cookies.set(
-          "user",
-          JSON.stringify({ role: userData.role, name: userData.name }),
-          {
-            expires: 1,
-            path: "/",
-            sameSite: "Lax",
-          }
+        login(
+          { _id: userData._id, role: userData.role, name: userData.name, image: userData.image },
+          token
         );
 
         toast.success("Registered successfully");
@@ -96,16 +86,17 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-30">
-      <div className="w-full max-w-4xl bg-grey backdrop-blur-md border border-white/20 shadow-lg p-8 rounded-2xl">
-        <h2 className="text-3xl font-bold text-center text-white mb-8">
+    <div className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 mt-10 sm:mt-16">
+      <div className="w-full max-w-md sm:max-w-2xl lg:max-w-4xl bg-grey backdrop-blur-md border border-white/20 shadow-lg p-4 sm:p-6 lg:p-8 rounded-2xl">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-white mb-6 sm:mb-8">
           Create an Account
         </h2>
 
         <form
           onSubmit={handleSubmit(handleRegister)}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
         >
+          {/* Full Name */}
           <div>
             <input
               type="text"
@@ -116,6 +107,7 @@ const Register = () => {
             <p className="text-red-400 text-sm mt-1">{errors.name?.message}</p>
           </div>
 
+          {/* Email */}
           <div>
             <input
               type="email"
@@ -126,6 +118,7 @@ const Register = () => {
             <p className="text-red-400 text-sm mt-1">{errors.email?.message}</p>
           </div>
 
+          {/* Password */}
           <div>
             <input
               type="password"
@@ -133,9 +126,12 @@ const Register = () => {
               {...register("password")}
               className="w-full p-3 rounded-xl bg-white/20 text-white placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-[#309689]"
             />
-            <p className="text-red-400 text-sm mt-1">{errors.password?.message}</p>
+            <p className="text-red-400 text-sm mt-1">
+              {errors.password?.message}
+            </p>
           </div>
 
+          {/* Phone */}
           <div>
             <input
               type="text"
@@ -146,44 +142,51 @@ const Register = () => {
             <p className="text-red-400 text-sm mt-1">{errors.phone?.message}</p>
           </div>
 
+          {/* Skills */}
           <div>
             <input
               type="text"
-              placeholder="Skills"
+              placeholder="Skills (Separate with commas)"
               {...register("skills")}
               className="w-full p-3 rounded-xl bg-white/20 text-white placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-[#309689]"
             />
             <p className="text-red-400 text-sm mt-1">{errors.skills?.message}</p>
           </div>
 
+          {/* Interests */}
           <div>
             <input
               type="text"
-              placeholder="Interested Jobs"
+              placeholder="Interested Jobs (Separate with commas)"
               {...register("interests")}
               className="w-full p-3 rounded-xl bg-white/20 text-white placeholder-black/50 focus:outline-none focus:ring-2 focus:ring-[#309689]"
             />
-            <p className="text-red-400 text-sm mt-1">{errors.interests?.message}</p>
+            <p className="text-red-400 text-sm mt-1">
+              {errors.interests?.message}
+            </p>
           </div>
 
+          {/* Image Upload */}
           <div className="md:col-span-2">
             <input
               type="file"
               {...register("image")}
-               className="w-full p-2 rounded-xl bg-white/20 text-black/50 placeholder-black/50 file:mr-4 file:py-2 file:px-4 file:border-0 file:bg-[#309689] file:text-white hover:file:bg-[#257166] focus:outline-none focus:ring-2 focus:ring-[#309689]"
+              className="w-full p-2 rounded-xl bg-white/20 text-black/50 file:mr-4 file:py-2 file:px-4 file:border-0 file:bg-[#309689] file:text-white hover:file:bg-[#257166] focus:outline-none focus:ring-2 focus:ring-[#309689]"
             />
             <p className="text-red-400 text-sm mt-1">{errors.image?.message}</p>
           </div>
 
+          {/* Submit Button */}
           <div className="md:col-span-2">
             <button
               type="submit"
-            className="w-full py-3 rounded-xl bg-[#309689] hover:bg-[#257166] transition text-white font-semibold shadow-md"
+              className="w-full py-3 rounded-xl bg-[#309689] hover:bg-[#257166] transition text-white font-semibold shadow-md"
             >
               Register
             </button>
           </div>
 
+          {/* Footer */}
           <div className="md:col-span-2 text-center">
             <p className="text-white text-sm">
               Already have an account?{" "}
@@ -202,4 +205,3 @@ const Register = () => {
 };
 
 export default Register;
-

@@ -42,7 +42,7 @@ const LoginPage = () => {
 
       //authcontext
       login(
-        { _id: user._id, role: user.role, name: user.name },
+        { _id: user._id, role: user.role, name: user.name, image: user.image },
         token
       )
 

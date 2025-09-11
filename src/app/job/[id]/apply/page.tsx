@@ -18,11 +18,19 @@ const schema = yup.object().shape({
   phone: yup.string().required("Please enter your number"),
   resume: yup
     .mixed()
-    .required("Please upload your resume")
-    .test("fileSize", "File too large", (value: any) => {
-      return value && value[0] && value[0].size <= 2 * 1024 * 1024;
+    .test("required", "Please upload your resume", (value) => {
+      const fileList = value as FileList | undefined;
+      return fileList && fileList.length > 0;
+    })
+    .test("fileSize", "File too large", (value) => {
+      const fileList = value as FileList | undefined;
+      if (!fileList || fileList.length === 0) return true; 
+      return fileList[0].size <= 2 * 1024 * 1024; // 2MB
     }),
 });
+
+
+
 
 type FormData = {
   name: string;
@@ -56,10 +64,8 @@ const AddApplication = () => {
     const userId = parsed?._id || parsed?.id;
     if (!userId) return;
 
-    // Fetch user by ID from Redux / API
     dispatch(viewUserById(userId)).then((res: any) => {
       const userData = res?.payload;
-      console.log("Fetched userData:", userData); // debug
       if (userData && Object.keys(userData).length > 0) {
         reset({
           name: userData.name || "",
@@ -91,14 +97,14 @@ const AddApplication = () => {
 
       toast.success(res.data.message || "Application submitted!");
       reset({
-        name: data.name, // keep prefilled for convenience
+        name: data.name, 
         email: data.email,
         phone: data.phone,
         prevPosition: "",
         prevCompany: "",
         resume: undefined as any,
       });
-      router.push("/");
+      router.push("/applications");
     } catch (err: any) {
       toast.error(err.response?.data?.message || "Failed to apply");
     } finally {
@@ -114,7 +120,6 @@ const AddApplication = () => {
         </h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          {/* Name */}
           <div>
             <input
               type="text"
@@ -127,7 +132,6 @@ const AddApplication = () => {
             )}
           </div>
 
-          {/* Email */}
           <div>
             <input
               type="email"
@@ -140,7 +144,6 @@ const AddApplication = () => {
             )}
           </div>
 
-          {/* Phone */}
           <div>
             <input
               type="text"
@@ -153,7 +156,6 @@ const AddApplication = () => {
             )}
           </div>
 
-          {/* Previous Position */}
           <div>
             <input
               type="text"
@@ -163,7 +165,6 @@ const AddApplication = () => {
             />
           </div>
 
-          {/* Previous Company */}
           <div>
             <input
               type="text"
@@ -173,7 +174,6 @@ const AddApplication = () => {
             />
           </div>
 
-          {/* Resume */}
           <div>
             <label className="block text-gray-200 text-sm font-medium mb-1">
               Upload Resume (PDF)
@@ -189,7 +189,6 @@ const AddApplication = () => {
             )}
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
             disabled={loading}

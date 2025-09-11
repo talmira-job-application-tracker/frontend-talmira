@@ -59,15 +59,23 @@ const ViewJob = () => {
     dispatch(viewJob(id)).unwrap();
   }, [id, dispatch]);
 
-  if (!job) {
+  if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <p className="text-red-500 text-lg">
-          Failed to load job. Please try again.
-        </p>
+      <div className="min-h-screen flex flex-col items-center justify-center px-4">
+        <div className="w-16 h-16 border-4 border-teal-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p className="text-white text-lg">Loading job details...</p>
       </div>
     );
   }
+
+  if (!job) {
+    return (
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <p className="text-red-500 text-lg">Failed to load job. Please try again.</p>
+      </div>
+    );
+  }
+
 
   const handleOpenDialog = () => setOpenDialog(true);
   const handleCloseDialog = () => setOpenDialog(false);
@@ -144,9 +152,6 @@ const ViewJob = () => {
           </p>
         </div>
 
-
-
-        {/* Buttons */}
         <div className="mt-10 flex flex-wrap gap-4">
           {isAdmin ? (
             <>
@@ -190,18 +195,15 @@ const ViewJob = () => {
         </div>
       </div>
 
-      {/* Delete Dialog */}
       {openDialog && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="bg-white/10 border border-white/20 backdrop-blur-xl rounded-3xl p-6 max-w-sm w-full shadow-xl">
-            {/* Title */}
             <h2 className="text-xl font-semibold text-white mb-2">Delete Job</h2>
             <p className="text-gray-300 text-sm mb-6">
               Are you sure you want to delete this job? This action cannot be
               undone.
             </p>
 
-            {/* Actions */}
             <div className="flex justify-end gap-3">
               <button
                 onClick={handleCloseDialog}

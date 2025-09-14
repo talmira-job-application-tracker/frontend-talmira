@@ -45,12 +45,14 @@ const JobSearch = () => {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setResults([]);
+        setResults([]);   
+        setQuery("");     
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
 
   return (
   <div className="relative w-full max-w-2xl mx-auto mt-6" ref={dropdownRef}>

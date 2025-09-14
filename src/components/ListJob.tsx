@@ -104,11 +104,15 @@ export default function ListJob() {
 
       {/* Desktop pagination */}
       {!isMobile && (
-        <Pagination
-          page={currentPage}
-          totalPages={totalPages}
-          onPageChange={(page) => dispatch(listJobs({ page, limit: 10, append: false }))}
-        />
+        <div className="flex justify-center mt-8">
+          <Pagination
+            page={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) =>
+              dispatch(listJobs({ page, limit: 10, append: false }))
+            }
+          />
+        </div>
       )}
     </div>
   );

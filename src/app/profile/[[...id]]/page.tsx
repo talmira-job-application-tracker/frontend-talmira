@@ -11,6 +11,7 @@ import Image from "next/image";
 import { Mail, Phone, User, Award, TriangleAlert } from "lucide-react";
 import api from "@/api";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/context/AuthContext";
 
 const ViewProfile = () => {
   const router = useRouter();
@@ -22,6 +23,7 @@ const ViewProfile = () => {
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const { logout } = useAuth();
 
   useEffect(() => {
     const token = Cookies.get("token");
@@ -40,13 +42,13 @@ const ViewProfile = () => {
     setDeleting(true);
     api.delete("/user/delete")
       .then(() => {
-        Cookies.remove("token");
-        Cookies.remove("user");
-        router.push("/");
+        logout(); 
       })
       .catch((err) => console.error("Error deleting account:", err))
       .finally(() => setDeleting(false));
   };
+
+
 
   if (loading) return <div className="text-center py-10 text-gray-500">Loading profile...</div>;
   if (error) return <div className="text-center py-10 text-red-500">{error}</div>;

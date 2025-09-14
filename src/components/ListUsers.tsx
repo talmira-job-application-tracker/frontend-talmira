@@ -19,7 +19,6 @@ const ListUsers = () => {
 
   return (
     <div className="min-h-screen px-8 py-6 bg-gradient-to-r from-white/30 to-white/10 backdrop-blur-md ">
-      {/* <h1 className="text-2xl font-bold text-[#309689] mb-6">Users List</h1> */}
 
       {loading && <p className="text-gray-600">Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
@@ -30,7 +29,6 @@ const ListUsers = () => {
             <thead className="bg-[#309689] text-white">
               <tr>
                 <th className="px-4 py-2 text-left">Name</th>
-                <th className="px-4 py-2 text-left">Role</th>
                 <th className="px-4 py-2 text-left">Email</th>
                 <th className="px-4 py-2 text-left">Status</th>
                 <th className="px-4 py-2 text-left">Actions</th>
@@ -63,9 +61,8 @@ const ListUsers = () => {
                         </>
                       </div>
                     </td>
-                    <td className="px-4 py-2">{u.role}</td>
                     <td className="px-4 py-2">{u.email}</td>
-                    <td className={`px-4 py-2 font-semibold ${u.isDeleted ? "text-red-600" : "text-green-600"}`}>
+                    <td className={`px-4 py-2 font-semibold ${u.isDeleted ? "text-red-600" : "text-teal-600"}`}>
                       {u.isDeleted ? "Inactive" : "Active"}
                     </td>
                     <td className="px-4 py-2">

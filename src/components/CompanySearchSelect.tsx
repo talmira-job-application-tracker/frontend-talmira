@@ -25,7 +25,6 @@ const CompanySearchSelect = ({ onCompanySelect, selectedCompany }: CompanySearch
     setLoading(true);
     setError("");
 
-    // Using your existing API - make sure to adjust the endpoint if needed
     fetch(`/api/company/list?query=${encodeURIComponent(searchQuery)}`)
       .then((res) => res.json())
       .then((data) => setResults(data.data || []))

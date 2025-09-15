@@ -104,7 +104,7 @@ const AddApplication = () => {
         prevCompany: "",
         resume: undefined as any,
       });
-      router.push("/applications");
+      router.push("/application");
     } catch (err: any) {
       toast.error(err.response?.data?.message || "Failed to apply");
     } finally {

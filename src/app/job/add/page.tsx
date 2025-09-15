@@ -241,7 +241,7 @@ const AddJob = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center ">
       <div className="w-full max-w-2xl p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl">
         <h2 className="text-3xl font-bold text-center text-black mb-8">
           Add Job

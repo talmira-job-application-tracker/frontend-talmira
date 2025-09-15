@@ -78,7 +78,7 @@ const AddCompany = () => {
   };
 
   return (
-    <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-br from-black via-teal-900 to-black px-4 overflow-hidden">
+    <div className="relative flex justify-center items-center min-h-screen bg-gradient-to-br from-black via-teal-900 to-black p-20 overflow-hidden">
       {/* Decorative blurred shapes */}
       <div className="absolute -top-24 -left-24 w-72 h-72 bg-teal-500/30 rounded-full mix-blend-screen filter blur-3xl animate-pulse" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-white/10 rounded-full mix-blend-overlay filter blur-2xl animate-[pulse_6s_ease-in-out_infinite]" />

@@ -48,7 +48,7 @@ const ViewJob = () => {
   const isAdmin = user?.role === "admin";
 
   const dispatch = useDispatch<AppDispatch>();
-  const { job, loading, error } = useSelector((state: RootState) => state.job);
+  const { job, loading, error, hasFetched  } = useSelector((state: RootState) => state.job);
   console.log(error,'error')
 
   const [openDialog, setOpenDialog] = useState(false);
@@ -59,22 +59,30 @@ const ViewJob = () => {
     dispatch(viewJob(id)).unwrap();
   }, [id, dispatch]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center px-4">
-        <div className="w-16 h-16 border-4 border-teal-400 border-t-transparent rounded-full animate-spin mb-4"></div>
-        <p className="text-white text-lg">Loading job details...</p>
-      </div>
-    );
-  }
+  if (loading ) {
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-4">
+      <div className="w-16 h-16 border-4 border-teal-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+      <p className="text-white text-lg">Loading job details...</p>
+    </div>
+  );
+}
 
-  if (!job) {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <p className="text-red-500 text-lg">Failed to load job. Please try again.</p>
-      </div>
-    );
-  }
+if (error) {
+  return (
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <p className="text-red-500 text-lg">Failed to load job. Please try again.</p>
+    </div>
+  );
+}
+
+if (!job) {
+  return (
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <p className="text-red-400 text-lg">Job not found.</p>
+    </div>
+  );
+}
 
 
   const handleOpenDialog = () => setOpenDialog(true);
@@ -98,13 +106,7 @@ const ViewJob = () => {
       });
   };
 
-  if (!job) {
-    return (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <p className="text-red-400 text-lg">Job not found.</p>
-      </div>
-    );
-  }
+ 
 
   return (
     <div className="min-h-screen py-30 px-4">

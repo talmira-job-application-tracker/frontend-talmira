@@ -13,6 +13,7 @@ interface jobState {
   currentPage: number,
   totalPages: number,
   totalJobs: number,
+  hasFetched: boolean;
 }
 
 const initialState:jobState = {
@@ -24,6 +25,7 @@ const initialState:jobState = {
   currentPage: 1,
   totalPages: 1,
   totalJobs: 0,
+  hasFetched: false,
 }
 
 //thunks
@@ -112,15 +114,19 @@ const jobSlice = createSlice({
         //View Job
         .addCase(viewJob.pending, state => {
           state.loading = true;
+          state.error = null;
+          state.hasFetched = false;  
         })
         .addCase(viewJob.fulfilled, (state, action) => {
           state.loading = false;
-          state.job = action.payload;  
+          state.job = action.payload; 
+          state.hasFetched = true; 
         })
 
         .addCase(viewJob.rejected, (state, action) => {
           state.loading = false;
           state.error = action.error.message || 'Failed to load job';
+          state.hasFetched = true;
         })
 
         //edit job

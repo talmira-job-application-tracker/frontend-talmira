@@ -19,16 +19,17 @@ const ListCompanies = () => {
   return (
     <div className="min-h-screen px-4 sm:px-6 py-8 sm:py-12">
       <div className="max-w-4xl mx-auto flex flex-col gap-4">
-        {companies.map((company) => {
-          const logoPath = company.logo?.replace(/\\/g, "/");
-          const logoUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}${
-            logoPath.startsWith("/") ? "" : "/"
-          }${logoPath}`;
+          {companies.map((company) => {
+          const logoPath = company.logo ? company.logo.replace(/\\/g, "/") : null;
+
+          const logoUrl = logoPath
+            ? `${process.env.NEXT_PUBLIC_BACKEND_URL}${logoPath.startsWith("/") ? "" : "/"}${logoPath}`
+            : "/default-logo.png"; 
 
           return (
             <div
               key={company._id}
-              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-gradient-to-r from-white/30 to-white/10 backdrop-blur-md  border border-white/20 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 p-4"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-gradient-to-r from-white/30 to-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 p-4"
             >
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 relative rounded-xl overflow-hidden border border-black/30 flex-shrink-0">

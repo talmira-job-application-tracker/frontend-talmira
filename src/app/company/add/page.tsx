@@ -42,6 +42,30 @@ const AddCompany = () => {
   const logoWatch = watch("logo");
   const dispatch = useDispatch<AppDispatch>();
   const { loading } = useSelector((state: RootState) => state.company);
+  const industryOptions = [
+  "Software Development",
+  "Artificial Intelligence / Machine Learning",
+  "Cybersecurity",
+  "Cloud Computing",
+  "Data Science / Analytics",
+  "Marketing & Advertising",
+  "Human Resources",
+  "Finance & Accounting",
+  "Sales",
+  "Graphic Design",
+  "Content Creation",
+  "Animation",
+  "UX/UI Design",
+  "Mechanical Engineering",
+  "Civil Engineering",
+  "Electronics & Hardware",
+  "Pharmaceuticals",
+  "Hospitals & Healthcare Services",
+  "Research & Development",
+  "Educational Institutes",
+  "Other"
+];
+
 
   useEffect(() => {
     const file = logoWatch?.[0];
@@ -105,21 +129,27 @@ const AddCompany = () => {
             />
             <p className="text-red-400 text-xs mt-1">{errors.name?.message}</p>
           </div>
-
-          {/* Industry */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2">
               Industry
             </label>
-            <input
-              type="text"
+            <select
               {...register("industry")}
-              placeholder="Industry type"
-              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-teal-400 focus:outline-none transition-all hover:bg-white/20"
-            />
+              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white 
+                        placeholder-gray-300 focus:ring-2 focus:ring-teal-400 focus:outline-none transition-all hover:bg-white/20"
+              defaultValue=""
+            >
+              <option value="" disabled className="bg-gray-900 text-white">
+                Select Industry
+              </option>
+              {industryOptions.map((ind, idx) => (
+                <option key={idx} value={ind} className=" text-black">
+                  {ind}
+                </option>
+              ))}
+            </select>
             <p className="text-red-400 text-xs mt-1">{errors.industry?.message}</p>
           </div>
-
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2">
               Location
@@ -133,7 +163,6 @@ const AddCompany = () => {
             <p className="text-red-400 text-xs mt-1">{errors.location?.message}</p>
           </div>
 
-          {/* Website */}
           <div className="flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2">
               Website
@@ -147,7 +176,6 @@ const AddCompany = () => {
             <p className="text-red-400 text-xs mt-1">{errors.website?.message}</p>
           </div>
 
-          {/* Description */}
           <div className="col-span-1 md:col-span-2 flex flex-col">
             <label className="text-sm font-semibold text-teal-200 mb-2">
               Description
@@ -162,8 +190,6 @@ const AddCompany = () => {
               {errors.description?.message}
             </p>
           </div>
-
-          {/* Logo Upload */}
           <div className="col-span-1 md:col-span-2">
             <label className="text-sm font-semibold text-teal-200 mb-3 block">
               Company Logo
@@ -205,8 +231,8 @@ const AddCompany = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    setPreview(null); // clear preview
-                    reset({ ...watch(), logo: undefined, }); // clear file input
+                    setPreview(null); 
+                    reset({ ...watch(), logo: undefined, }); 
                   }}
                   className="mt-2 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
                 >
@@ -217,7 +243,6 @@ const AddCompany = () => {
             <p className="text-red-400 text-xs mt-1">{errors.logo?.message}</p>
           </div>
 
-          {/* Buttons */}
           <div className="col-span-1 md:col-span-2 flex gap-4 mt-4">
             <button
               type="button"

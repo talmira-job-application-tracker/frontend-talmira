@@ -61,7 +61,7 @@ const AddJob = () => {
     const jobData = { ...data, company: companyId as string };
     const result = await dispatch(addJob(jobData));
     if (addJob.fulfilled.match(result)) {
-      router.push("/job");
+      router.push("/admin/dashboard?tab=jobs");
     }
   };
 

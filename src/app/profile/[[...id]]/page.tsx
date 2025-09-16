@@ -12,6 +12,8 @@ import { Mail, Phone, User, Award, TriangleAlert } from "lucide-react";
 import api from "@/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
+import { Star } from "lucide-react";
+
 
 const ViewProfile = () => {
   const router = useRouter();
@@ -80,38 +82,37 @@ const ViewProfile = () => {
                 <p className="text-sm text-gray-900">{user.email}</p>
               </div>
             </div>
+        
+            <div className="flex items-center gap-3 bg-white/50 p-4 rounded-xl shadow-sm">
+              <Phone className="w-5 h-5 text-teal-600" />
+              <div>
+                <p className="text-xs text-gray-500">Phone</p>
+                <p className="text-sm text-gray-900">{user.phone}</p>
+              </div>
+            </div>
 
-            {user.role !== "admin" && (
-              <>
-                <div className="flex items-center gap-3 bg-white/50 p-4 rounded-xl shadow-sm">
-                  <User className="w-5 h-5 text-teal-600" />
-                  <div>
-                    <p className="text-xs text-gray-500">Age</p>
-                    <p className="text-sm text-gray-900">{user.age}</p>
-                  </div>
-                </div>
+             <div className="flex items-center gap-3 bg-white/50 p-4 rounded-xl shadow-sm">
+                <Award className="w-5 h-5 text-teal-600" />
+                <div className="w-full">
+                  <p className="text-xs text-gray-500">Interests</p>
+                  <p className="text-sm text-gray-900">
+                    {Array.isArray(user.interests) ? user.interests.join(", ") : user.interests || "N/A"}
+                  </p>
+              </div>
+            </div>
 
-                <div className="flex items-center gap-3 bg-white/50 p-4 rounded-xl shadow-sm">
-                  <Phone className="w-5 h-5 text-teal-600" />
-                  <div>
-                    <p className="text-xs text-gray-500">Phone</p>
-                    <p className="text-sm text-gray-900">{user.phone}</p>
-                  </div>
-                </div>
+            <div className="flex items-center gap-3 bg-white/50 p-4 rounded-xl shadow-sm">
+              <Award className="w-5 h-5 text-teal-600" />
+              <div>
+                <p className="text-xs text-gray-500">Skills</p>
+                <p className="text-sm text-gray-900">
+                  {Array.isArray(user.skills) ? user.skills.join(", ") : user.skills}
+                </p>
+              </div>
+            </div>
 
-                <div className="flex items-center gap-3 bg-white/50 p-4 rounded-xl shadow-sm">
-                  <Award className="w-5 h-5 text-teal-600" />
-                  <div>
-                    <p className="text-xs text-gray-500">Skills</p>
-                    <p className="text-sm text-gray-900">
-                      {Array.isArray(user.skills) ? user.skills.join(", ") : user.skills}
-                    </p>
-                  </div>
-                </div>
-              </>
-            )}
+           
           </div>
-
           <div className="mt-6 flex flex-wrap justify-center gap-4">
             {loggedInUser?.role !== "admin" && (
               <>

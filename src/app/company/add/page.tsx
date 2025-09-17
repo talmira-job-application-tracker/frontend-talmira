@@ -43,28 +43,18 @@ const AddCompany = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { loading } = useSelector((state: RootState) => state.company);
   const industryOptions = [
-  "Software Development",
-  "Artificial Intelligence / Machine Learning",
-  "Cybersecurity",
-  "Cloud Computing",
-  "Data Science / Analytics",
-  "Marketing & Advertising",
-  "Human Resources",
-  "Finance & Accounting",
-  "Sales",
-  "Graphic Design",
-  "Content Creation",
-  "Animation",
-  "UX/UI Design",
-  "Mechanical Engineering",
-  "Civil Engineering",
-  "Electronics & Hardware",
-  "Pharmaceuticals",
-  "Hospitals & Healthcare Services",
-  "Research & Development",
-  "Educational Institutes",
-  "Other"
-];
+        "Technology & IT",
+        "Business & Professional",
+        "Creative & Media",
+        "Industrial & Manufacturing",
+        "Marketing & Advertising",
+        "Agriculture & Environment",
+        "Healthcare & Life Sciences",
+        "Electronics & Hardware",
+        "Research & Development",
+        "Educational Institutes",
+        "Food & Beverages",
+  ];
 
 
   useEffect(() => {

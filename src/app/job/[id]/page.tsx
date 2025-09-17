@@ -154,6 +154,43 @@ if (!job) {
           </p>
         </div>
 
+        {/* buttons for social share integration */}
+
+        {/* <div className="mt-8">
+        <h3 className="text-xs uppercase tracking-wide text-gray-400 mb-3">
+          Share this Job
+        </h3>
+        <div className="sharethis-inline-share-buttons"></div>
+      </div> */}
+      {/* <div className="mt-6 flex gap-3">
+        <a
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800"
+        >
+          <LinkedIn className="w-5 h-5" /> 
+        </a>
+
+        <a
+          href={`https://wa.me/?text=${encodeURIComponent(window.location.href)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+        >
+          <WhatsApp className="w-5 h-5" /> 
+        </a>
+
+        <a
+          href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent('Check out this job!')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-4 py-2 bg-blue-400 text-white rounded-lg hover:bg-blue-500"
+        >
+          <Twitter className="w-5 h-5" /> 
+        </a>
+      </div> */}
+
         <div className="mt-10 flex flex-wrap gap-4">
           {isAdmin ? (
             <>
@@ -195,6 +232,7 @@ if (!job) {
             </Button>
           )}
         </div>
+        
       </div>
 
       {openDialog && (

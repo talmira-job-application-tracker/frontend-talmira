@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast"
 import Header from "@/components/Header"
 import { AuthProvider } from "@/context/AuthContext"
 import Footer from "@/components/Footer"
+import Script from "next/script"
 
 const figtree = Figtree({ subsets: ["latin"] })
 
@@ -36,6 +37,13 @@ export default function RootLayout({
           <Footer />
         </AuthProvider>
       </ReduxProvider>
+
+      <Script
+        src="https://platform-api.sharethis.com/js/sharethis.js#property=68c8edfe8a53d7666a669edb&product=sop"
+        strategy="afterInteractive"
+        async
+      />
+
     </body>
   </html>
   )

@@ -70,7 +70,7 @@ const ListSubscribers: React.FC<SubscriptionProps> = ({ companyId }) => {
           ))}
         </div>
       ) : (
-        <p className="text-gray-500">No Subscribers found</p>
+        <p className="text-white text-center">No Subscribers yet!</p>
       )}
     </div>
   );

@@ -171,19 +171,23 @@ const Header = () => {
           </div>
         ) : (
           <>
-            <span onClick={() => router.push("/login")} className="text-white hover:text-[#309689] cursor-pointer transition">
-              Login
-            </span>
-            <span onClick={() => router.push("/register")} className="text-white hover:text-[#309689] cursor-pointer transition">
-              Register
-            </span>
-            <span onClick={() => router.push("/about-us")} className="text-white hover:text-[#309689] cursor-pointer transition">
-              About Us
-            </span>
-            <span onClick={() => router.push("/contact-us")} className="text-white hover:text-[#309689] cursor-pointer transition">
-              Contact Us
-            </span>
-          </>
+  <div className="flex gap-4 items-center">
+    <button
+      onClick={() => router.push("/login")}
+      className="px-3 py-1 text-white font-semibold rounded-lg bg-[#309689] hover:bg-[#4fd1c5] transition-colors duration-300"
+    >
+      Login
+    </button>
+
+    <button
+      onClick={() => router.push("/register")}
+      className="px-3 py-1 text-[#309689] font-semibold rounded-lg bg-white hover:bg-[#e0f7f5] transition-colors duration-300"
+    >
+      Register
+    </button>
+  </div>
+</>
+
         )}
       </nav>
 

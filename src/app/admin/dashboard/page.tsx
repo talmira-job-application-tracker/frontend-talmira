@@ -46,6 +46,7 @@ import ListJob from "@/components/ListJob";
 import ListUsers from "@/components/ListUsers";
 import CompanySearch from "@/components/CompanySearch";
 import JobSearch from "@/components/JobSearchBar";
+import ListInterviews from "@/components/ListInterviews";
 
 const COLORS = ["#309689", "#00796B", "#80CBC4", "#B2DFDB"];
 
@@ -73,9 +74,11 @@ const sidebarTabs = [
   { key: "companies", label: "Companies", icon: <BusinessIcon /> },
   { key: "jobs", label: "Jobs", icon: <WorkIcon /> },
   { key: "users", label: "Users", icon: <PeopleIcon /> },
+  { key: "interviews", label: "Interviews", icon: <AssignmentIcon /> }, 
 ];
 
 const mobileTabs = sidebarTabs.map(tab => ({ key: tab.key, label: tab.label }));
+
 
 const AdminDashboard = () => {
   const router = useRouter();
@@ -203,7 +206,10 @@ const AdminDashboard = () => {
       </Box>
     );
     if (selected === "users") return <ListUsers />;
+    if (selected === "interviews") return <ListInterviews />;
   };
+
+
 
   if (!mounted) return null;
 

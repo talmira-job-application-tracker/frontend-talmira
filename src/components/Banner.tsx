@@ -60,7 +60,7 @@ const AutoSlider = () => {
   }, [])
 
   return (
-    <div className="relative w-full h-[300px] md:h-[450px] overflow-hidden shadow-lg">
+    <div className="relative w-full min-h-[400px] md:min-h-[600px] overflow-hidden shadow-lg">
       {banners.map((banner, index) => (
         <div
           key={banner.id}

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useParams, useRouter } from "next/navigation";
@@ -24,7 +24,6 @@ const schema = yup.object({
   location: yup.string().required("Location is required"),
   description: yup.string().notRequired(),
   website: yup.string().url("Enter a valid URL").required("Website link is required"),
-  logo: yup.mixed().notRequired(),
 });
 
 const EditCompany = () => {
@@ -33,58 +32,59 @@ const EditCompany = () => {
   const router = useRouter();
   const [preview, setPreview] = useState<string | null>(null);
   const [removeLogo, setRemoveLogo] = useState(false);
+  const [logoFile, setLogoFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useDispatch<AppDispatch>();
   const { loading } = useSelector((state: RootState) => state.company);
 
   const industryOptions = [
-        "Technology & IT",
-        "Business & Professional",
-        "Creative & Media",
-        "Industrial & Manufacturing",
-        "Marketing & Advertising",
-        "Agriculture & Environment",
-        "Healthcare & Life Sciences",
-        "Electronics & Hardware",
-        "Research & Development",
-        "Educational Institutes",
-        "Food & Beverages",
+    "Technology & IT",
+    "Business & Professional",
+    "Creative & Media",
+    "Industrial & Manufacturing",
+    "Marketing & Advertising",
+    "Agriculture & Environment",
+    "Healthcare & Life Sciences",
+    "Electronics & Hardware",
+    "Research & Development",
+    "Educational Institutes",
+    "Food & Beverages",
   ];
 
   const {
-  register,
-  handleSubmit,
-  reset,
-  formState: { errors },
-} = useForm({
-  resolver: yupResolver(schema),
-  defaultValues: {
-    name: "",
-    industry: "",   // 👈 placeholder if no value
-    location: "",
-    description: "",
-    website: "",
-  },
-});
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: "",
+      industry: "",
+      location: "",
+      description: "",
+      website: "",
+    },
+  });
 
-useEffect(() => {
-  if (companyId) {
-    dispatch(getCompany(companyId)).then((res) => {
-      if (res.payload) {
-        const { name, industry, location, description, website, logo } = res.payload;
-        reset({ name, industry: industry || "", location, description, website });
+  useEffect(() => {
+    if (companyId) {
+      dispatch(getCompany(companyId)).then((res) => {
+        if (res.payload) {
+          const { name, industry, location, description, website, logo } = res.payload;
+          reset({ name, industry: industry || "", location, description, website });
 
-        if (logo) {
-          const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "");
-          setPreview(`${baseURL}/${logo.replace(/^\/+/, "")}`);
+          if (logo) {
+            const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "");
+            setPreview(`${baseURL}/${logo.replace(/^\/+/, "")}`);
+          }
         }
-      }
-    });
-  }
-}, [companyId, dispatch, reset]);
+      });
+    }
+  }, [companyId, dispatch, reset]);
 
-
+  // Form submit
   const onSubmit = async (data: any) => {
     const formData = new FormData();
     formData.append("name", data.name);
@@ -93,11 +93,12 @@ useEffect(() => {
     formData.append("location", data.location);
     formData.append("website", data.website);
 
-    // Append logo only if user selected one
-    if (data.logo && data.logo.length > 0) {
-      formData.append("logo", data.logo[0]);
+    // Append logo if selected
+    if (logoFile) {
+      formData.append("logo", logoFile);
     }
 
+    // Remove logo if needed
     if (removeLogo) {
       formData.append("removeLogo", "true");
     }
@@ -117,7 +118,6 @@ useEffect(() => {
       <h1 className="text-3xl font-bold text-gray-800 mb-10">Edit Company Details</h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-12">
-        {/* Basic Information */}
         <section>
           <h3 className="text-lg font-semibold text-[#309689] mb-4">
             Basic Information
@@ -136,24 +136,21 @@ useEffect(() => {
               <p className="text-red-500 text-sm mt-1">{errors.name?.message}</p>
             </div>
 
-           <div className="flex flex-col">
-  <label className="block text-sm text-gray-600 mb-2">Industry</label>
-  <select
-    {...register("industry")}
-    className="w-full px-4 py-3 rounded-xl border border-gray-300 text-gray-800 
-              focus:ring-2 focus:ring-teal-400 focus:outline-none transition-all"
-  >
-    {industryOptions.map((ind, idx) => (
-      <option key={idx} value={ind}>
-        {ind}
-      </option>
-    ))}
-  </select>
-  <p className="text-red-500 text-sm mt-1">{errors.industry?.message}</p>
-</div>
-
-
-
+            <div className="flex flex-col">
+              <label className="block text-sm text-gray-600 mb-2">Industry</label>
+              <select
+                {...register("industry")}
+                className="w-full px-4 py-3 rounded-xl border border-gray-300 text-gray-800 
+                          focus:ring-2 focus:ring-teal-400 focus:outline-none transition-all"
+              >
+                {industryOptions.map((ind, idx) => (
+                  <option key={idx} value={ind}>
+                    {ind}
+                  </option>
+                ))}
+              </select>
+              <p className="text-red-500 text-sm mt-1">{errors.industry?.message}</p>
+            </div>
           </div>
 
           <div className="mt-6">
@@ -169,7 +166,6 @@ useEffect(() => {
           </div>
         </section>
 
-        {/* Location & Contact */}
         <section>
           <h3 className="text-lg font-semibold text-[#309689] mb-4">
             Location & Contact
@@ -184,9 +180,7 @@ useEffect(() => {
                   className="w-full focus:outline-none"
                 />
               </div>
-              <p className="text-red-500 text-sm mt-1">
-                {errors.location?.message}
-              </p>
+              <p className="text-red-500 text-sm mt-1">{errors.location?.message}</p>
             </div>
 
             <div>
@@ -198,9 +192,7 @@ useEffect(() => {
                   className="w-full focus:outline-none"
                 />
               </div>
-              <p className="text-red-500 text-sm mt-1">
-                {errors.website?.message}
-              </p>
+              <p className="text-red-500 text-sm mt-1">{errors.website?.message}</p>
             </div>
           </div>
         </section>
@@ -215,12 +207,14 @@ useEffect(() => {
               <input
                 type="file"
                 accept="image/*"
-                {...register("logo")}
                 ref={fileInputRef}
                 onChange={(e) => {
                   const file = e.target.files?.[0];
-                  if (file) setPreview(URL.createObjectURL(file));
-                  setRemoveLogo(false);
+                  if (file) {
+                    setLogoFile(file);
+                    setPreview(URL.createObjectURL(file));
+                    setRemoveLogo(false);
+                  }
                 }}
                 className="focus:outline-none"
               />
@@ -230,6 +224,7 @@ useEffect(() => {
                   onClick={() => {
                     setPreview(null);
                     setRemoveLogo(true);
+                    setLogoFile(null);
                     if (fileInputRef.current) {
                       fileInputRef.current.value = "";
                     }

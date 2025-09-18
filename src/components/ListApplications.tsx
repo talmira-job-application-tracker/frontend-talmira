@@ -94,7 +94,7 @@ const ListApplications = () => {
   }
 
   return (
-    <div className="py-18 max-w-5xl mx-auto px-4">
+    <div className="py-16 max-w-5xl mx-auto px-4">
       <div className="space-y-4">
         {applications.map((app) => (
           <div

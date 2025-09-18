@@ -622,7 +622,7 @@ const AddJob = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen  mt-18 mb-3 flex items-center justify-center">
       <div className="w-full max-w-2xl p-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl">
         <h2 className="text-3xl font-bold text-center text-black mb-8">Add Job</h2>
 
@@ -675,8 +675,7 @@ const AddJob = () => {
                     onPlaceSelected={(place) => field.onChange(place.formatted_address || "")}
                     types={["(cities)"]}
                     placeholder="Job location"
-                    className="w-full pl-4 pr-4 py-2 rounded-lg shadow-md bg-white/80 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#309689] focus:border-[#309689] transition duration-300 text-sm sm:text-base"
-                  />
+                    className="w-full p-3 bg-white/20 text-[#07332f] placeholder-[#07332f]/70 border border-white/30 focus:ring-2 focus:ring-[#309689] outline-none rounded-lg transition"                  />
                 )}
               />
               {errors.location && <p className="text-red-400 mt-1">{errors.location.message}</p>}

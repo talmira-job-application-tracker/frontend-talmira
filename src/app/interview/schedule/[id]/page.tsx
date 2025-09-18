@@ -9,14 +9,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-
 const schema = yup.object().shape({
   date: yup.string().required("Date is required"),
   time: yup.string().required("Time is required"),
-  mode: yup.string().oneOf(["online", "offline"]).required("Mode is required"),
+  mode: yup.string().oneOf(["Online", "In-person", "Phone"]).required("Mode is required"),
   location: yup.string().when("mode", {
-    is: "offline",
-    then: (schema) => schema.required("Location is required for offline interviews"),
+    is: (val: string) => val === "In-person",
+    then: (schema) => schema.required("Location is required for in-person interviews"),
     otherwise: (schema) => schema.notRequired(),
   }),
   notes: yup.string().max(500, "Notes cannot exceed 500 characters"),
@@ -95,6 +94,7 @@ const ScheduleInterviewPage = () => {
           </p>
         </div>
 
+        {/* Date */}
         <label className="block text-sm font-medium text-gray-700 mb-2">Date</label>
         <div className="relative mb-2">
           <Calendar className="absolute left-3 top-3 text-gray-400" size={18} />
@@ -106,6 +106,7 @@ const ScheduleInterviewPage = () => {
         </div>
         {errors.date && <p className="text-red-500 text-sm mb-3">{errors.date.message}</p>}
 
+        {/* Time */}
         <label className="block text-sm font-medium text-gray-700 mb-2">Time</label>
         <div className="relative mb-2">
           <NotebookPen className="absolute left-3 top-3 text-gray-400" size={18} />
@@ -117,6 +118,7 @@ const ScheduleInterviewPage = () => {
         </div>
         {errors.time && <p className="text-red-500 text-sm mb-3">{errors.time.message}</p>}
 
+        {/* Mode */}
         <label className="block text-sm font-medium text-gray-700 mb-2">Mode</label>
         <div className="relative mb-2">
           <Monitor className="absolute left-3 top-3 text-gray-400" size={18} />
@@ -124,12 +126,14 @@ const ScheduleInterviewPage = () => {
             {...register("mode")}
             className="w-full pl-10 pr-4 py-2 rounded-lg bg-gray-50 border border-gray-300 text-gray-800 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
           >
-            <option value="online">Online</option>
-            <option value="offline">Offline</option>
+            <option value="Online">Online</option>
+            <option value="In-person">In-person</option>
+            <option value="Phone">Phone</option>
           </select>
         </div>
         {errors.mode && <p className="text-red-500 text-sm mb-3">{errors.mode.message}</p>}
 
+        {/* Location */}
         <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
         <div className="relative mb-2">
           <MapPin className="absolute left-3 top-3 text-gray-400" size={18} />
@@ -142,6 +146,7 @@ const ScheduleInterviewPage = () => {
         </div>
         {errors.location && <p className="text-red-500 text-sm mb-3">{errors.location.message}</p>}
 
+        {/* Notes */}
         <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
         <textarea
           {...register("notes")}
@@ -151,6 +156,7 @@ const ScheduleInterviewPage = () => {
         />
         {errors.notes && <p className="text-red-500 text-sm mb-3">{errors.notes.message}</p>}
 
+        {/* Submit */}
         <button
           type="submit"
           disabled={loading}

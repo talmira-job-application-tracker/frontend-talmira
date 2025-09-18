@@ -1,6 +1,3 @@
-
-
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -11,14 +8,8 @@ import { ApplicationType } from "@/types/applicationType";
 import toast from "react-hot-toast";
 import {
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
 } from "@mui/material";
 import { Briefcase, Building2, Calendar, FileText, Mail, Phone, User } from "lucide-react";
-import Header from "@/components/Header";
 
 const ViewApplication = () => {
   const { id } = useParams();

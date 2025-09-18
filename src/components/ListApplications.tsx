@@ -162,4 +162,3 @@ const ListApplications = () => {
 };
 
 export default ListApplications;
-

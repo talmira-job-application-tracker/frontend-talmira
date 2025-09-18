@@ -11,7 +11,7 @@ import { Search, FileText, Bell } from "lucide-react";
 import Image from "next/image";
 
 interface FeatureCardProps {
-  icon: React.ReactNode; // type for JSX elements or icons
+  icon: React.ReactNode; 
   title: string;
   desc: string;
   delay?: number;
@@ -92,7 +92,6 @@ export const Home = () => {
             </div>
           </section>
 
-          {/* About  */}
           <motion.section
             initial="hidden"
             animate="visible"
@@ -121,7 +120,7 @@ export const Home = () => {
             </div>
           </section>
 
-          <section className="px-6 py-24 bg-gray-900 text-white">
+          <section className="px-6 py-24 bg-[#3096891A] text-white">
             <h2 className="text-4xl font-bold mb-12 text-center">FAQs</h2>
             <div className="max-w-4xl mx-auto space-y-4">
               

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import api from "@/api";
 
@@ -38,17 +39,36 @@ const ListInterviews = () => {
           <tbody className="divide-y divide-gray-200 text-gray-800">
             {interviews.map((intv) => (
               <tr key={intv._id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-6 py-4 text-teal-600 font-medium">
-                  {intv.application?.job?.title || "N/A"}
+                {/* Job */}
+                <td className="px-6 py-4 text-teal-600 font-medium hover:underline">
+                  {intv.application?.job?._id ? (
+                    <Link href={`/job/${intv.application.job._id}`}>
+                      {intv.application.job.title}
+                    </Link>
+                  ) : "N/A"}
                 </td>
-                <td className="px-6 py-4">
-                  {intv.application?.user?.name || "N/A"}
+
+                {/* Candidate */}
+                <td className="px-6 py-4 text-black-600 font-medium hover:underline">
+                  {intv.application?.user?._id ? (
+                    <Link href={`/profile/${intv.application.user._id}`}>
+                      {intv.application.user.name}
+                    </Link>
+                  ) : "N/A"}
                 </td>
+
+                {/* Phone */}
                 <td className="px-6 py-4">{intv.application?.user?.phone || "N/A"}</td>
+
+                {/* Date & Time */}
                 <td className="px-6 py-4">
                   {intv.scheduledAt ? new Date(intv.scheduledAt).toLocaleString() : "N/A"}
                 </td>
+
+                {/* Mode */}
                 <td className="px-6 py-4">{intv.mode || "N/A"}</td>
+
+                {/* View button */}
                 <td className="px-6 py-4">
                   <button
                     onClick={() => handleView(intv._id)}

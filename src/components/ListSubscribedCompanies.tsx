@@ -62,10 +62,13 @@ const SubscribedCompanies = () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col justify-center items-center h-64 text-center space-y-3">
-          <Building2 size={48} className="text-gray-400" />
-          <p className="text-gray-500 text-lg font-medium">
-            You haven’t subscribed to any companies yet.
+        <div className="flex flex-col justify-center items-center h-64 text-center space-y-3 bg-gradient-to-r from-teal-700 to-teal-500 rounded-xl shadow-lg p-6 relative overflow-hidden">
+          <Building2 size={50} className="text-white animate-bounce" />
+          <p className="text-white text-lg font-semibold">
+            You haven’t subscribed to any companies yet!
+          </p>
+          <p className="text-teal-100 text-sm max-w-xs">
+            Subscribe to companies to receive alerts for new job postings and stay ahead in your job search.
           </p>
         </div>
       )}

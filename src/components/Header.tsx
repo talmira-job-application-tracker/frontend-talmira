@@ -12,6 +12,7 @@ import {
   LogOut,
   Building2,
   LayoutDashboard,
+  Home,
 } from "lucide-react";
 import Cookies from "js-cookie";
 import api from "@/api";
@@ -128,6 +129,12 @@ const Header = () => {
                 {user.role === "user" && (
                   <>
                     <span
+                      onClick={() => navigateAndClose("/")}
+                      className="flex items-center gap-2 px-3 py-2 text-white hover:text-[#309689] cursor-pointer transition"
+                    >
+                      <Home size={18} /> Home
+                    </span>
+                    <span
                       onClick={() => navigateAndClose("/profile")}
                       className="flex items-center gap-2 px-3 py-2 text-white hover:text-[#309689] cursor-pointer transition"
                     >
@@ -211,6 +218,9 @@ const Header = () => {
                     {unreadCount > 9 ? "9+" : unreadCount}
                   </span>
                 )}
+              </span>
+              <span onClick={() => navigateAndClose("/")} className="flex items-center gap-2 text-white cursor-pointer">
+                <Home size={18} /> Home
               </span>
               <span onClick={() => navigateAndClose("/application")} className="flex items-center gap-2 text-white cursor-pointer">
                 <FileText size={18} /> Applications

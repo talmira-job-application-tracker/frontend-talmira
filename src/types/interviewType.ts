@@ -1,8 +1,8 @@
-import { ApplicationType } from "./applicationType";
+import { ApplicationInterviewType } from "./applicationType";
 
 export interface InterviewType {
   _id: string;
-  applicationId: ApplicationType; 
+  application: ApplicationInterviewType; 
   scheduledAt: string;            
   mode: "Online" | "Offline" | "Phone";
   location?: string;

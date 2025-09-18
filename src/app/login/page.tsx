@@ -40,14 +40,13 @@ const LoginPage = () => {
       const token = res.data.token
       const user = res.data.data
 
-      //authcontext
       login(
         { _id: user._id, role: user.role, name: user.name, image: user.image },
         token
       )
 
       Cookies.set("token", token, {
-        expires: 1, // 1 day
+        expires: 1, 
         path: "/",
         sameSite: "Lax",
       })

@@ -26,7 +26,6 @@ const Header = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [unreadCount, setUnreadCount] = useState<number>(0);
 
-  // Fetch alerts (kept as your old logic)
   useEffect(() => {
     const token = Cookies.get("token");
     if (!token || !user) return;
@@ -41,7 +40,6 @@ const Header = () => {
       .catch((err) => console.error("Failed to fetch alerts", err));
   }, [user]);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -64,7 +62,7 @@ const Header = () => {
   const navigateAndClose = (path: string) => {
     router.push(path);
     setDropdownOpen(false);
-    setMenuOpen(false); // close mobile menu if open
+    setMenuOpen(false); 
   };
   console.log(user?.image,'userimage')
 
@@ -181,14 +179,14 @@ const Header = () => {
   <div className="flex gap-4 items-center">
     <button
       onClick={() => router.push("/login")}
-      className="px-3 py-1 text-white font-semibold rounded-lg bg-[#309689] hover:bg-[#4fd1c5] transition-colors duration-300"
+      className="px-3 py-1 text-white font-semibold rounded-lg  hover:bg-[#4fd1c5] transition-colors duration-300"
     >
       Login
     </button>
 
     <button
       onClick={() => router.push("/register")}
-      className="px-3 py-1 text-[#309689] font-semibold rounded-lg bg-white hover:bg-[#e0f7f5] transition-colors duration-300"
+      className="px-3 py-1 text-[#309689] font-semibold rounded-lg  hover:bg-[#e0f7f5] transition-colors duration-300"
     >
       Register
     </button>

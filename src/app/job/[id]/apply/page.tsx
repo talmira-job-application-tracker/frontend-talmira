@@ -25,12 +25,9 @@ const schema = yup.object().shape({
     .test("fileSize", "File too large", (value) => {
       const fileList = value as FileList | undefined;
       if (!fileList || fileList.length === 0) return true; 
-      return fileList[0].size <= 2 * 1024 * 1024; // 2MB
+      return fileList[0].size <= 2 * 1024 * 1024;
     }),
 });
-
-
-
 
 type FormData = {
   name: string;
@@ -42,7 +39,7 @@ type FormData = {
 };
 
 const AddApplication = () => {
-  const { id } = useParams(); // jobId
+  const { id } = useParams();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
@@ -113,8 +110,8 @@ const AddApplication = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-[#0d1f1e] to-[#103c37] py-30 px-4">
-      <div className="w-full max-w-lg bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-8">
+    <div className="min-h-screen flex items-center justify-center py-30 px-4">
+      <div className="w-full max-w-lg bg-black/30 backdrop-blur-xl border border-white/20 shadow-2xl rounded-2xl p-8">
         <h1 className="text-3xl font-bold text-center text-white mb-6">
           Apply for this Job
         </h1>

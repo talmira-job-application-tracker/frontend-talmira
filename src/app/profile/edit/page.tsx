@@ -26,7 +26,7 @@ export type FormData = {
 const EditProfile = () => {
   const [preview, setPreview] = useState<string | null>(null);
   const [hasExistingImage, setHasExistingImage] = useState(false);
-  const [role, setRole] = useState<"user" | "admin">("user"); // role state
+  const [role, setRole] = useState<"user" | "admin">("user");
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -135,8 +135,8 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="min-h-screen px-4 py-30 flex justify-center items-center bg-gradient-to-br from-teal-700 via-black to-gray-900">
-      <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg p-8 max-w-lg w-full">
+    <div className="min-h-screen px-4 py-30 flex justify-center items-center ">
+      <div className="bg-black/30 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg p-8 max-w-lg w-full">
         <h2 className="text-2xl font-semibold text-center mb-6 text-white">
           Edit Profile
         </h2>

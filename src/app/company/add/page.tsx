@@ -19,9 +19,9 @@ const schema = yup.object().shape({
   website: yup.string().url().required("Website required"),
   logo: yup
     .mixed<FileList>()
-    .notRequired() // make it optional
+    .notRequired() 
     .test("fileType", "Unsupported file format", (value) => {
-      if (!value || !value[0]) return true; // allow empty
+      if (!value || !value[0]) return true;
       return ["image/jpeg", "image/png", "image/webp"].includes(value[0].type);
     }),
 });

@@ -3,12 +3,13 @@
 import { AppDispatch, RootState } from "@/redux/store";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useParams, useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import * as yup from "yup";
 import { editJob, viewJob } from "@/redux/slices/jobSlice";
 import toast from "react-hot-toast";
+import Autocomplete from "react-google-autocomplete";
 
 export interface JobEditType {
   title: string;
@@ -45,6 +46,7 @@ const EditJob = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     reset,
   } = useForm<JobEditType>({
@@ -103,11 +105,11 @@ const EditJob = () => {
   };
 
   return (
-    <div className="relative flex justify-center items-start min-h-screen bg-gradient-to-br from-black via-teal-900 to-black px-4 pt-24 pb-12 overflow-hidden">
+    <div className="relative flex justify-center items-start min-h-screen px-4 pt-24 pb-12 overflow-hidden">
       <div className="absolute -top-24 -left-24 w-72 h-72 bg-teal-500/30 rounded-full mix-blend-screen filter blur-3xl animate-pulse" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-white/10 rounded-full mix-blend-overlay filter blur-2xl animate-[pulse_6s_ease-in-out_infinite]" />
 
-      <div className="w-full max-w-4xl bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 mt-6 p-8 relative z-10">
+      <div className="w-full max-w-4xl bg-black/30 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 mt-6 p-8 relative z-10">
         <h2 className="text-4xl font-extrabold text-center text-white mb-8 tracking-wide drop-shadow-lg">
           Edit Job Details
         </h2>
@@ -128,16 +130,23 @@ const EditJob = () => {
             />
             <p className="text-red-400 text-xs mt-1">{errors.title?.message}</p>
           </div>
-
+          
           <div className="flex flex-col">
-            <label className="text-sm font-semibold text-teal-200 mb-2 tracking-wide">
-              Location
-            </label>
-            <input
-              type="text"
-              {...register("location")}
-              placeholder="Job location"
-              className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-teal-400 focus:outline-none backdrop-blur-md transition-all duration-300 hover:bg-white/20"
+            <label className="text-sm font-semibold text-teal-200 mb-2 tracking-wide">Location</label>
+            <Controller
+              name="location"
+              control={control}
+              rules={{ required: "Location is required" }}
+              render={({ field }) => (
+                <Autocomplete
+                  apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
+                  onPlaceSelected={(place) => field.onChange(place.formatted_address || "")}
+                  types={["(cities)"]}
+                  defaultValue={job?.location || ""}
+                  className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:ring-2 focus:ring-teal-400 focus:outline-none backdrop-blur-md transition-all duration-300 hover:bg-white/20"
+                  placeholder="Job location"
+                />
+              )}
             />
             <p className="text-red-400 text-xs mt-1">{errors.location?.message}</p>
           </div>

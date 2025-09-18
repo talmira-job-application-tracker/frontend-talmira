@@ -8,7 +8,6 @@ import Header from "@/components/Header"
 import { FiPhone, FiMail, FiMapPin, FiClock } from "react-icons/fi"
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa"
 
-// Validation schema
 const schema = yup.object().shape({
   name: yup.string().required("Name is required").min(2),
   email: yup.string().required("Email is required").email(),

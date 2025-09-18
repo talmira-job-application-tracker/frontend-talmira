@@ -4,14 +4,6 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Button,
-} from "@mui/material";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompany, deleteCompany } from "@/redux/slices/companySlice";
@@ -26,7 +18,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import SubscriptionButton from "@/components/ToggleSubscription";
-import Header from "@/components/Header";
 
 const ViewCompany = () => {
   const params = useParams<{ id: string }>();

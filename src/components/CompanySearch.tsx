@@ -11,7 +11,7 @@ const CompanySearch = () => {
   const [results, setResults] = useState<CompanyType[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [isOpen, setIsOpen] = useState(false); // dropdown open state
+  const [isOpen, setIsOpen] = useState(false); 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const fetchCompanies = (searchQuery: string) => {
@@ -43,7 +43,6 @@ const CompanySearch = () => {
     return () => clearTimeout(timer);
   }, [query]);
 
-  // close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -64,7 +63,7 @@ const CompanySearch = () => {
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
-            setIsOpen(true); // open dropdown on typing
+            setIsOpen(true);
           }}
           className="w-full pl-4 pr-10 py-2 rounded-lg shadow-md bg-white/80 placeholder-gray-400 
                      focus:outline-none focus:ring-2 focus:ring-[#309689] focus:border-[#309689] 

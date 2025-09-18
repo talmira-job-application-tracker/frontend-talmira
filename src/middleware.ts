@@ -32,7 +32,7 @@ export function middleware(request: NextRequest) {
   const isUserPage = 
     pathname === "/subscriptions" || pathname === "/alerts/list"
 
-  //If NOT logged in and trying to access a protected route 
+  //If NOT logged in  
   if (!token && !isPublicPage) {
     return NextResponse.redirect(new URL('/', request.url))
   }

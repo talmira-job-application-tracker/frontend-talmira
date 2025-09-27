@@ -13,6 +13,7 @@ import { useState, useEffect, useRef } from "react";
 import Autocomplete from "react-google-autocomplete";
 import { Search, X } from "lucide-react";
 import api from "@/api";
+import Image from "next/image";
 
 const CompanySearchSelect = ({ 
   onCompanySelect, 
@@ -90,10 +91,12 @@ const CompanySearchSelect = ({
         <div className="flex items-center justify-between p-3 bg-white/20 border border-white/30 rounded-lg">
           <div className="flex items-center gap-3">
             {selectedCompany.logo && (
-              <img
+              <Image
                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedCompany.logo}`}
                 alt={selectedCompany.name}
-                className="w-8 h-8 rounded-full object-contain border"
+                width={32} 
+                height={32} 
+                className="rounded-full object-contain border"
               />
             )}
             <span className="font-medium text-[#07332f]">{selectedCompany.name}</span>
@@ -146,10 +149,12 @@ const CompanySearchSelect = ({
                   className="w-full text-left flex items-center gap-3 px-4 py-2 hover:bg-[#309689]/10 cursor-pointer transition"
                 >
                   {logoUrl ? (
-                    <img
+                    <Image
                       src={logoUrl}
                       alt={company.name}
-                      className="w-8 h-8 rounded-full object-contain border"
+                      width={32} 
+                      height={32} 
+                      className="rounded-full object-contain border"
                     />
                   ) : (
                     <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-xs">

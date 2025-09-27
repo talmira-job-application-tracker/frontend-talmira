@@ -35,7 +35,7 @@ const ContactUs = () => {
       <div className="py-12 text-center mt-8">
         <h1 className="text-4xl md:text-5xl font-bold text-teal-500 mb-2">Contact TALMIRA</h1>
         <p className="text-gray-300 max-w-xl mx-auto">
-          Have questions or need support? Reach out to us, and we'll help you track and manage your job applications efficiently.
+          Have questions or need support? Reach out to us, and we will help you track and manage your job applications efficiently.
         </p>
       </div>
 

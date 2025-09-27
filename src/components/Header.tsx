@@ -70,7 +70,12 @@ const Header = () => {
     <header className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-3 bg-black/30 backdrop-blur-md border-b border-white/10">
       {/* Logo */}
       <button onClick={() => router.push("/")} className="flex items-center gap-3 cursor-pointer">
-        <img src={"/icons/Group.svg"} alt="Talmira Logo" className="h-8 w-8" />
+        <Image
+          src="/icons/Group.svg"
+          alt="Talmira Logo"
+          width={32}
+          height={32} 
+        />
         <h1 className="text-lg font-semibold text-white hover:text-[#309689] transition-colors">
           TALMIRA
         </h1>

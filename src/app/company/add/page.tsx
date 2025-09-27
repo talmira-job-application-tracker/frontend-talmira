@@ -2,8 +2,9 @@
 
 import { addCompany } from "@/redux/slices/companySlice";
 import { AppDispatch, RootState } from "@/redux/store";
-import { cFormType } from "@/types/companyType";
+import { cFormType, CompanyType } from "@/types/companyType";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -187,10 +188,12 @@ const AddCompany = () => {
             <div className="flex flex-col items-center">
               <label className="flex flex-col items-center justify-center w-full p-6 rounded-xl border border-dashed border-white/20 bg-white/5 cursor-pointer hover:border-teal-400 transition-all">
                 {preview ? (
-                  <img
+                  <Image
                     src={preview}
                     alt="Preview"
-                    className="w-24 h-24 object-cover rounded-full shadow-md border-2 border-teal-500 mb-2"
+                    width={96}
+                    height={96} 
+                    className="object-cover rounded-full shadow-md border-2 border-teal-500 mb-2"
                   />
                 ) : (
                   <>

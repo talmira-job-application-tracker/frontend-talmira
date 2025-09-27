@@ -7,7 +7,6 @@ import api from "@/api"
 import Link from "next/link"
 import { AlertType } from "@/types/alertsType"
 import { FiTrash2, FiBell } from "react-icons/fi"
-import Header from "@/components/Header"
 
 const ListAlerts = () => {
   const [alerts, setAlerts] = useState<AlertType[]>([])

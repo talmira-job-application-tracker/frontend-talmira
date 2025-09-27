@@ -47,6 +47,7 @@ import ListUsers from "@/components/ListUsers";
 import CompanySearch from "@/components/CompanySearch";
 import JobSearch from "@/components/JobSearchBar";
 import ListInterviews from "@/components/ListInterviews";
+import { ApplicationType } from "@/types/applicationType";
 
 const COLORS = ["#309689", "#00796B", "#80CBC4", "#B2DFDB"];
 
@@ -89,7 +90,7 @@ const AdminDashboard = () => {
   const [mounted, setMounted] = useState(false);
   const [selected, setSelected] = useState("dashboard");
   const [counts, setCounts] = useState({ applications: 0, jobs: 0, applicants: 0, companies: 0 });
-  const [applicationsData, setApplicationsData] = useState<any[]>([]);
+  const [applicationsData, setApplicationsData] = useState<ApplicationType[]>([]);
   const [jobsData, setJobsData] = useState<any[]>([]);
 
   useEffect(() => {

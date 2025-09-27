@@ -9,7 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { getCompany, updateCompany } from "@/redux/slices/companySlice";
 import toast from "react-hot-toast";
-import { Building2, MapPin, Globe, Image as ImageIcon, Type, FileText, Loader2 } from "lucide-react";
+import { Building2, MapPin, Image as ImageIcon, Loader2 } from "lucide-react";
+import { cFormType, CompanyType } from "@/types/companyType";
+import Image from "next/image";
 
 const schema = yup.object({
   name: yup.string().required("Company name is required"),
@@ -214,7 +216,13 @@ const EditCompany = () => {
               )}
             </div>
             {preview && !preview.includes("default-logo.png") && (
-              <img src={preview} alt="Logo" className="w-24 h-24 mt-4 rounded-lg border" />
+              <Image
+                src={preview}
+                alt="Logo"
+                width={96} 
+                height={96} 
+                className="mt-4 rounded-lg border"
+              />
             )}
           </div>
         </div>

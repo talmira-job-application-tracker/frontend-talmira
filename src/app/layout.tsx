@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Google Maps + Places API */}
+        {/* Google Maps */}
         <Script
           src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`}
           strategy="afterInteractive"
@@ -36,8 +36,6 @@ export default function RootLayout({
           <AuthProvider>
             <Toaster position="top-right" reverseOrder={false} />
             <Header />
-
-          {/* Main content grows to push footer down */}
           <main className="flex-grow">
             {children}
           </main>

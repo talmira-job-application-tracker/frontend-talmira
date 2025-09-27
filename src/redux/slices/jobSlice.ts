@@ -187,7 +187,6 @@ export const listJobs = createAsyncThunk(
   async ({
     page,
     limit,
-    append,
     query,
     location,
     jobType,

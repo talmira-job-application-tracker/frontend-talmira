@@ -1,6 +1,7 @@
 'use client'
 
 import { Github, Linkedin, Twitter } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Footer = () => {
@@ -22,7 +23,7 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-wrap justify-center gap-6 text-sm font-medium px-6 md:px-12">
-          <a href="/" className="text-gray hover:text-[#26786f] transition">Home</a>
+          <Link href="/" className="text-gray hover:text-[#26786f] transition">Home</Link>
           <a href="/about-us" className="text-gray hover:text-[#26786f] transition">About</a>
           <a href="/contact-us" className="text-gray hover:text-[#26786f] transition">Contact</a>
         </div>

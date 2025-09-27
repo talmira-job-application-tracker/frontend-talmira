@@ -87,7 +87,12 @@ const AutoSlider = () => {
             <div className="flex flex-row gap-12">
               <div className="flex flex-row gap-1 text-left">
                 <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
-                  <img src="/icons/job-icon.svg" className="h-5 w-5" />
+                  <Image
+                    src="/icons/job-icon.svg"
+                    alt="Job Icon"
+                    width={20} // h-5 w-5
+                    height={20}
+                  />
                 </div>
                 <div>
                   <p className="text-white font-bold">{counts.jobs}</p>

@@ -23,7 +23,7 @@ const ViewInterview = () => {
       .then((res) => setInterview(res.data.data))
       .catch(() => toast.error("Failed to fetch"))
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [id, router]);
 
   if (loading) return <p className="text-gray-600 text-center mt-10">Loading...</p>;
 

@@ -1,7 +1,6 @@
 import api from "@/api";
 import { CompanyType } from "@/types/companyType";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { create } from "domain";
 
 interface CompanyState {
     companies: CompanyType[];

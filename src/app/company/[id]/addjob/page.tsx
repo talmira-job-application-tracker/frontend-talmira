@@ -53,7 +53,7 @@ const AddJob = () => {
   const {
     register,
     handleSubmit,
-    control, // ✅ add this
+    control,
     formState: { errors, isSubmitting },
   } = useForm<JobCreateType>({
     resolver: yupResolver(schema) as any,

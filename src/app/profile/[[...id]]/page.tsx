@@ -8,11 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
 import { viewProfile, viewUserById } from "@/redux/slices/userSlice";
 import Image from "next/image";
-import { Mail, Phone, User, Award, TriangleAlert } from "lucide-react";
+import { Mail, Phone, Award, TriangleAlert } from "lucide-react";
 import api from "@/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
-import { Star } from "lucide-react";
 
 
 const ViewProfile = () => {

@@ -2,6 +2,7 @@
 
 import { CompanyType } from "@/types/companyType";
 import { Search, X } from "lucide-react";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
 interface CompanySearchSelectProps {
@@ -80,10 +81,13 @@ const CompanySearchSelect = ({ onCompanySelect, selectedCompany }: CompanySearch
         <div className="flex items-center justify-between p-3 bg-white/20 border border-white/30 rounded-lg">
           <div className="flex items-center gap-3">
             {selectedCompany.logo && (
-              <img
+              <Image
                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}${selectedCompany.logo}`}
                 alt={selectedCompany.name}
-                className="w-8 h-8 rounded-full object-contain border"
+                width={32} // w-8
+                height={32} // h-8
+                className="rounded-full object-contain border"
+                unoptimized
               />
             )}
             <span className="font-medium text-[#07332f]">{selectedCompany.name}</span>

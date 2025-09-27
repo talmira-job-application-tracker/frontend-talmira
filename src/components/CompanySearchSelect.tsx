@@ -140,10 +140,13 @@ const CompanySearchSelect = ({ onCompanySelect, selectedCompany }: CompanySearch
                   className="w-full text-left flex items-center gap-3 px-4 py-2 hover:bg-[#309689]/10 cursor-pointer transition"
                 >
                   {logoUrl ? (
-                    <img
+                    <Image
                       src={logoUrl}
                       alt={company.name}
-                      className="w-8 h-8 rounded-full object-contain border"
+                      width={32} // w-8
+                      height={32} // h-8
+                      className="rounded-full object-contain border"
+                      unoptimized // needed if logoUrl is from your backend or external source
                     />
                   ) : (
                     <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-xs">

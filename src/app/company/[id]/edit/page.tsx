@@ -10,7 +10,6 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { getCompany, updateCompany } from "@/redux/slices/companySlice";
 import toast from "react-hot-toast";
 import { Building2, MapPin, Image as ImageIcon, Loader2 } from "lucide-react";
-import { cFormType, CompanyType } from "@/types/companyType";
 import Image from "next/image";
 
 const schema = yup.object({

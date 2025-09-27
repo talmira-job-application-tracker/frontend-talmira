@@ -2,7 +2,7 @@
 
 import { addCompany } from "@/redux/slices/companySlice";
 import { AppDispatch, RootState } from "@/redux/store";
-import { cFormType, CompanyType } from "@/types/companyType";
+import { cFormType } from "@/types/companyType";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

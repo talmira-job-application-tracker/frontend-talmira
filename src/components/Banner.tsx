@@ -102,7 +102,12 @@ const AutoSlider = () => {
 
               <div className="flex flex-row gap-1 text-left">
                 <div className="h-10 w-10 bg-[#309689] rounded-full flex items-center justify-center">
-                  <img src="/icons/users-icon.svg" className="h-5 w-5" />
+                  <Image
+                    src="/icons/users-icon.svg"
+                    alt="Users Icon"
+                    width={20} 
+                    height={20} 
+                  />
                 </div>
                 <div>
                   <p className="text-white font-bold">{counts.applicants}</p>

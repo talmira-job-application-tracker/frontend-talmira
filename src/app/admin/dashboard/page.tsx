@@ -49,6 +49,11 @@ import JobSearch from "@/components/JobSearchBar";
 import ListInterviews from "@/components/ListInterviews";
 import { ApplicationType } from "@/types/applicationType";
 
+type JobType = {
+  name: string;
+  value: number;
+};
+
 const COLORS = ["#309689", "#00796B", "#80CBC4", "#B2DFDB"];
 
 // merge small slices into "Other"
@@ -91,7 +96,7 @@ const AdminDashboard = () => {
   const [selected, setSelected] = useState("dashboard");
   const [counts, setCounts] = useState({ applications: 0, jobs: 0, applicants: 0, companies: 0 });
   const [applicationsData, setApplicationsData] = useState<ApplicationType[]>([]);
-  const [jobsData, setJobsData] = useState<any[]>([]);
+  const [jobsData, setJobsData] = useState<JobType[]>([]);
 
   useEffect(() => {
     setMounted(true);
